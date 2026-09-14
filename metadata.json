@@ -1,0 +1,6 @@
+{
+  "name": "Barin Electronic Notarization Facility",
+  "description": "Secure Philippine Electronic Notarization Facility (IEN & REN) with role-based access control, cryptographic verification, tamper-evident audit logging, real-time threat detection, and accreditation compliance.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
