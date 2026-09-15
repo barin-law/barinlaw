@@ -18,7 +18,9 @@ import {
   AlertTriangle,
   Server,
   Lock,
+  Mail,
 } from 'lucide-react';
+import { ContactInquiriesManager } from '../admin/ContactInquiriesManager';
 
 interface EnfAdminDashboardProps {
   activeModuleId?: string;
@@ -31,6 +33,7 @@ export const EnfAdminDashboard: React.FC<EnfAdminDashboardProps> = ({
   onSelectModule,
   onOpenIntegrationCenter,
 }) => {
+  const [adminTab, setAdminTab] = useState<'CLUSTER' | 'INQUIRIES'>('CLUSTER');
   const [showMfaStepUp, setShowMfaStepUp] = useState(false);
   const [selectedRoleReq, setSelectedRoleReq] = useState<any | null>(null);
   const [adminNotice, setAdminNotice] = useState<string | null>(null);

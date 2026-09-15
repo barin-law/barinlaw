@@ -15,7 +15,9 @@ import {
   Lock,
   Clock,
   ExternalLink,
+  Mail,
 } from 'lucide-react';
+import { ContactInquiriesManager } from '../admin/ContactInquiriesManager';
 
 interface CustomerSupportDashboardProps {
   activeModuleId: string;
@@ -26,6 +28,7 @@ export const CustomerSupportDashboard: React.FC<CustomerSupportDashboardProps> =
   activeModuleId,
   onSelectModule,
 }) => {
+  const [supportTab, setSupportTab] = useState<'TICKETS' | 'INQUIRIES'>('TICKETS');
   const [selectedTicket, setSelectedTicket] = useState<any | null>(null);
   const [resolutionNotice, setResolutionNotice] = useState<string | null>(null);
 
@@ -134,8 +137,40 @@ export const CustomerSupportDashboard: React.FC<CustomerSupportDashboardProps> =
         </div>
       </div>
 
-      {/* Ticket Management Table */}
-      <div className="border border-black/15 bg-white p-5 dark:border-white/15 dark:bg-neutral-950 space-y-4">
+      {/* Workspace Tabs: Diagnostic Tickets vs Public Inquiries */}
+      <div className="flex items-center gap-2 border-b border-neutral-300 dark:border-neutral-700 pb-2">
+        <button
+          type="button"
+          onClick={() => setSupportTab('TICKETS')}
+          className={`inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold border transition-colors cursor-pointer ${
+            supportTab === 'TICKETS'
+              ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black'
+              : 'border-neutral-200 bg-white text-neutral-600 hover:border-black dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300'
+          }`}
+        >
+          <Ticket className="h-3.5 w-3.5" />
+          <span>Diagnostic &amp; Troubleshooting Tickets (3)</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setSupportTab('INQUIRIES')}
+          className={`inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold border transition-colors cursor-pointer ${
+            supportTab === 'INQUIRIES'
+              ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black'
+              : 'border-neutral-200 bg-white text-neutral-600 hover:border-black dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300'
+          }`}
+        >
+          <Mail className="h-3.5 w-3.5" />
+          <span>Public Contact &amp; Admin Inquiries</span>
+        </button>
+      </div>
+
+      {supportTab === 'INQUIRIES' ? (
+        <ContactInquiriesManager />
+      ) : (
+        <>
+          {/* Ticket Management Table */}
+          <div className="border border-black/15 bg-white p-5 dark:border-white/15 dark:bg-neutral-950 space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold text-black dark:text-white">
             Support Inquiry & Troubleshooting Tickets
@@ -216,7 +251,7 @@ export const CustomerSupportDashboard: React.FC<CustomerSupportDashboardProps> =
             <div className="pt-3 border-t border-black/10 dark:border-white/10 flex justify-end">
               <button
                 onClick={() => handleResolveTicket(selectedTicket.id)}
-                className="border border-black bg-black px-4 py-1.5 text-xs text-white font-semibold hover:bg-neutral-800 dark:border-white dark:bg-white dark:text-black"
+                className="border border-black bg-black px-4 py-1.5 text-xs text-white font-semibold hover:bg-neutral-800 dark:border-white dark:bg-white dark:text-black cursor-pointer"
               >
                 Mark as Resolved
               </button>
@@ -224,6 +259,8 @@ export const CustomerSupportDashboard: React.FC<CustomerSupportDashboardProps> =
           </div>
         )}
       </DetailsDrawer>
+        </>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrandLogo } from '../components/common/BrandLogo';
 import {
   Scale,
@@ -10,13 +10,18 @@ import {
   MessageSquare,
   Building,
   UserCheck,
+  Headphones,
 } from 'lucide-react';
+import { GlobalFooter } from '../components/common/GlobalFooter';
+import { SupportModal } from '../components/common/SupportModal';
 
 interface PublicHomePageProps {
   onNavigate: (path: string) => void;
 }
 
 export const PublicHomePage: React.FC<PublicHomePageProps> = ({ onNavigate }) => {
+  const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
+
   return (
     <div
       id="barin-enf-public-homepage"
@@ -39,7 +44,7 @@ export const PublicHomePage: React.FC<PublicHomePageProps> = ({ onNavigate }) =>
             />
           </div>
 
-          <nav aria-label="Public Navigation" className="flex items-center gap-4 sm:gap-6 text-xs font-medium">
+          <nav aria-label="Public Navigation" className="flex items-center gap-3 sm:gap-6 text-xs font-medium">
             <button
               onClick={() => onNavigate('/verify')}
               className="text-neutral-600 hover:text-black transition-colors"
@@ -51,6 +56,12 @@ export const PublicHomePage: React.FC<PublicHomePageProps> = ({ onNavigate }) =>
               className="text-neutral-600 hover:text-black transition-colors"
             >
               Barin Law Firm &amp; Assistant
+            </button>
+            <button
+              onClick={() => onNavigate('/contact')}
+              className="text-neutral-600 hover:text-black transition-colors"
+            >
+              Contact Us
             </button>
             <button
               onClick={() => onNavigate('/sign-in')}
@@ -183,33 +194,18 @@ export const PublicHomePage: React.FC<PublicHomePageProps> = ({ onNavigate }) =>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-neutral-200 bg-neutral-50/50 py-10 mt-16">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
-          <div className="flex items-center gap-2.5">
-            <BrandLogo
-              variant="emblem"
-              height={22}
-              decorative
-              className="shrink-0 opacity-90"
-            />
-            <span className="font-serif font-bold text-neutral-900">BARIN ENF</span>
-            <span>• Candidate Accreditation Architecture</span>
-          </div>
+      {/* Standardized Global Public Footer */}
+      <GlobalFooter
+        onNavigate={onNavigate}
+        onOpenSupportModal={() => setIsSupportModalOpen(true)}
+      />
 
-          <div className="flex items-center gap-4 text-[11px]">
-            <button onClick={() => onNavigate('/verify')} className="hover:text-black">
-              Hash Verification
-            </button>
-            <button onClick={() => onNavigate('/barin-law-firm')} className="hover:text-black">
-              Barin Law Firm
-            </button>
-            <button onClick={() => onNavigate('/sign-in')} className="hover:text-black">
-              Demo Sign In
-            </button>
-          </div>
-        </div>
-      </footer>
+      {/* Support Modal */}
+      <SupportModal
+        isOpen={isSupportModalOpen}
+        onClose={() => setIsSupportModalOpen(false)}
+        defaultTopic="general"
+      />
     </div>
   );
 };

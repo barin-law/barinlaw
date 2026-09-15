@@ -41,7 +41,9 @@ import { BarinLawFirmPublicPage } from './pages/BarinLawFirmPublicPage';
 import { SignInPage } from './pages/SignInPage';
 import { PublicHomePage } from './pages/PublicHomePage';
 import { PublicVerifyPage } from './pages/PublicVerifyPage';
+import { ContactUsPage } from './pages/ContactUsPage';
 import { AccessDenied403 } from './components/common/AccessDenied403';
+import { NotFound404 } from './components/common/NotFound404';
 
 type OverlayView =
   | 'NONE'
@@ -287,7 +289,12 @@ const AppRouter: React.FC = () => {
     return <PublicVerifyPage onNavigate={navigate} />;
   }
 
-  // 4. Role-based Dashboard Routes
+  // 4. Contact Us / Technical Support: /contact or /contact-us
+  if (currentPath === '/contact' || currentPath === '/contact-us') {
+    return <ContactUsPage onNavigate={navigate} />;
+  }
+
+  // 5. Role-based Dashboard Routes
   if (currentPath in ROUTE_ROLE_MAP) {
     const requiredRole = ROUTE_ROLE_MAP[currentPath];
     if (currentUser.role !== requiredRole) {
@@ -307,8 +314,13 @@ const AppRouter: React.FC = () => {
     return <MainWorkspace />;
   }
 
-  // 5. Default Public Homepage: /
-  return <PublicHomePage onNavigate={navigate} />;
+  // 6. Default Public Homepage: /
+  if (currentPath === '' || currentPath === '/') {
+    return <PublicHomePage onNavigate={navigate} />;
+  }
+
+  // 7. Unknown route -> Standardized 404 page
+  return <NotFound404 onNavigate={navigate} />;
 };
 
 export default function App() {

@@ -45,4 +45,6 @@ export const PUBLIC_ROUTES = [
   '/barin-law-firm',
   '/verify',
   '/sign-in',
+  '/contact',
+  '/contact-us',
 ];

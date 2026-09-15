@@ -5,6 +5,7 @@ import { CollapsibleSidebar } from './CollapsibleSidebar';
 import { MobileNavigationDrawer } from './MobileNavigationDrawer';
 import { NotificationCenter, AppNotification } from './NotificationCenter';
 import { GuidedHelpModal } from './GuidedHelpModal';
+import { SupportModal } from './SupportModal';
 import { SessionTimeoutDialog } from './SessionTimeoutDialog';
 import { AuthenticatedFooter } from './AuthenticatedFooter';
 import { ROLE_NAVIGATION_MAP, NavItemConfig } from '../../data/navigationConfig';
@@ -84,6 +85,9 @@ export const ApplicationShell: React.FC<ApplicationShellProps> = ({
   // Help modal state
   const [isHelpOpen, setIsHelpOpen] = useState(false);
 
+  // Support & Contact Admin modal state
+  const [isSupportOpen, setIsSupportOpen] = useState(false);
+
   // Session timeout simulation
   const [showTimeoutWarning, setShowTimeoutWarning] = useState(false);
   const [remainingTimeoutSeconds, setRemainingTimeoutSeconds] = useState(60);
@@ -116,6 +120,7 @@ export const ApplicationShell: React.FC<ApplicationShellProps> = ({
         onOpenMobileDrawer={() => setIsMobileDrawerOpen(true)}
         onOpenNotifications={() => setIsNotificationsOpen(true)}
         onOpenHelp={() => setIsHelpOpen(true)}
+        onOpenSupport={() => setIsSupportOpen(true)}
         onOpenIntegrationCenter={onOpenIntegrationCenter}
         unreadCount={notifications.filter((n) => !n.read).length}
         onSearch={onSearch}
@@ -134,6 +139,7 @@ export const ApplicationShell: React.FC<ApplicationShellProps> = ({
           onOpenIntegrationCenter={onOpenIntegrationCenter}
           onOpenUnitTests={onOpenUnitTests}
           onOpenVerificationPortal={onOpenVerificationPortal}
+          onOpenSupport={() => setIsSupportOpen(true)}
         />
 
         {/* Off-canvas Mobile Drawer */}
@@ -147,6 +153,7 @@ export const ApplicationShell: React.FC<ApplicationShellProps> = ({
           onOpenIntegrationCenter={onOpenIntegrationCenter}
           onOpenUnitTests={onOpenUnitTests}
           onOpenVerificationPortal={onOpenVerificationPortal}
+          onOpenSupport={() => setIsSupportOpen(true)}
         />
 
         {/* Main Application Working Area */}
@@ -162,7 +169,10 @@ export const ApplicationShell: React.FC<ApplicationShellProps> = ({
       </div>
 
       {/* 4. Authenticated Footer */}
-      <AuthenticatedFooter currentRole={currentUser.role} />
+      <AuthenticatedFooter
+        currentRole={currentUser.role}
+        onOpenSupportModal={() => setIsSupportOpen(true)}
+      />
 
       {/* Overlays / Modals */}
       <NotificationCenter
@@ -176,6 +186,12 @@ export const ApplicationShell: React.FC<ApplicationShellProps> = ({
         isOpen={isHelpOpen}
         onClose={() => setIsHelpOpen(false)}
         activeRole={currentUser.role}
+      />
+
+      <SupportModal
+        isOpen={isSupportOpen}
+        onClose={() => setIsSupportOpen(false)}
+        defaultTopic="general"
       />
 
       <SessionTimeoutDialog

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, Scale, Activity, CheckCircle, FileSearch } from 'lucide-react';
+import { X, Scale, Activity, CheckCircle, FileSearch, Headphones } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { NavItemConfig } from '../../data/navigationConfig';
 import { UserRole } from '../../types';
@@ -14,6 +14,7 @@ interface MobileNavigationDrawerProps {
   onOpenIntegrationCenter: () => void;
   onOpenUnitTests: () => void;
   onOpenVerificationPortal: () => void;
+  onOpenSupport?: () => void;
 }
 
 export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
@@ -26,6 +27,7 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
   onOpenIntegrationCenter,
   onOpenUnitTests,
   onOpenVerificationPortal,
+  onOpenSupport,
 }) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -165,6 +167,18 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
             <FileSearch className="h-3.5 w-3.5" />
             <span>Public Verification</span>
           </button>
+          {onOpenSupport && (
+            <button
+              onClick={() => {
+                onOpenSupport();
+                onClose();
+              }}
+              className="flex w-full items-center gap-2 px-2.5 py-1.5 text-xs font-semibold text-neutral-800 hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-900"
+            >
+              <Headphones className="h-3.5 w-3.5" />
+              <span>Contact Admin / Support</span>
+            </button>
+          )}
         </div>
       </div>
     </div>

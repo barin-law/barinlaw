@@ -11,8 +11,15 @@ import {
   ExternalLink,
   MessageSquare,
   Lock,
+  Headphones,
+  Phone,
 } from 'lucide-react';
 import { BarinAssistantWorkspace } from '../components/barin-assistant/BarinAssistantWorkspace';
+import { GlobalFooter } from '../components/common/GlobalFooter';
+import { SupportModal } from '../components/common/SupportModal';
+import { ContactInformation } from '../components/common/ContactInformation';
+import { ContactForm } from '../components/common/ContactForm';
+import { siteContact } from '../config/contactConfig';
 
 interface BarinLawFirmPublicPageProps {
   onNavigate?: (path: string) => void;
@@ -22,13 +29,16 @@ export const BarinLawFirmPublicPage: React.FC<BarinLawFirmPublicPageProps> = ({
   onNavigate,
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
+  const [showInquiryForm, setShowInquiryForm] = useState(false);
 
   const handleNav = (path: string) => {
     setIsMobileMenuOpen(false);
     if (onNavigate) {
       onNavigate(path);
     } else {
-      window.location.pathname = path;
+      window.history.pushState({}, '', path);
+      window.dispatchEvent(new PopStateEvent('popstate'));
     }
   };
 
@@ -242,7 +252,7 @@ export const BarinLawFirmPublicPage: React.FC<BarinLawFirmPublicPageProps> = ({
         {/* 5. Contact Section */}
         <section
           id="contact-section"
-          className="border-t border-neutral-200 pt-16 max-w-3xl mx-auto space-y-6 text-center sm:text-left"
+          className="border-t border-neutral-200 pt-16 max-w-3xl mx-auto space-y-6 text-left"
         >
           <div className="space-y-2">
             <h2 className="font-serif text-2xl font-bold tracking-tight text-neutral-950">
@@ -253,57 +263,71 @@ export const BarinLawFirmPublicPage: React.FC<BarinLawFirmPublicPageProps> = ({
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-3">
-            <button
-              type="button"
-              onClick={() => window.open('mailto:contact@demo-barinlaw.ph', '_blank')}
-              className="w-full sm:w-auto border border-black bg-black px-5 py-2.5 text-xs font-semibold text-white hover:bg-neutral-800 transition-colors"
-            >
-              Contact the Firm
-            </button>
-            <button
-              type="button"
-              onClick={() => window.open('mailto:admin@demo-barinlaw.ph', '_blank')}
-              className="w-full sm:w-auto border border-neutral-300 bg-white px-5 py-2.5 text-xs font-semibold text-neutral-800 hover:border-black transition-colors"
-            >
-              Contact Administrator
-            </button>
+          <div className="border border-neutral-300 bg-neutral-50/70 p-5 sm:p-6 space-y-5">
+            <ContactInformation variant="card" showDisclaimer={true} />
+
+            <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-neutral-200">
+              <a
+                href={siteContact.phoneHref}
+                className="inline-flex items-center gap-2 border border-black bg-black px-4 py-2 text-xs font-semibold text-white hover:bg-neutral-800 transition-colors"
+              >
+                <Phone className="h-3.5 w-3.5" />
+                <span>Call Hotline ({siteContact.phoneDisplay})</span>
+              </a>
+              <a
+                href={siteContact.emailHref}
+                className="inline-flex items-center gap-2 border border-neutral-300 bg-white px-4 py-2 text-xs font-semibold text-neutral-800 hover:border-black transition-colors"
+              >
+                <Mail className="h-3.5 w-3.5" />
+                <span>Send Email ({siteContact.email})</span>
+              </a>
+              <button
+                type="button"
+                onClick={() => setShowInquiryForm(!showInquiryForm)}
+                className="inline-flex items-center gap-2 border border-neutral-300 bg-white px-4 py-2 text-xs font-semibold text-neutral-800 hover:border-black transition-colors cursor-pointer"
+              >
+                <MessageSquare className="h-3.5 w-3.5" />
+                <span>{showInquiryForm ? 'Hide Inquiry Form' : 'Send an Online Message'}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsSupportModalOpen(true)}
+                className="inline-flex items-center gap-2 border border-neutral-300 bg-white px-4 py-2 text-xs font-semibold text-neutral-800 hover:border-black transition-colors cursor-pointer"
+              >
+                <Headphones className="h-3.5 w-3.5" />
+                <span>Open Support Hub</span>
+              </button>
+            </div>
+
+            {showInquiryForm && (
+              <div className="mt-4 pt-4 border-t border-neutral-200">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-900 mb-3">
+                  Submit Direct Inquiry
+                </h3>
+                <ContactForm
+                  defaultCategory="consultation"
+                  onSuccess={() => {
+                    setTimeout(() => setShowInquiryForm(false), 3000);
+                  }}
+                />
+              </div>
+            )}
           </div>
         </section>
       </main>
 
-      {/* Public Footer */}
-      <footer className="border-t border-neutral-200 bg-neutral-50/50 py-10 mt-20">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-4 text-xs text-neutral-500">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 border-b border-neutral-200 pb-4">
-            <div className="flex items-center gap-2">
-              <BrandLogo
-                variant="emblem"
-                height={20}
-                decorative
-                className="shrink-0"
-              />
-              <span className="font-serif font-bold text-neutral-900">BARIN LAW FIRM</span>
-            </div>
-            <p className="text-[11px] font-mono">
-              Republic of the Philippines • Legal Information Service
-            </p>
-          </div>
+      {/* Standardized Global Public Footer */}
+      <GlobalFooter
+        onNavigate={handleNav}
+        onOpenSupportModal={() => setIsSupportModalOpen(true)}
+      />
 
-          <div className="text-[11px] leading-relaxed text-neutral-500 space-y-1">
-            <p>
-              <strong>Legal Disclaimer:</strong> Using Barin Assistant or accessing this website does
-              not create an attorney-client relationship. Information provided on this public website
-              is for educational and informational purposes only. Do not submit confidential, privileged,
-              or sensitive personal data.
-            </p>
-            <p>
-              Philippine laws, regulations, and judicial rulings are subject to amendment, interpretation,
-              and repeal. Please consult a qualified Philippine lawyer for advice tailored to your specific matter.
-            </p>
-          </div>
-        </div>
-      </footer>
+      {/* Central Support Modal */}
+      <SupportModal
+        isOpen={isSupportModalOpen}
+        onClose={() => setIsSupportModalOpen(false)}
+        defaultTopic="consultation"
+      />
     </div>
   );
 };

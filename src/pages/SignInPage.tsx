@@ -13,11 +13,16 @@ import {
   Scale,
   LogOut,
   Info,
+  Headphones,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useSecurity } from '../context/SecurityContext';
 import { UserRole } from '../types';
 import { ROLE_NAVIGATION_MAP } from '../data/navigationConfig';
+import { GlobalFooter } from '../components/common/GlobalFooter';
+import { SupportModal } from '../components/common/SupportModal';
+import { ErrorSupportMessage } from '../components/common/ErrorSupportMessage';
+import { siteContact } from '../config/contactConfig';
 
 interface SignInPageProps {
   returnTo?: string;
@@ -166,6 +171,7 @@ export const SignInPage: React.FC<SignInPageProps> = ({
   // Authenticated state (shows demo persona workspace selector)
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const [isSupportModalOpen, setIsSupportModalOpen] = useState<boolean>(false);
 
   // Handle 60s lockout timer
   useEffect(() => {
@@ -424,14 +430,49 @@ export const SignInPage: React.FC<SignInPageProps> = ({
               </button>
             </form>
 
-            <div className="text-center pt-2">
-              <button
-                type="button"
-                onClick={() => onNavigate('/barin-law-firm')}
-                className="text-xs text-neutral-500 hover:text-black"
-              >
-                Return to Barin Law Firm Public Page
-              </button>
+            {isLockedOut && (
+              <div className="pt-2">
+                <ErrorSupportMessage
+                  errorType="access"
+                  customTitle="Authentication Security Lockout"
+                  onOpenSupport={() => setIsSupportModalOpen(true)}
+                />
+              </div>
+            )}
+
+            <div className="border-t border-neutral-200 pt-4 space-y-2 text-center">
+              <div className="flex items-center justify-center gap-3 text-xs text-neutral-600">
+                <button
+                  type="button"
+                  onClick={() => setIsSupportModalOpen(true)}
+                  className="inline-flex items-center gap-1.5 font-medium text-neutral-800 hover:text-black cursor-pointer underline"
+                >
+                  <Headphones className="h-3.5 w-3.5" />
+                  <span>Need Assistance? Contact Support</span>
+                </button>
+                <span>&bull;</span>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('/contact')}
+                  className="text-neutral-600 hover:text-black"
+                >
+                  Contact Us Page
+                </button>
+              </div>
+
+              <div className="text-[10px] text-neutral-500 font-mono">
+                Hotline: {siteContact.phoneDisplay} &bull; {siteContact.email}
+              </div>
+
+              <div className="pt-1">
+                <button
+                  type="button"
+                  onClick={() => onNavigate('/barin-law-firm')}
+                  className="text-xs text-neutral-500 hover:text-black"
+                >
+                  Return to Barin Law Firm Public Page
+                </button>
+              </div>
             </div>
           </div>
         ) : (
@@ -524,10 +565,18 @@ export const SignInPage: React.FC<SignInPageProps> = ({
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-neutral-200 bg-white px-4 py-3 text-center text-[11px] text-neutral-500">
-        BARIN ENF Demonstration Environment • Supreme Court A.M. No. 24-10-14-SC Candidate v1.0
-      </footer>
+      {/* Standardized Global Public Footer */}
+      <GlobalFooter
+        onNavigate={onNavigate}
+        onOpenSupportModal={() => setIsSupportModalOpen(true)}
+      />
+
+      {/* Support Modal */}
+      <SupportModal
+        isOpen={isSupportModalOpen}
+        onClose={() => setIsSupportModalOpen(false)}
+        defaultTopic="technical"
+      />
     </div>
   );
 };

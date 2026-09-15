@@ -11,7 +11,9 @@ import {
   CheckCircle,
   FileSearch,
   ExternalLink,
+  Headphones,
 } from 'lucide-react';
+import { siteContact } from '../../config/contactConfig';
 
 interface CollapsibleSidebarProps {
   isCollapsed: boolean;
@@ -23,6 +25,7 @@ interface CollapsibleSidebarProps {
   onOpenIntegrationCenter: () => void;
   onOpenUnitTests: () => void;
   onOpenVerificationPortal: () => void;
+  onOpenSupport?: () => void;
 }
 
 export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
@@ -35,6 +38,7 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
   onOpenIntegrationCenter,
   onOpenUnitTests,
   onOpenVerificationPortal,
+  onOpenSupport,
 }) => {
   // Group menu items by category if available
   const categories = Array.from(new Set(menuItems.map((item) => item.category || 'Workspace')));
@@ -229,6 +233,28 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
             <FileSearch className="h-3.5 w-3.5" />
             <span className="truncate">Public Verification</span>
           </button>
+        )}
+
+        {/* Contact Administrator / Support Desk */}
+        {onOpenSupport && (
+          isCollapsed ? (
+            <AccessibleTooltip content="Contact Administrator & Support Desk" position="right">
+              <button
+                onClick={onOpenSupport}
+                className="flex w-full items-center justify-center p-2 text-neutral-700 hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-800 cursor-pointer"
+              >
+                <Headphones className="h-4 w-4" />
+              </button>
+            </AccessibleTooltip>
+          ) : (
+            <button
+              onClick={onOpenSupport}
+              className="flex w-full items-center gap-2 px-2 py-1.5 text-xs font-semibold text-neutral-800 hover:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-800 cursor-pointer"
+            >
+              <Headphones className="h-3.5 w-3.5" />
+              <span className="truncate">Contact Admin / Support</span>
+            </button>
+          )
         )}
       </div>
     </aside>

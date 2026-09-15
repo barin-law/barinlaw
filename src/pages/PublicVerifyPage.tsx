@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { VerifyPortal } from '../components/dashboards/VerifyPortal';
 import { BrandLogo } from '../components/common/BrandLogo';
+import { GlobalFooter } from '../components/common/GlobalFooter';
+import { SupportModal } from '../components/common/SupportModal';
 
 interface PublicVerifyPageProps {
   onNavigate: (path: string) => void;
 }
 
 export const PublicVerifyPage: React.FC<PublicVerifyPageProps> = ({ onNavigate }) => {
+  const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white text-neutral-900 font-sans antialiased selection:bg-neutral-900 selection:text-white">
       {/* Header */}
@@ -35,7 +39,7 @@ export const PublicVerifyPage: React.FC<PublicVerifyPageProps> = ({ onNavigate }
             </div>
           </div>
 
-          <div className="flex items-center gap-4 text-xs">
+          <div className="flex items-center gap-3 sm:gap-4 text-xs">
             <button
               type="button"
               onClick={() => onNavigate('/')}
@@ -49,6 +53,13 @@ export const PublicVerifyPage: React.FC<PublicVerifyPageProps> = ({ onNavigate }
               className="text-neutral-600 hover:text-black font-medium"
             >
               Barin Law Firm
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('/contact')}
+              className="text-neutral-600 hover:text-black font-medium"
+            >
+              Contact Us
             </button>
             <button
               type="button"
@@ -67,7 +78,7 @@ export const PublicVerifyPage: React.FC<PublicVerifyPageProps> = ({ onNavigate }
           <button
             type="button"
             onClick={() => onNavigate('/')}
-            className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-black"
+            className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-black cursor-pointer"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>Return to Public Home</span>
@@ -77,10 +88,18 @@ export const PublicVerifyPage: React.FC<PublicVerifyPageProps> = ({ onNavigate }
         <VerifyPortal />
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-neutral-200 bg-neutral-50/50 py-8 mt-20 text-center text-xs text-neutral-500">
-        BARIN ENF • Cryptographic Document Verification under R.A. 8792 &amp; Supreme Court A.M. No. 24-10-14-SC
-      </footer>
+      {/* Standardized Global Public Footer */}
+      <GlobalFooter
+        onNavigate={onNavigate}
+        onOpenSupportModal={() => setIsSupportModalOpen(true)}
+      />
+
+      {/* Support Modal */}
+      <SupportModal
+        isOpen={isSupportModalOpen}
+        onClose={() => setIsSupportModalOpen(false)}
+        defaultTopic="verification"
+      />
     </div>
   );
 };

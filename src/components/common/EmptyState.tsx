@@ -1,5 +1,6 @@
 import React from 'react';
-import { Inbox } from 'lucide-react';
+import { Inbox, Headphones } from 'lucide-react';
+import { siteContact } from '../../config/contactConfig';
 
 interface EmptyStateProps {
   title: string;
@@ -9,6 +10,8 @@ interface EmptyStateProps {
     label: string;
     onClick: () => void;
   };
+  showContactSupport?: boolean;
+  onOpenSupport?: () => void;
 }
 
 export const EmptyState: React.FC<EmptyStateProps> = ({
@@ -16,6 +19,8 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   description,
   icon: Icon = Inbox,
   action,
+  showContactSupport,
+  onOpenSupport,
 }) => {
   return (
     <div className="flex flex-col items-center justify-center border border-dashed border-black/20 p-8 text-center dark:border-white/20">
@@ -35,6 +40,29 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
         >
           {action.label}
         </button>
+      )}
+
+      {showContactSupport && (
+        <div className="mt-4 pt-3 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-center gap-2 text-xs text-neutral-500">
+          <span>Need assistance?</span>
+          {onOpenSupport ? (
+            <button
+              type="button"
+              onClick={onOpenSupport}
+              className="inline-flex items-center gap-1 font-semibold text-neutral-800 dark:text-neutral-200 hover:underline cursor-pointer"
+            >
+              <Headphones className="h-3 w-3" />
+              <span>Contact Administrator Support</span>
+            </button>
+          ) : (
+            <a
+              href={siteContact.emailHref}
+              className="font-semibold text-neutral-800 dark:text-neutral-200 hover:underline"
+            >
+              Email {siteContact.email}
+            </a>
+          )}
+        </div>
       )}
     </div>
   );

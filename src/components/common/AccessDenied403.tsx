@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ShieldAlert, ArrowLeft, LogOut, Key } from 'lucide-react';
 import { UserRole } from '../../types';
+import { ErrorSupportMessage } from './ErrorSupportMessage';
+import { SupportModal } from './SupportModal';
 
 interface AccessDenied403Props {
   currentRole: UserRole;
@@ -17,6 +19,8 @@ export const AccessDenied403: React.FC<AccessDenied403Props> = ({
   onNavigate,
   onSignOut,
 }) => {
+  const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-4 font-sans text-neutral-900">
       <div className="w-full max-w-lg border border-neutral-300 bg-white p-6 sm:p-8 shadow-sm space-y-5 text-center">
@@ -44,11 +48,18 @@ export const AccessDenied403: React.FC<AccessDenied403Props> = ({
           <p className="text-neutral-800">• Target Route Restriction: <strong>{requiredRole}</strong></p>
         </div>
 
+        {/* Standardized Administrator Support Box for Access Issues */}
+        <ErrorSupportMessage
+          errorType="access"
+          customTitle="Need Role Elevation or Credentials Support?"
+          onOpenSupport={() => setIsSupportModalOpen(true)}
+        />
+
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
           <button
             type="button"
             onClick={() => onNavigate(authorizedRoute)}
-            className="w-full sm:w-auto border border-black bg-black px-4 py-2 text-xs font-semibold text-white hover:bg-neutral-800 transition-colors"
+            className="w-full sm:w-auto border border-black bg-black px-4 py-2 text-xs font-semibold text-white hover:bg-neutral-800 transition-colors cursor-pointer"
           >
             Return to Authorized Workspace
           </button>
@@ -56,22 +67,35 @@ export const AccessDenied403: React.FC<AccessDenied403Props> = ({
           <button
             type="button"
             onClick={() => onNavigate('/sign-in')}
-            className="w-full sm:w-auto border border-neutral-300 bg-white px-4 py-2 text-xs font-semibold text-neutral-800 hover:border-black transition-colors"
+            className="w-full sm:w-auto border border-neutral-300 bg-white px-4 py-2 text-xs font-semibold text-neutral-800 hover:border-black transition-colors cursor-pointer"
           >
             Switch Persona (Sign In)
           </button>
         </div>
 
-        <div className="pt-2 border-t border-neutral-100">
+        <div className="pt-2 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-500">
+          <button
+            type="button"
+            onClick={() => onNavigate('/contact')}
+            className="hover:text-black transition-colors underline"
+          >
+            Contact Administrator
+          </button>
           <button
             type="button"
             onClick={onSignOut}
-            className="text-xs text-neutral-500 hover:text-red-600 transition-colors"
+            className="hover:text-red-600 transition-colors"
           >
             Sign Out Session
           </button>
         </div>
       </div>
+
+      <SupportModal
+        isOpen={isSupportModalOpen}
+        onClose={() => setIsSupportModalOpen(false)}
+        defaultTopic="technical"
+      />
     </div>
   );
 };
