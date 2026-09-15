@@ -24,6 +24,7 @@ import { useIntegration } from '../../context/IntegrationContext';
 import { UserRole } from '../../types';
 import { SYSTEM_ROLES } from '../../data/initialData';
 import { StatusBadge } from './StatusBadge';
+import { ROLE_ROUTE_MAP } from '../../data/routesConfig';
 
 interface TopApplicationBarProps {
   isSidebarCollapsed: boolean;
@@ -225,6 +226,11 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
                       onClick={() => {
                         switchRole(roleInfo.role as UserRole);
                         setIsPersonaMenuOpen(false);
+                        const target = ROLE_ROUTE_MAP[roleInfo.role as UserRole];
+                        if (target) {
+                          window.history.pushState({}, '', target);
+                          window.dispatchEvent(new PopStateEvent('popstate'));
+                        }
                       }}
                       className={`flex w-full flex-col text-left px-3 py-2 text-xs transition-colors cursor-pointer ${
                         isCurrent
@@ -301,11 +307,56 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
                 </div>
               )}
 
+              {/* Public Portal Navigation Links */}
+              <div className="border-t border-black/10 py-2 space-y-1 dark:border-white/10 text-xs">
+                <a
+                  href="/barin-law-firm"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsProfileMenuOpen(false);
+                    window.history.pushState({}, '', '/barin-law-firm');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+                  }}
+                  className="flex items-center justify-between px-2 py-1 hover:bg-neutral-100 dark:hover:bg-neutral-900 text-neutral-700 dark:text-neutral-300"
+                >
+                  <span>Barin Law Firm &amp; Assistant</span>
+                  <span className="text-[10px] font-mono text-neutral-400">/barin-law-firm</span>
+                </a>
+                <a
+                  href="/verify"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsProfileMenuOpen(false);
+                    window.history.pushState({}, '', '/verify');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+                  }}
+                  className="flex items-center justify-between px-2 py-1 hover:bg-neutral-100 dark:hover:bg-neutral-900 text-neutral-700 dark:text-neutral-300"
+                >
+                  <span>Public Hash Verification</span>
+                  <span className="text-[10px] font-mono text-neutral-400">/verify</span>
+                </a>
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsProfileMenuOpen(false);
+                    window.history.pushState({}, '', '/');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+                  }}
+                  className="flex items-center justify-between px-2 py-1 hover:bg-neutral-100 dark:hover:bg-neutral-900 text-neutral-700 dark:text-neutral-300"
+                >
+                  <span>Public Homepage</span>
+                  <span className="text-[10px] font-mono text-neutral-400">/</span>
+                </a>
+              </div>
+
               <div className="border-t border-black/10 pt-2 dark:border-white/10">
                 <button
                   onClick={() => {
                     setIsProfileMenuOpen(false);
                     logout();
+                    window.history.pushState({}, '', '/sign-in');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
                   }}
                   className="flex w-full items-center gap-1.5 px-2 py-1.5 text-xs text-red-600 hover:bg-neutral-100 dark:text-red-400 dark:hover:bg-neutral-900 cursor-pointer"
                 >

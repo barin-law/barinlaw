@@ -34,6 +34,14 @@ import { DocumentationView } from './components/dashboards/DocumentationView';
 
 import { ArrowLeft, RefreshCw } from 'lucide-react';
 import { ROLE_NAVIGATION_MAP } from './data/navigationConfig';
+import { ROLE_ROUTE_MAP, ROUTE_ROLE_MAP } from './data/routesConfig';
+
+// Public & Security Route Pages
+import { BarinLawFirmPublicPage } from './pages/BarinLawFirmPublicPage';
+import { SignInPage } from './pages/SignInPage';
+import { PublicHomePage } from './pages/PublicHomePage';
+import { PublicVerifyPage } from './pages/PublicVerifyPage';
+import { AccessDenied403 } from './components/common/AccessDenied403';
 
 type OverlayView =
   | 'NONE'
@@ -245,6 +253,64 @@ const MainWorkspace: React.FC = () => {
   );
 };
 
+const AppRouter: React.FC = () => {
+  const { currentUser, logout } = useAuth();
+  const [currentPath, setCurrentPath] = useState<string>(() => {
+    return window.location.pathname || '/';
+  });
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname || '/');
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigate = (path: string) => {
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+  };
+
+  // 1. Isolated Route: /barin-law-firm
+  if (currentPath === '/barin-law-firm') {
+    return <BarinLawFirmPublicPage onNavigate={navigate} />;
+  }
+
+  // 2. Demo Sign-In: /sign-in
+  if (currentPath === '/sign-in') {
+    return <SignInPage onNavigate={navigate} />;
+  }
+
+  // 3. Public Verification: /verify
+  if (currentPath === '/verify') {
+    return <PublicVerifyPage onNavigate={navigate} />;
+  }
+
+  // 4. Role-based Dashboard Routes
+  if (currentPath in ROUTE_ROLE_MAP) {
+    const requiredRole = ROUTE_ROLE_MAP[currentPath];
+    if (currentUser.role !== requiredRole) {
+      return (
+        <AccessDenied403
+          currentRole={currentUser.role}
+          requiredRole={requiredRole}
+          authorizedRoute={ROLE_ROUTE_MAP[currentUser.role]}
+          onNavigate={navigate}
+          onSignOut={() => {
+            logout();
+            navigate('/sign-in');
+          }}
+        />
+      );
+    }
+    return <MainWorkspace />;
+  }
+
+  // 5. Default Public Homepage: /
+  return <PublicHomePage onNavigate={navigate} />;
+};
+
 export default function App() {
   return (
     <ThemeProvider>
@@ -252,7 +318,7 @@ export default function App() {
         <SecurityProvider>
           <NotarizationProvider>
             <IntegrationProvider>
-              <MainWorkspace />
+              <AppRouter />
             </IntegrationProvider>
           </NotarizationProvider>
         </SecurityProvider>
