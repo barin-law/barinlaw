@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { BrandLogo } from './BrandLogo';
 import {
   Menu,
   Search,
@@ -107,10 +108,13 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
         </button>
 
         {/* Brand wordmark */}
-        <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center border border-black bg-black text-white dark:border-white dark:bg-white dark:text-black">
-            <Scale className="h-4 w-4" />
-          </div>
+        <div className="flex items-center gap-2.5">
+          <BrandLogo
+            variant="emblem"
+            height={30}
+            decorative
+            className="shrink-0"
+          />
           <div className="flex flex-col">
             <span className="text-sm font-bold tracking-tight text-black dark:text-white leading-none">
               Barin ENF

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrandLogo } from '../components/common/BrandLogo';
 import {
   Scale,
   Menu,
@@ -59,10 +60,12 @@ export const BarinLawFirmPublicPage: React.FC<BarinLawFirmPublicPageProps> = ({
             onClick={() => scrollToSection('top-intro')}
             className="flex items-center gap-3 cursor-pointer group"
           >
-            <img
-              src="/assets/barin-logo-bw.svg"
-              alt="BARIN ENF Electronic Notarization Facility logo"
-              className="h-9 w-9 object-contain"
+            <BrandLogo
+              variant="emblem"
+              height={36}
+              priority
+              alt="BARIN ENF Emblem"
+              className="shrink-0"
             />
             <div className="flex flex-col">
               <span className="font-serif text-base font-bold tracking-tight text-neutral-950 group-hover:text-neutral-700 transition-colors">
@@ -163,10 +166,12 @@ export const BarinLawFirmPublicPage: React.FC<BarinLawFirmPublicPageProps> = ({
         {/* 2. Main Introduction */}
         <section id="top-intro" className="text-center max-w-3xl mx-auto space-y-8">
           <div className="flex justify-center">
-            <img
-              src="/assets/barin-logo-bw.svg"
-              alt="BARIN ENF Electronic Notarization Facility logo"
-              className="h-24 w-24 sm:h-32 sm:w-32 object-contain"
+            <BrandLogo
+              variant="emblem"
+              height={112}
+              priority
+              alt="BARIN ENF Emblem"
+              className="shrink-0 max-w-[128px]"
             />
           </div>
 
@@ -272,10 +277,11 @@ export const BarinLawFirmPublicPage: React.FC<BarinLawFirmPublicPageProps> = ({
         <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-4 text-xs text-neutral-500">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-2 border-b border-neutral-200 pb-4">
             <div className="flex items-center gap-2">
-              <img
-                src="/assets/barin-logo-bw.svg"
-                alt="BARIN ENF Electronic Notarization Facility logo"
-                className="h-5 w-5 object-contain"
+              <BrandLogo
+                variant="emblem"
+                height={20}
+                decorative
+                className="shrink-0"
               />
               <span className="font-serif font-bold text-neutral-900">BARIN LAW FIRM</span>
             </div>

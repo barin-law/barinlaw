@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { VerifyPortal } from '../components/dashboards/VerifyPortal';
+import { BrandLogo } from '../components/common/BrandLogo';
 
 interface PublicVerifyPageProps {
   onNavigate: (path: string) => void;
@@ -14,12 +15,15 @@ export const PublicVerifyPage: React.FC<PublicVerifyPageProps> = ({ onNavigate }
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
           <div
             onClick={() => onNavigate('/')}
-            className="flex items-center gap-3 cursor-pointer"
+            className="flex items-center gap-3 cursor-pointer select-none"
+            title="Barin Electronic Notarization Facility"
           >
-            <img
-              src="/assets/barin-logo-bw.svg"
-              alt="BARIN ENF Electronic Notarization Facility logo"
-              className="h-8 w-8 object-contain"
+            <BrandLogo
+              variant="emblem"
+              height={36}
+              priority
+              alt="BARIN ENF Emblem"
+              className="shrink-0"
             />
             <div className="flex flex-col">
               <span className="font-serif text-sm font-bold tracking-tight text-neutral-950">

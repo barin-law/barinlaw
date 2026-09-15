@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrandLogo } from './BrandLogo';
 import { NavItemConfig } from '../../data/navigationConfig';
 import { AccessibleTooltip } from './AccessibleTooltip';
 import { UserRole } from '../../types';
@@ -47,21 +48,42 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
       }`}
     >
       {/* Sidebar Header / Role Info */}
-      <div className="flex items-center justify-between border-b border-black/10 px-3 py-3 dark:border-white/10">
-        {!isCollapsed && (
-          <div className="flex flex-col truncate pr-2">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-              Role Workspace
-            </span>
-            <span className="text-xs font-bold text-black dark:text-white truncate">
-              {activeRole.replace(/_/g, ' ')}
-            </span>
+      <div className={`flex items-center border-b border-black/10 dark:border-white/10 ${
+        isCollapsed ? 'flex-col gap-2 py-2 px-1' : 'justify-between px-3 py-2.5'
+      }`}>
+        {!isCollapsed ? (
+          <div className="flex items-center gap-2.5 truncate pr-1">
+            <BrandLogo
+              variant="emblem"
+              height={34}
+              decorative
+              className="shrink-0"
+            />
+            <div className="flex flex-col truncate">
+              <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                Role Workspace
+              </span>
+              <span className="text-xs font-bold text-black dark:text-white truncate">
+                {activeRole.replace(/_/g, ' ')}
+              </span>
+            </div>
+          </div>
+        ) : (
+          <div className="flex items-center justify-center pt-1" title="BARIN ENF">
+            <BrandLogo
+              variant="emblem"
+              height={32}
+              decorative
+              className="shrink-0"
+            />
           </div>
         )}
         <button
           onClick={onToggleCollapse}
           aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          className="flex h-7 w-7 items-center justify-center border border-black/20 hover:bg-neutral-200 dark:border-white/20 dark:hover:bg-neutral-800 transition-colors mx-auto"
+          className={`flex h-7 w-7 items-center justify-center border border-black/20 hover:bg-neutral-200 dark:border-white/20 dark:hover:bg-neutral-800 transition-colors ${
+            isCollapsed ? 'mx-auto' : ''
+          }`}
         >
           {isCollapsed ? <ChevronRight className="h-3.5 w-3.5" /> : <ChevronLeft className="h-3.5 w-3.5" />}
         </button>

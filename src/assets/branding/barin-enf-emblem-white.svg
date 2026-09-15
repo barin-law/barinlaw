@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="150 40 700 730" width="100%" height="100%" fill="none">
+      
+    <!-- Top Apex Diamond (12 o'clock) -->
+    <polygon points="500,55 522,112 500,168 478,112" fill="#FFFFFF" />
+
+    <!-- Bottom Apex Diamond (6 o'clock) -->
+    <polygon points="500,642 522,698 500,755 478,698" fill="#FFFFFF" />
+
+    <!-- Outer Circular Ring (Concentric) -->
+    <circle cx="500" cy="405" r="295" fill="none" stroke="#FFFFFF" stroke-width="24" />
+
+    <!-- Inner Circular Ring (Concentric) -->
+    <circle cx="500" cy="405" r="258" fill="none" stroke="#FFFFFF" stroke-width="17" />
+
+    <!-- Scales of Justice: Arched Balance Beam -->
+    <g id="scales-beam">
+      <!-- Center Pivot Top Cap -->
+      <path d="M 488,272 C 488,260 512,260 512,272 L 506,280 L 494,280 Z" fill="#FFFFFF" />
+      <!-- Gracefully Arched Crossbeam -->
+      <path d="M 276,336 C 350,270 435,274 500,278 C 565,274 650,270 724,336" 
+            fill="none" stroke="#FFFFFF" stroke-width="13" stroke-linecap="round" />
+      <!-- Left Beam End Knob -->
+      <circle cx="276" cy="336" r="9" fill="#FFFFFF" />
+      <!-- Right Beam End Knob -->
+      <circle cx="724" cy="336" r="9" fill="#FFFFFF" />
+    </g>
+
+    <!-- Left Scale of Justice (Cords & Pan) -->
+    <g id="left-scale">
+      <line x1="276" y1="336" x2="204" y2="456" stroke="#FFFFFF" stroke-width="3.5" />
+      <line x1="276" y1="336" x2="276" y2="458" stroke="#FFFFFF" stroke-width="3" />
+      <line x1="276" y1="336" x2="348" y2="456" stroke="#FFFFFF" stroke-width="3.5" />
+      <!-- Left Pan Saucer -->
+      <path d="M 194,456 Q 276,498 358,456 Q 276,480 194,456 Z" fill="#FFFFFF" />
+      <path d="M 194,456 Q 276,498 358,456" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" />
+    </g>
+
+    <!-- Right Scale of Justice (Cords & Pan) -->
+    <g id="right-scale">
+      <line x1="724" y1="336" x2="652" y2="456" stroke="#FFFFFF" stroke-width="3.5" />
+      <line x1="724" y1="336" x2="724" y2="458" stroke="#FFFFFF" stroke-width="3" />
+      <line x1="724" y1="336" x2="796" y2="456" stroke="#FFFFFF" stroke-width="3.5" />
+      <!-- Right Pan Saucer -->
+      <path d="M 642,456 Q 724,498 806,456 Q 724,480 642,456 Z" fill="#FFFFFF" />
+      <path d="M 642,456 Q 724,498 806,456" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" />
+    </g>
+
+    <!-- Classical Column (Left Backbone of "B") -->
+    <g id="classical-column">
+      <!-- Abacus Top Molding -->
+      <path d="M 390,210 L 536,210 C 540,210 542,212 542,216 L 542,228 L 384,228 L 384,216 C 384,212 386,210 390,210 Z" fill="#FFFFFF" />
+      <!-- Ionic Volutes (Scrolls) -->
+      <circle cx="398" cy="242" r="16" fill="none" stroke="#FFFFFF" stroke-width="7" />
+      <circle cx="528" cy="242" r="16" fill="none" stroke="#FFFFFF" stroke-width="7" />
+      <rect x="402" y="234" width="122" height="9" rx="3" fill="#FFFFFF" />
+      <rect x="414" y="246" width="98" height="8" rx="2" fill="#FFFFFF" />
+
+      <!-- Column Shaft: 4 Vertical Ribs with Fluting Channels -->
+      <rect x="424" y="256" width="14" height="340" rx="3.5" fill="#FFFFFF" />
+      <rect x="444" y="256" width="14" height="340" rx="3.5" fill="#FFFFFF" />
+      <rect x="464" y="256" width="14" height="340" rx="3.5" fill="#FFFFFF" />
+      <rect x="484" y="256" width="14" height="340" rx="3.5" fill="#FFFFFF" />
+
+      <!-- Column Base Pedestal -->
+      <rect x="410" y="598" width="106" height="11" rx="2" fill="#FFFFFF" />
+      <rect x="394" y="611" width="138" height="15" rx="3" fill="#FFFFFF" />
+    </g>
+
+    <!-- Letter "B" Serif Bowls (Didone High Contrast) -->
+    <g id="letter-b-bowls">
+      <!-- Upper Bowl -->
+      <path d="M 498,216 C 565,216 630,238 630,310 C 630,362 584,392 506,395 C 496,395 492,393 492,383 C 550,380 588,354 588,310 C 588,254 538,236 498,236 Z" 
+            fill="#FFFFFF" />
+      <!-- Lower Bowl with Sweeping Tail -->
+      <path d="M 498,392 C 590,392 648,424 648,500 C 648,566 592,610 472,616 C 448,617 348,617 348,605 C 362,605 402,603 424,603 C 552,597 604,554 604,498 C 604,440 550,408 498,408 Z" 
+            fill="#FFFFFF" />
+    </g>
+
+    <!-- Foreground Legal Document (Dog-Eared) -->
+    <g id="legal-document">
+      <!-- Document Base Sheet with White Fill to Occlude Elements Behind -->
+      <path d="M 440,450 L 536,450 L 572,486 L 572,610 C 572,615 567,620 562,620 L 450,620 C 444,620 440,615 440,610 Z" 
+            fill="#171717" stroke="#FFFFFF" stroke-width="8" stroke-linejoin="round" />
+      <!-- Folded Dog-Ear Corner -->
+      <path d="M 536,450 L 536,486 L 572,486 Z" fill="#FFFFFF" />
+      <!-- Text Lines on Document -->
+      <rect x="466" y="500" width="58" height="7.5" rx="3.75" fill="#FFFFFF" />
+      <rect x="466" y="524" width="52" height="7.5" rx="3.75" fill="#FFFFFF" />
+      <rect x="466" y="548" width="48" height="7.5" rx="3.75" fill="#FFFFFF" />
+      <rect x="466" y="572" width="42" height="7.5" rx="3.75" fill="#FFFFFF" />
+    </g>
+
+    <!-- Closed Padlock (Security / Cryptographic Lock) -->
+    <g id="security-padlock">
+      <!-- Padlock Shackle -->
+      <path d="M 548,554 L 548,525 C 548,510 560,498 575,498 C 590,498 602,510 602,525 L 602,554" 
+            fill="none" stroke="#FFFFFF" stroke-width="9.5" stroke-linecap="round" />
+      <!-- Padlock Body -->
+      <rect x="532" y="548" width="86" height="72" rx="14" fill="#FFFFFF" stroke="#171717" stroke-width="3.5" />
+      <!-- Padlock Keyhole -->
+      <circle cx="575" cy="576" r="7.5" fill="#171717" />
+      <polygon points="570,576 580,576 582,598 568,598" fill="#171717" />
+    </g>
+  
+    </svg>

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { BrandLogo } from '../common/BrandLogo';
 import {
   Send,
   Square,
@@ -184,10 +185,13 @@ export const BarinAssistantWorkspace: React.FC<BarinAssistantWorkspaceProps> = (
     >
       {/* Workspace Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-neutral-200 px-4 py-3 gap-2 bg-white">
-        <div className="flex items-center gap-2">
-          <div className="flex h-6 w-6 items-center justify-center border border-black bg-black text-white text-[11px] font-bold">
-            BA
-          </div>
+        <div className="flex items-center gap-2.5">
+          <BrandLogo
+            variant="emblem"
+            height={26}
+            decorative
+            className="shrink-0"
+          />
           <div>
             <h2 className="text-sm font-bold tracking-tight text-neutral-900 leading-none">
               Barin Assistant

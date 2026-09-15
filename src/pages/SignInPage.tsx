@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrandLogo } from '../components/common/BrandLogo';
 import {
   Lock,
   User,
@@ -288,19 +289,16 @@ export const SignInPage: React.FC<SignInPageProps> = ({
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div
             onClick={() => onNavigate('/')}
-            className="flex items-center gap-2.5 cursor-pointer"
+            className="flex items-center cursor-pointer select-none"
+            title="Barin Electronic Notarization Facility"
           >
-            <img
-              src="/assets/barin-logo-bw.svg"
-              alt="BARIN ENF Electronic Notarization Facility logo"
-              className="h-8 w-8 object-contain"
+            <BrandLogo
+              variant="full"
+              height={40}
+              priority
+              alt="BARIN ENF Electronic Notarization Facility"
+              className="max-h-[44px]"
             />
-            <div className="flex flex-col">
-              <span className="font-serif text-sm font-bold tracking-tight">BARIN ENF</span>
-              <span className="text-[10px] text-neutral-500 font-mono">
-                Electronic Notarization Facility
-              </span>
-            </div>
           </div>
 
           <div className="flex items-center gap-3">
@@ -323,9 +321,16 @@ export const SignInPage: React.FC<SignInPageProps> = ({
         {!isAuthenticated ? (
           /* Step 1: Sign-in Form */
           <div className="w-full max-w-md border border-neutral-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
-            <div className="text-center space-y-2">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center border border-black bg-black text-white">
-                <Lock className="h-5 w-5" />
+            <div className="text-center space-y-3">
+              <div className="flex justify-center pb-1">
+                <BrandLogo
+                  variant="full"
+                  width={170}
+                  height="auto"
+                  priority
+                  alt="BARIN ENF Electronic Notarization Facility"
+                  className="max-w-[180px]"
+                />
               </div>
               <h1 className="text-xl font-bold tracking-tight font-serif">
                 Demonstration Portal Sign In

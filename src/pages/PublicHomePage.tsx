@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrandLogo } from '../components/common/BrandLogo';
 import {
   Scale,
   ShieldCheck,
@@ -26,21 +27,16 @@ export const PublicHomePage: React.FC<PublicHomePageProps> = ({ onNavigate }) =>
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
           <div
             onClick={() => onNavigate('/')}
-            className="flex items-center gap-3 cursor-pointer"
+            className="flex items-center cursor-pointer select-none"
+            title="Barin Electronic Notarization Facility"
           >
-            <img
-              src="/assets/barin-logo-bw.svg"
-              alt="BARIN ENF Electronic Notarization Facility logo"
-              className="h-8 w-8 object-contain"
+            <BrandLogo
+              variant="full"
+              height={42}
+              priority
+              alt="BARIN ENF Electronic Notarization Facility"
+              className="max-h-[46px]"
             />
-            <div className="flex flex-col">
-              <span className="font-serif text-sm font-bold tracking-tight text-neutral-950">
-                BARIN ENF
-              </span>
-              <span className="text-[10px] text-neutral-500 font-mono">
-                Electronic Notarization Facility
-              </span>
-            </div>
           </div>
 
           <nav aria-label="Public Navigation" className="flex items-center gap-4 sm:gap-6 text-xs font-medium">
@@ -67,8 +63,19 @@ export const PublicHomePage: React.FC<PublicHomePageProps> = ({ onNavigate }) =>
       </header>
 
       {/* Hero Section */}
-      <main className="mx-auto max-w-5xl px-4 sm:px-6 py-16 sm:py-24 space-y-20">
+      <main className="mx-auto max-w-5xl px-4 sm:px-6 py-12 sm:py-20 space-y-16">
         <section className="text-center max-w-3xl mx-auto space-y-6">
+          <div className="flex justify-center pb-2">
+            <BrandLogo
+              variant="full"
+              width={200}
+              height="auto"
+              priority
+              alt="BARIN ENF Electronic Notarization Facility"
+              className="max-w-[220px]"
+            />
+          </div>
+
           <div className="inline-flex items-center gap-2 border border-neutral-300 bg-neutral-50 px-3 py-1 text-xs font-mono text-neutral-700">
             <span>Supreme Court A.M. No. 24-10-14-SC</span>
             <span>•</span>
@@ -179,11 +186,12 @@ export const PublicHomePage: React.FC<PublicHomePageProps> = ({ onNavigate }) =>
       {/* Footer */}
       <footer className="border-t border-neutral-200 bg-neutral-50/50 py-10 mt-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
-          <div className="flex items-center gap-2">
-            <img
-              src="/assets/barin-logo-bw.svg"
-              alt="BARIN ENF Electronic Notarization Facility logo"
-              className="h-5 w-5 object-contain"
+          <div className="flex items-center gap-2.5">
+            <BrandLogo
+              variant="emblem"
+              height={22}
+              decorative
+              className="shrink-0 opacity-90"
             />
             <span className="font-serif font-bold text-neutral-900">BARIN ENF</span>
             <span>• Candidate Accreditation Architecture</span>

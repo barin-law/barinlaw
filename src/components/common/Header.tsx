@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrandLogo } from './BrandLogo';
 import {
   Sun,
   Moon,
@@ -30,9 +31,13 @@ export const Header: React.FC = () => {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
         {/* Brand & Wordmark */}
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center border border-black bg-black text-white dark:border-white dark:bg-white dark:text-black">
-            <span className="font-mono text-sm font-bold tracking-tight">ENF</span>
-          </div>
+          <BrandLogo
+            variant="emblem"
+            height={36}
+            priority
+            alt="BARIN ENF Emblem"
+            className="shrink-0"
+          />
           <div>
             <div className="flex items-center gap-2">
               <span className="text-base font-bold tracking-tight">BARIN ENF</span>
