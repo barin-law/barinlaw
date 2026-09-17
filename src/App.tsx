@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { SecurityProvider } from './context/SecurityContext';
@@ -16,7 +17,6 @@ import { WitnessDashboard } from './components/dashboards/WitnessDashboard';
 import { OrgDashboard } from './components/dashboards/OrgDashboard';
 import { EnpAssistantDashboard } from './components/dashboards/EnpAssistantDashboard';
 import { SecOpsDashboard } from './components/dashboards/SecOpsDashboard';
-import { AuditLogDashboard } from './components/dashboards/AuditLogDashboard';
 import { DpoDashboard } from './components/dashboards/DpoDashboard';
 import { FinanceDashboard } from './components/dashboards/FinanceDashboard';
 import { CustomerSupportDashboard } from './components/dashboards/CustomerSupportDashboard';
@@ -32,7 +32,8 @@ import { NotarialBookView } from './components/dashboards/NotarialBookView';
 import { ApiDocumentationView } from './components/dashboards/ApiDocumentationView';
 import { DocumentationView } from './components/dashboards/DocumentationView';
 
-import { ArrowLeft, RefreshCw } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+
 import { ROLE_NAVIGATION_MAP } from './data/navigationConfig';
 import { ROLE_ROUTE_MAP, ROUTE_ROLE_MAP } from './data/routesConfig';
 
@@ -45,6 +46,32 @@ import { ContactUsPage } from './pages/ContactUsPage';
 import { AccessDenied403 } from './components/common/AccessDenied403';
 import { NotFound404 } from './components/common/NotFound404';
 
+/**
+ * ============================================================
+ * DHENZE ELECTRONIC NOTARIZATION FACILITY
+ * GitHub Pages Routing Configuration
+ * ============================================================
+ *
+ * Production:
+ * https://barin-law.github.io/barinlaw/
+ *
+ * Vite base:
+ * /barinlaw/
+ *
+ * The application uses its own lightweight routing system rather
+ * than React Router.
+ *
+ * Browser URL:
+ * /barinlaw/contact
+ *
+ * Internal application route:
+ * /contact
+ *
+ * This prevents the GitHub Pages repository prefix from being
+ * mistaken for an application route.
+ * ============================================================
+ */
+
 type OverlayView =
   | 'NONE'
   | 'INTEGRATION_CENTER'
@@ -54,42 +81,62 @@ type OverlayView =
   | 'NOTARIAL_BOOK'
   | 'DOCS';
 
+/**
+ * ============================================================
+ * MAIN AUTHENTICATED WORKSPACE
+ * ============================================================
+ */
+
 const MainWorkspace: React.FC = () => {
   const { currentUser } = useAuth();
 
-  // Set default module based on active role
   const defaultModuleForRole = (role: string) => {
-    const navItems = ROLE_NAVIGATION_MAP[role as keyof typeof ROLE_NAVIGATION_MAP] || ROLE_NAVIGATION_MAP.PRINCIPAL;
+    const navItems =
+      ROLE_NAVIGATION_MAP[
+        role as keyof typeof ROLE_NAVIGATION_MAP
+      ] || ROLE_NAVIGATION_MAP.PRINCIPAL;
+
     return navItems[0]?.id || 'principal-overview';
   };
 
   const [activeModuleId, setActiveModuleId] = useState<string>(() =>
     defaultModuleForRole(currentUser.role)
   );
-  const [overlayView, setOverlayView] = useState<OverlayView>('NONE');
 
-  // Sync module whenever role changes
+  const [overlayView, setOverlayView] =
+    useState<OverlayView>('NONE');
+
+  /**
+   * Synchronize the default module whenever the user's role changes.
+   */
   useEffect(() => {
     setActiveModuleId(defaultModuleForRole(currentUser.role));
     setOverlayView('NONE');
   }, [currentUser.role]);
 
-  // Handle module navigation from child or sidebar
+  /**
+   * Handle navigation between workspace modules.
+   */
   const handleSelectModule = (moduleId: string) => {
-    // Check if it's a global utility module
     if (moduleId === 'global-integration-center') {
       setOverlayView('INTEGRATION_CENTER');
       return;
     }
+
     if (moduleId === 'global-verify-portal') {
       setOverlayView('VERIFICATION_PORTAL');
       return;
     }
+
     if (moduleId === 'global-unit-tests') {
       setOverlayView('UNIT_TESTS');
       return;
     }
-    if (moduleId === 'enp-register' && currentUser.role !== 'ENP') {
+
+    if (
+      moduleId === 'enp-register' &&
+      currentUser.role !== 'ENP'
+    ) {
       setOverlayView('NOTARIAL_BOOK');
       return;
     }
@@ -102,45 +149,98 @@ const MainWorkspace: React.FC = () => {
     <ApplicationShell
       activeModuleId={activeModuleId}
       setActiveModuleId={handleSelectModule}
-      onOpenIntegrationCenter={() => setOverlayView('INTEGRATION_CENTER')}
-      onOpenUnitTests={() => setOverlayView('UNIT_TESTS')}
-      onOpenVerificationPortal={() => setOverlayView('VERIFICATION_PORTAL')}
+      onOpenIntegrationCenter={() =>
+        setOverlayView('INTEGRATION_CENTER')
+      }
+      onOpenUnitTests={() =>
+        setOverlayView('UNIT_TESTS')
+      }
+      onOpenVerificationPortal={() =>
+        setOverlayView('VERIFICATION_PORTAL')
+      }
     >
       {(currentModuleId, setCurrentModuleId) => {
-        // If an overlay view is active, render it with a back button
+        /**
+         * ------------------------------------------------------------
+         * GLOBAL / SYSTEM OVERLAY VIEWS
+         * ------------------------------------------------------------
+         */
+
         if (overlayView !== 'NONE') {
           return (
             <div className="space-y-4">
               <div className="flex items-center justify-between border-b border-black/10 pb-3 dark:border-white/10">
                 <button
-                  onClick={() => setOverlayView('NONE')}
-                  className="flex items-center gap-1.5 border border-black px-3 py-1.5 text-xs font-semibold hover:bg-neutral-100 dark:border-white dark:hover:bg-neutral-900 cursor-pointer"
+                  type="button"
+                  onClick={() =>
+                    setOverlayView('NONE')
+                  }
+                  className="flex cursor-pointer items-center gap-1.5 border border-black px-3 py-1.5 text-xs font-semibold hover:bg-neutral-100 dark:border-white dark:hover:bg-neutral-900"
                 >
                   <ArrowLeft className="h-3.5 w-3.5" />
-                  <span>Return to {currentUser.role.replace(/_/g, ' ')} Workspace</span>
+
+                  <span>
+                    Return to{' '}
+                    {currentUser.role.replace(
+                      /_/g,
+                      ' '
+                    )}{' '}
+                    Workspace
+                  </span>
                 </button>
-                <span className="text-[11px] font-mono text-neutral-500">
+
+                <span className="font-mono text-[11px] text-neutral-500">
                   System Utility Mode
                 </span>
               </div>
 
-              {overlayView === 'INTEGRATION_CENTER' && <IntegrationCenterView />}
-              {overlayView === 'UNIT_TESTS' && <UnitTestRunnerView />}
-              {overlayView === 'VERIFICATION_PORTAL' && <VerifyPortal />}
-              {overlayView === 'API_DOCS' && <ApiDocumentationView />}
-              {overlayView === 'NOTARIAL_BOOK' && <NotarialBookView />}
-              {overlayView === 'DOCS' && <DocumentationView />}
+              {overlayView ===
+                'INTEGRATION_CENTER' && (
+                <IntegrationCenterView />
+              )}
+
+              {overlayView ===
+                'UNIT_TESTS' && (
+                <UnitTestRunnerView />
+              )}
+
+              {overlayView ===
+                'VERIFICATION_PORTAL' && (
+                <VerifyPortal />
+              )}
+
+              {overlayView ===
+                'API_DOCS' && (
+                <ApiDocumentationView />
+              )}
+
+              {overlayView ===
+                'NOTARIAL_BOOK' && (
+                <NotarialBookView />
+              )}
+
+              {overlayView ===
+                'DOCS' && (
+                <DocumentationView />
+              )}
             </div>
           );
         }
 
-        // Render role-specific workspace dashboard
+        /**
+         * ------------------------------------------------------------
+         * ROLE-SPECIFIC WORKSPACES
+         * ------------------------------------------------------------
+         */
+
         switch (currentUser.role) {
           case 'PRINCIPAL':
             return (
               <PrincipalDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
 
@@ -148,7 +248,9 @@ const MainWorkspace: React.FC = () => {
             return (
               <EnpDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
 
@@ -156,7 +258,9 @@ const MainWorkspace: React.FC = () => {
             return (
               <WitnessDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
 
@@ -165,7 +269,9 @@ const MainWorkspace: React.FC = () => {
             return (
               <OrgDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
 
@@ -173,7 +279,9 @@ const MainWorkspace: React.FC = () => {
             return (
               <EnpAssistantDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
 
@@ -181,7 +289,9 @@ const MainWorkspace: React.FC = () => {
             return (
               <SecOpsDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
 
@@ -189,7 +299,9 @@ const MainWorkspace: React.FC = () => {
             return (
               <DpoDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
 
@@ -197,7 +309,9 @@ const MainWorkspace: React.FC = () => {
             return (
               <FinanceDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
 
@@ -205,7 +319,9 @@ const MainWorkspace: React.FC = () => {
             return (
               <CustomerSupportDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
 
@@ -213,8 +329,14 @@ const MainWorkspace: React.FC = () => {
             return (
               <EnfAdminDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
-                onOpenIntegrationCenter={() => setOverlayView('INTEGRATION_CENTER')}
+                onSelectModule={
+                  setCurrentModuleId
+                }
+                onOpenIntegrationCenter={() =>
+                  setOverlayView(
+                    'INTEGRATION_CENTER'
+                  )
+                }
               />
             );
 
@@ -222,7 +344,9 @@ const MainWorkspace: React.FC = () => {
             return (
               <InternalAuditorDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
 
@@ -230,7 +354,9 @@ const MainWorkspace: React.FC = () => {
             return (
               <CourtAuditorDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
 
@@ -238,7 +364,9 @@ const MainWorkspace: React.FC = () => {
             return (
               <ComplianceDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
 
@@ -246,7 +374,9 @@ const MainWorkspace: React.FC = () => {
             return (
               <PrincipalDashboard
                 activeModuleId={currentModuleId}
-                onSelectModule={setCurrentModuleId}
+                onSelectModule={
+                  setCurrentModuleId
+                }
               />
             );
         }
@@ -255,54 +385,269 @@ const MainWorkspace: React.FC = () => {
   );
 };
 
+/**
+ * ============================================================
+ * APPLICATION ROUTER
+ * ============================================================
+ *
+ * This router is GitHub Pages base-path aware.
+ *
+ * Example:
+ *
+ * Browser:
+ * /barinlaw/contact
+ *
+ * Application:
+ * /contact
+ *
+ * ============================================================
+ */
+
 const AppRouter: React.FC = () => {
   const { currentUser, logout } = useAuth();
-  const [currentPath, setCurrentPath] = useState<string>(() => {
-    return window.location.pathname || '/';
-  });
 
-  useEffect(() => {
-    const handlePopState = () => {
-      setCurrentPath(window.location.pathname || '/');
-    };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+  /**
+   * Vite BASE_URL comes from vite.config.ts.
+   *
+   * Current production configuration:
+   *
+   * base: '/barinlaw/'
+   *
+   * Remove the final slash so we can safely construct URLs.
+   */
+  const basePath =
+    import.meta.env.BASE_URL === '/'
+      ? ''
+      : import.meta.env.BASE_URL.replace(
+          /\/$/,
+          ''
+        );
 
-  const navigate = (path: string) => {
-    window.history.pushState({}, '', path);
-    setCurrentPath(path);
+  /**
+   * Convert the actual browser pathname into an
+   * application-relative pathname.
+   *
+   * Examples:
+   *
+   * /barinlaw/            -> /
+   * /barinlaw/sign-in     -> /sign-in
+   * /barinlaw/contact     -> /contact
+   * /barinlaw/verify      -> /verify
+   */
+  const getAppPath = (): string => {
+    const pathname =
+      window.location.pathname || '/';
+
+    if (
+      basePath &&
+      pathname === basePath
+    ) {
+      return '/';
+    }
+
+    if (
+      basePath &&
+      pathname.startsWith(
+        `${basePath}/`
+      )
+    ) {
+      const relativePath =
+        pathname.slice(basePath.length);
+
+      return relativePath || '/';
+    }
+
+    return pathname || '/';
   };
 
-  // 1. Isolated Route: /dhenze-law-firm (with backwards-compatible alias /barin-law-firm)
-  if (currentPath === '/dhenze-law-firm' || currentPath === '/barin-law-firm') {
-    return <DhenzeLawFirmPublicPage onNavigate={navigate} />;
+  const [currentPath, setCurrentPath] =
+    useState<string>(() => getAppPath());
+
+  /**
+   * Handle browser Back / Forward navigation.
+   */
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(getAppPath());
+    };
+
+    window.addEventListener(
+      'popstate',
+      handlePopState
+    );
+
+    return () => {
+      window.removeEventListener(
+        'popstate',
+        handlePopState
+      );
+    };
+  }, []);
+
+  /**
+   * Navigate internally while preserving the
+   * GitHub Pages repository base path.
+   *
+   * navigate('/contact')
+   *
+   * becomes:
+   *
+   * /barinlaw/contact
+   */
+  const navigate = (path: string) => {
+    let normalizedPath =
+      path && path !== '/'
+        ? path.startsWith('/')
+          ? path
+          : `/${path}`
+        : '/';
+
+    /**
+     * Remove accidental duplicate repository prefix.
+     *
+     * Example:
+     *
+     * /barinlaw/contact
+     *
+     * becomes:
+     *
+     * /contact
+     */
+    if (
+      basePath &&
+      normalizedPath.startsWith(
+        `${basePath}/`
+      )
+    ) {
+      normalizedPath =
+        normalizedPath.slice(
+          basePath.length
+        );
+    }
+
+    if (
+      basePath &&
+      normalizedPath === basePath
+    ) {
+      normalizedPath = '/';
+    }
+
+    const browserPath =
+      basePath
+        ? normalizedPath === '/'
+          ? `${basePath}/`
+          : `${basePath}${normalizedPath}`
+        : normalizedPath;
+
+    window.history.pushState(
+      {},
+      '',
+      browserPath
+    );
+
+    setCurrentPath(normalizedPath);
+
+    /**
+     * Move to top of page after navigation.
+     */
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    });
+  };
+
+  /**
+   * ============================================================
+   * PUBLIC ROUTES
+   * ============================================================
+   */
+
+  /**
+   * 1. Dhenze Law Firm Public Page
+   *
+   * Keep old /barin-law-firm route temporarily
+   * for backwards compatibility.
+   */
+  if (
+    currentPath ===
+      '/dhenze-law-firm' ||
+    currentPath ===
+      '/barin-law-firm'
+  ) {
+    return (
+      <DhenzeLawFirmPublicPage
+        onNavigate={navigate}
+      />
+    );
   }
 
-  // 2. Demo Sign-In: /sign-in
+  /**
+   * 2. Sign-In
+   */
   if (currentPath === '/sign-in') {
-    return <SignInPage onNavigate={navigate} />;
+    return (
+      <SignInPage
+        onNavigate={navigate}
+      />
+    );
   }
 
-  // 3. Public Verification: /verify
+  /**
+   * 3. Public Verification
+   */
   if (currentPath === '/verify') {
-    return <PublicVerifyPage onNavigate={navigate} />;
+    return (
+      <PublicVerifyPage
+        onNavigate={navigate}
+      />
+    );
   }
 
-  // 4. Contact Us / Technical Support: /contact or /contact-us
-  if (currentPath === '/contact' || currentPath === '/contact-us') {
-    return <ContactUsPage onNavigate={navigate} />;
+  /**
+   * 4. Contact / Technical Support
+   */
+  if (
+    currentPath === '/contact' ||
+    currentPath === '/contact-us'
+  ) {
+    return (
+      <ContactUsPage
+        onNavigate={navigate}
+      />
+    );
   }
 
-  // 5. Role-based Dashboard Routes
+  /**
+   * ============================================================
+   * AUTHENTICATED ROLE ROUTES
+   * ============================================================
+   */
+
   if (currentPath in ROUTE_ROLE_MAP) {
-    const requiredRole = ROUTE_ROLE_MAP[currentPath];
-    if (currentUser.role !== requiredRole) {
+    const requiredRole =
+      ROUTE_ROLE_MAP[currentPath];
+
+    /**
+     * User is authenticated under a different
+     * role than the requested workspace.
+     */
+    if (
+      currentUser.role !== requiredRole
+    ) {
       return (
         <AccessDenied403
-          currentRole={currentUser.role}
-          requiredRole={requiredRole}
-          authorizedRoute={ROLE_ROUTE_MAP[currentUser.role]}
+          currentRole={
+            currentUser.role
+          }
+          requiredRole={
+            requiredRole
+          }
+          authorizedRoute={
+            ROLE_ROUTE_MAP[
+              currentUser.role
+            ]
+          }
           onNavigate={navigate}
           onSignOut={() => {
             logout();
@@ -311,17 +656,45 @@ const AppRouter: React.FC = () => {
         />
       );
     }
+
     return <MainWorkspace />;
   }
 
-  // 6. Default Public Homepage: /
-  if (currentPath === '' || currentPath === '/') {
-    return <PublicHomePage onNavigate={navigate} />;
+  /**
+   * ============================================================
+   * PUBLIC HOMEPAGE
+   * ============================================================
+   */
+
+  if (
+    currentPath === '' ||
+    currentPath === '/'
+  ) {
+    return (
+      <PublicHomePage
+        onNavigate={navigate}
+      />
+    );
   }
 
-  // 7. Unknown route -> Standardized 404 page
-  return <NotFound404 onNavigate={navigate} />;
+  /**
+   * ============================================================
+   * UNKNOWN ROUTE
+   * ============================================================
+   */
+
+  return (
+    <NotFound404
+      onNavigate={navigate}
+    />
+  );
 };
+
+/**
+ * ============================================================
+ * APPLICATION ROOT
+ * ============================================================
+ */
 
 export default function App() {
   return (
