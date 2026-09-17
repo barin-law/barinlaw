@@ -175,7 +175,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
           <div className="space-y-4 text-xs font-mono">
             <div className="border border-black/20 p-4 bg-neutral-50 dark:border-white/20 dark:bg-neutral-900 space-y-2">
               <div className="text-center pb-2 border-b border-black/10 dark:border-white/10">
-                <span className="font-bold text-sm font-sans">Barin Electronic Notarization Facility</span>
+                <span className="font-bold text-sm font-sans">Dhenze Electronic Notarization Facility</span>
                 <div className="text-[10px] text-neutral-500">Accreditation Candidate Demonstrative E-Receipt</div>
               </div>
 

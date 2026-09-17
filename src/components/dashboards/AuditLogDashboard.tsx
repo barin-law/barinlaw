@@ -93,7 +93,7 @@ export const AuditLogDashboard: React.FC<AuditLogDashboardProps> = ({
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `barin-enf-audit-report-${Date.now()}.csv`;
+    link.download = `dhenze-enf-audit-report-${Date.now()}.csv`;
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -104,7 +104,7 @@ export const AuditLogDashboard: React.FC<AuditLogDashboardProps> = ({
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `barin-enf-audit-events-${Date.now()}.json`;
+    link.download = `dhenze-enf-audit-events-${Date.now()}.json`;
     link.click();
     URL.revokeObjectURL(url);
   };

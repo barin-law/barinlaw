@@ -42,6 +42,7 @@ export const ROUTE_ROLE_MAP: Record<string, UserRole> = {
 
 export const PUBLIC_ROUTES = [
   '/',
+  '/dhenze-law-firm',
   '/barin-law-firm',
   '/verify',
   '/sign-in',

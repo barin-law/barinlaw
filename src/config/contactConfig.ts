@@ -12,10 +12,12 @@ export interface SiteContactConfig {
   developerAttribution: string;
   phoneDisplay: string;
   phoneLink: string;
+  phoneHref: string;
   phoneStatus: string;
   phoneAccessibleLabel: string;
   email: string;
   emailLink: string;
+  emailHref: string;
   emailStatus: string;
   emailAccessibleLabel: string;
   officeAddress: string;
@@ -29,16 +31,18 @@ export interface SiteContactConfig {
 }
 
 export const siteContact: SiteContactConfig = {
-  attorneyName: 'Atty. Enrico Barin',
+  attorneyName: 'Supreme Court of the Philippines',
   developerName: 'Ophireum Multimedia Production',
   developerStatus: 'Official Developer',
   developerAttribution: 'Developed by: Ophireum Multimedia Production — Official Developer',
   phoneDisplay: '+63 917 966 8814',
   phoneLink: 'tel:+639179668814',
+  phoneHref: 'tel:+639179668814',
   phoneStatus: 'Temporary Contact Number',
   phoneAccessibleLabel: 'Call temporary contact number',
   email: 'ophireum.admin@gmail.com',
   emailLink: 'mailto:ophireum.admin@gmail.com',
+  emailHref: 'mailto:ophireum.admin@gmail.com',
   emailStatus: 'Temporary Email Address',
   emailAccessibleLabel: 'Email temporary administrator address',
   officeAddress: 'To be confirmed',

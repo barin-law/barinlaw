@@ -35,7 +35,7 @@ interface ContactInquiriesManagerProps {
 
 export const ContactInquiriesManager: React.FC<ContactInquiriesManagerProps> = ({
   currentUserRole = 'ENF_ADMIN',
-  currentUserName = 'Atty. Enrico Barin',
+  currentUserName = 'Supreme Court of the Philippines',
   userEmailFilter,
   className = '',
 }) => {
@@ -226,7 +226,7 @@ export const ContactInquiriesManager: React.FC<ContactInquiriesManagerProps> = (
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
-    link.setAttribute('download', `Barin_ENF_Inquiries_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute('download', `Dhenze_ENF_Inquiries_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -238,7 +238,7 @@ export const ContactInquiriesManager: React.FC<ContactInquiriesManagerProps> = (
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
-    link.setAttribute('download', `Barin_ENF_Inquiries_${new Date().toISOString().slice(0, 10)}.json`);
+    link.setAttribute('download', `Dhenze_ENF_Inquiries_${new Date().toISOString().slice(0, 10)}.json`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

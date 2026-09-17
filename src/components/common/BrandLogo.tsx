@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
 
-// Import local optimized assets directly so Vite bundles and hashes them cleanly
-import logoBwPng from '../../assets/branding/barin-enf-logo-bw.png';
-import logoBwWebp from '../../assets/branding/barin-enf-logo-bw.webp';
-import logoWhitePng from '../../assets/branding/barin-enf-logo-white.png';
-import logoWhiteWebp from '../../assets/branding/barin-enf-logo-white.webp';
-
-import emblemBwPng from '../../assets/branding/barin-enf-emblem-bw.png';
-import emblemBwWebp from '../../assets/branding/barin-enf-emblem-bw.webp';
-import emblemWhitePng from '../../assets/branding/barin-enf-emblem-white.png';
-import emblemWhiteWebp from '../../assets/branding/barin-enf-emblem-white.webp';
+// Import optimized crisp vector branding assets with D symbol and DHENZE ENF
+import logoBwSvg from '../../assets/branding/dhenze-enf-logo-bw.svg';
+import logoWhiteSvg from '../../assets/branding/dhenze-enf-logo-white.svg';
+import emblemBwSvg from '../../assets/branding/dhenze-enf-emblem-bw.svg';
+import emblemWhiteSvg from '../../assets/branding/dhenze-enf-emblem-white.svg';
 
 export type BrandLogoVariant = 'full' | 'emblem';
 export type BrandLogoTheme = 'light' | 'dark' | 'auto';
 
 export interface BrandLogoProps {
   /**
-   * 'full': Complete official logo (Seal + BARIN ENF + ELECTRONIC NOTARIZATION FACILITY)
-   * 'emblem': Compact circular seal symbol only
+   * 'full': Complete official logo (Seal + DHENZE ENF + ELECTRONIC NOTARIZATION FACILITY)
+   * 'emblem': Compact circular seal symbol with 'D' only
    */
   variant?: BrandLogoVariant;
   /**
@@ -27,7 +22,7 @@ export interface BrandLogoProps {
    */
   themeMode?: BrandLogoTheme;
   /**
-   * Accessible alternative text. Defaults to 'BARIN ENF Electronic Notarization Facility'.
+   * Accessible alternative text. Defaults to 'DHENZE ENF Electronic Notarization Facility'.
    * Set to empty string for decorative instances.
    */
   alt?: string;
@@ -63,8 +58,8 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     : alt !== undefined
     ? alt
     : variant === 'full'
-    ? 'BARIN ENF Electronic Notarization Facility'
-    : 'BARIN ENF Emblem';
+    ? 'DHENZE ENF Electronic Notarization Facility'
+    : 'DHENZE ENF Emblem';
 
   // Sizing defaults based on variant recommendations
   const defaultHeight = variant === 'full' ? 44 : 36;
@@ -79,70 +74,64 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         style={{ height: resolvedHeight, width: width ?? 'auto' }}
         onClick={onClick}
       >
-        {variant === 'full' ? 'BARIN ENF' : 'B'}
+        {variant === 'full' ? 'DHENZE ENF' : 'D'}
       </span>
     );
   }
 
   // Explicit 'light' mode
   if (themeMode === 'light') {
-    const webpSrc = variant === 'full' ? logoBwWebp : emblemBwWebp;
-    const pngSrc = variant === 'full' ? logoBwPng : emblemBwPng;
+    const svgSrc = variant === 'full' ? logoBwSvg : emblemBwSvg;
 
     return (
-      <picture id={id} className={`inline-block ${className}`} onClick={onClick}>
-        <source srcSet={webpSrc} type="image/webp" />
-        <img
-          src={pngSrc}
-          alt={resolvedAlt}
-          width={width}
-          height={height}
-          loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
-          onError={() => setLoadError(true)}
-          className="h-full w-auto object-contain transition-opacity duration-150"
-          style={{
-            maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
-            width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
-          }}
-          referrerPolicy="no-referrer"
-        />
-      </picture>
+      <img
+        id={id}
+        src={svgSrc}
+        alt={resolvedAlt}
+        width={width}
+        height={height}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        onError={() => setLoadError(true)}
+        className={`inline-block h-full w-auto object-contain transition-opacity duration-150 ${className}`}
+        style={{
+          maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
+          width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
+        }}
+        onClick={onClick}
+        referrerPolicy="no-referrer"
+      />
     );
   }
 
   // Explicit 'dark' mode
   if (themeMode === 'dark') {
-    const webpSrc = variant === 'full' ? logoWhiteWebp : emblemWhiteWebp;
-    const pngSrc = variant === 'full' ? logoWhitePng : emblemWhitePng;
+    const svgSrc = variant === 'full' ? logoWhiteSvg : emblemWhiteSvg;
 
     return (
-      <picture id={id} className={`inline-block ${className}`} onClick={onClick}>
-        <source srcSet={webpSrc} type="image/webp" />
-        <img
-          src={pngSrc}
-          alt={resolvedAlt}
-          width={width}
-          height={height}
-          loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
-          onError={() => setLoadError(true)}
-          className="h-full w-auto object-contain transition-opacity duration-150"
-          style={{
-            maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
-            width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
-          }}
-          referrerPolicy="no-referrer"
-        />
-      </picture>
+      <img
+        id={id}
+        src={svgSrc}
+        alt={resolvedAlt}
+        width={width}
+        height={height}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        onError={() => setLoadError(true)}
+        className={`inline-block h-full w-auto object-contain transition-opacity duration-150 ${className}`}
+        style={{
+          maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
+          width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
+        }}
+        onClick={onClick}
+        referrerPolicy="no-referrer"
+      />
     );
   }
 
   // Automatic Theme Switcher (light logo in standard mode, white logo in dark mode)
-  const lightWebp = variant === 'full' ? logoBwWebp : emblemBwWebp;
-  const lightPng = variant === 'full' ? logoBwPng : emblemBwPng;
-  const darkWebp = variant === 'full' ? logoWhiteWebp : emblemWhiteWebp;
-  const darkPng = variant === 'full' ? logoWhitePng : emblemWhitePng;
+  const lightSvg = variant === 'full' ? logoBwSvg : emblemBwSvg;
+  const darkSvg = variant === 'full' ? logoWhiteSvg : emblemWhiteSvg;
 
   return (
     <span
@@ -155,44 +144,38 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       }}
     >
       {/* Light Theme Logo */}
-      <picture className="dark:hidden inline-block h-full">
-        <source srcSet={lightWebp} type="image/webp" />
-        <img
-          src={lightPng}
-          alt={resolvedAlt}
-          width={width}
-          height={height}
-          loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
-          onError={() => setLoadError(true)}
-          className="h-full w-auto object-contain"
-          style={{
-            maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
-            width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
-          }}
-          referrerPolicy="no-referrer"
-        />
-      </picture>
+      <img
+        src={lightSvg}
+        alt={resolvedAlt}
+        width={width}
+        height={height}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        onError={() => setLoadError(true)}
+        className="dark:hidden inline-block h-full w-auto object-contain"
+        style={{
+          maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
+          width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
+        }}
+        referrerPolicy="no-referrer"
+      />
 
       {/* Dark Theme Logo */}
-      <picture className="hidden dark:inline-block h-full">
-        <source srcSet={darkWebp} type="image/webp" />
-        <img
-          src={darkPng}
-          alt={resolvedAlt}
-          width={width}
-          height={height}
-          loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
-          onError={() => setLoadError(true)}
-          className="h-full w-auto object-contain"
-          style={{
-            maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
-            width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
-          }}
-          referrerPolicy="no-referrer"
-        />
-      </picture>
+      <img
+        src={darkSvg}
+        alt={resolvedAlt}
+        width={width}
+        height={height}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        onError={() => setLoadError(true)}
+        className="hidden dark:inline-block h-full w-auto object-contain"
+        style={{
+          maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
+          width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
+        }}
+        referrerPolicy="no-referrer"
+      />
     </span>
   );
 };

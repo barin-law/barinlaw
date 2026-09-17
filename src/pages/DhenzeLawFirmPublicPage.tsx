@@ -331,6 +331,3 @@ export const DhenzeLawFirmPublicPage: React.FC<DhenzeLawFirmPublicPageProps> = (
     </div>
   );
 };
-
-export const BarinLawFirmPublicPage = DhenzeLawFirmPublicPage;
-

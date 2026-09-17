@@ -17,7 +17,7 @@ export const ApiDocumentationView: React.FC = () => {
           JSON.stringify(
             {
               status: 'SUCCESS',
-              facility: 'Barin Electronic Notarization Facility',
+              facility: 'Dhenze Electronic Notarization Facility',
               referenceNumber: testInput,
               verified: true,
               documentType: 'Affidavit of Loss (PhilSys)',
@@ -25,7 +25,7 @@ export const ApiDocumentationView: React.FC = () => {
               pdfaSha256: '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08',
               notarizedAt: '2026-09-14T09:15:30Z',
               enp: {
-                name: 'Atty. Leandro V. Barin, En.P.',
+                name: 'Atty. Leandro V. Dhenze, En.P.',
                 commissionNo: 'NP-2025-0814-MKT',
                 jurisdiction: 'RTC Makati Branch 138',
               },
@@ -161,7 +161,7 @@ export const ApiDocumentationView: React.FC = () => {
                   Publicly verifies whether a document was notarized, checks SHA-256 hash integrity, and returns ENP commission details without revealing private PII or biometrics.
                 </p>
                 <pre className="mt-3 border border-black/20 bg-neutral-50 p-3 text-[11px] font-mono dark:border-white/20 dark:bg-neutral-900">
-{`curl -X GET "https://api.barin-enf.gov.ph/api/v1/verify/ENF-20260914-2201" \\
+{`curl -X GET "https://api.dhenze-enf.gov.ph/api/v1/verify/ENF-20260914-2201" \\
   -H "Authorization: Bearer enf_live_pk_..." \\
   -H "Accept: application/json"`}
                 </pre>
@@ -175,7 +175,7 @@ export const ApiDocumentationView: React.FC = () => {
                   Ingests enterprise instruments, deposits into isolated quarantine bucket, initiates ClamAV malware scan, and schedules ENP appearance.
                 </p>
                 <pre className="mt-3 border border-black/20 bg-neutral-50 p-3 text-[11px] font-mono dark:border-white/20 dark:bg-neutral-900">
-{`curl -X POST "https://api.barin-enf.gov.ph/api/v1/requests" \\
+{`curl -X POST "https://api.dhenze-enf.gov.ph/api/v1/requests" \\
   -H "Authorization: Bearer enf_live_pk_..." \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -195,7 +195,7 @@ export const ApiDocumentationView: React.FC = () => {
                   Streams tamper-evident audit logs directly to security collectors (Splunk, QRadar, Datadog) formatted as RFC 5424 or ArcSight CEF.
                 </p>
                 <pre className="mt-3 border border-black/20 bg-neutral-50 p-3 text-[11px] font-mono dark:border-white/20 dark:bg-neutral-900">
-{`curl -X GET "https://api.barin-enf.gov.ph/api/v1/audit/stream?format=CEF" \\
+{`curl -X GET "https://api.dhenze-enf.gov.ph/api/v1/audit/stream?format=CEF" \\
   -H "Authorization: Bearer enf_live_pk_..."`}
                 </pre>
               </div>

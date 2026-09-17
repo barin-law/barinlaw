@@ -221,7 +221,7 @@ export const OrgDashboard: React.FC<OrgDashboardProps> = ({
               Enterprise REST API Credentials (Sandbox)
             </h3>
             <p className="text-xs text-neutral-500">
-              Integrate corporate ERP / Document Management systems with the Barin ENF API endpoint.
+              Integrate corporate ERP / Document Management systems with the Dhenze ENF API endpoint.
             </p>
 
             <div className="border border-black/10 p-3 bg-neutral-50 dark:bg-neutral-900 font-mono text-xs flex items-center justify-between">

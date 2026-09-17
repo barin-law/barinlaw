@@ -36,7 +36,7 @@ export const ApplicationShell: React.FC<ApplicationShellProps> = ({
   // Persistent sidebar collapsed state in localStorage
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(() => {
     try {
-      return localStorage.getItem('barin_sidebar_collapsed') === 'true';
+      return localStorage.getItem('dhenze_sidebar_collapsed') === 'true';
     } catch {
       return false;
     }
@@ -46,7 +46,7 @@ export const ApplicationShell: React.FC<ApplicationShellProps> = ({
     setIsSidebarCollapsed((prev) => {
       const next = !prev;
       try {
-        localStorage.setItem('barin_sidebar_collapsed', String(next));
+        localStorage.setItem('dhenze_sidebar_collapsed', String(next));
       } catch (e) {
         console.error('Failed to save sidebar state', e);
       }

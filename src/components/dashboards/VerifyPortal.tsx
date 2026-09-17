@@ -32,7 +32,7 @@ export const VerifyPortal: React.FC = () => {
         </div>
         <h2 className="text-2xl font-bold tracking-tight">Public Instrument Verification Portal</h2>
         <p className="text-xs text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto">
-          Verify the authenticity, integrity, and Electronic Notary Public commission for any instrument executed via the Barin Electronic Notarization Facility.
+          Verify the authenticity, integrity, and Electronic Notary Public commission for any instrument executed via the Dhenze Electronic Notarization Facility.
         </p>
       </div>
 

@@ -16,12 +16,12 @@ export const DocumentationView: React.FC = () => {
             </span>
           </div>
           <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
-            Architectural guidelines, statutory compliance models, and engineering onboarding for the Barin Electronic Notarization Facility.
+            Architectural guidelines, statutory compliance models, and engineering onboarding for the Dhenze Electronic Notarization Facility.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-neutral-500">Document ID: BARIN-ENF-ARCH-2026</span>
+          <span className="text-xs font-mono text-neutral-500">Document ID: DHENZE-ENF-ARCH-2026</span>
         </div>
       </div>
 
@@ -60,7 +60,7 @@ export const DocumentationView: React.FC = () => {
               1. System Architecture & Ingestion Pipeline
             </h3>
             <p>
-              The Barin Electronic Notarization Facility is engineered as an enterprise-grade, fail-closed platform designed specifically for Philippine Electronic Notarization (IEN for Integrated In-Person Electronic Notarization and REN for Remote Electronic Notarization).
+              The Dhenze Electronic Notarization Facility is engineered as an enterprise-grade, fail-closed platform designed specifically for Philippine Electronic Notarization (IEN for Integrated In-Person Electronic Notarization and REN for Remote Electronic Notarization).
             </p>
 
             <div className="border border-black/20 bg-neutral-50 p-4 dark:border-white/20 dark:bg-neutral-900 space-y-2 font-mono text-[11px]">
@@ -114,7 +114,7 @@ export const DocumentationView: React.FC = () => {
               3. Cryptography & SIEM Integration Model
             </h3>
             <p>
-              Barin ENF deploys continuous security telemetry and automated threat detection:
+              Dhenze ENF deploys continuous security telemetry and automated threat detection:
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -205,7 +205,7 @@ export const DocumentationView: React.FC = () => {
               5. Engineering Onboarding & Contribution Guidelines
             </h3>
             <p>
-              Welcome to the Barin ENF engineering team. Please follow these conventions when contributing code:
+              Welcome to the Dhenze ENF engineering team. Please follow these conventions when contributing code:
             </p>
 
             <div className="space-y-2 border border-black/15 p-4 bg-neutral-50 dark:border-white/15 dark:bg-neutral-900">

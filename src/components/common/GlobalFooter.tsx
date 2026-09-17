@@ -47,7 +47,7 @@ export const GlobalFooter: React.FC<GlobalFooterProps> = ({
                 />
                 <div>
                   <span className="font-serif text-sm font-bold tracking-tight text-neutral-950 dark:text-neutral-50 block leading-tight">
-                    BARIN ELECTRONIC NOTARIZATION FACILITY
+                    DHENZE ELECTRONIC NOTARIZATION FACILITY
                   </span>
                   <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block">
                     Candidate Accreditation Architecture
@@ -193,7 +193,7 @@ export const GlobalFooter: React.FC<GlobalFooterProps> = ({
           {/* Bottom Bar: Copyright & Candidate Disclaimer */}
           <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-500">
             <p>
-              &copy; {siteContact.copyrightYear} {siteContact.attorneyName} • Barin Electronic Notarization Facility. All rights reserved.
+              &copy; {siteContact.copyrightYear} {siteContact.attorneyName} • Dhenze Electronic Notarization Facility. All rights reserved.
             </p>
             <p className="text-[11px] font-mono">
               Official Developer: Ophireum Multimedia Production

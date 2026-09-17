@@ -33,7 +33,7 @@ export const SessionTimeoutDialog: React.FC<SessionTimeoutDialogProps> = ({
               Session Idle Warning
             </h2>
             <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-300 leading-relaxed">
-              Pursuant to Barin ENF candidate security policies, your authenticated session will expire due to inactivity in:
+              Pursuant to Dhenze ENF candidate security policies, your authenticated session will expire due to inactivity in:
             </p>
             <div className="my-3 text-center">
               <span className="font-mono text-3xl font-bold tracking-tight text-red-600 dark:text-red-400">

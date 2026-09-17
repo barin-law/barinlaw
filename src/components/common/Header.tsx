@@ -35,12 +35,12 @@ export const Header: React.FC = () => {
             variant="emblem"
             height={36}
             priority
-            alt="BARIN ENF Emblem"
+            alt="DHENZE ENF Emblem"
             className="shrink-0"
           />
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-base font-bold tracking-tight">BARIN ENF</span>
+              <span className="text-base font-bold tracking-tight">DHENZE ENF</span>
               <span className="border border-black/30 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider dark:border-white/30">
                 Candidate v1.0
               </span>

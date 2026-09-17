@@ -82,13 +82,10 @@
       <rect x="394" y="611" width="138" height="15" rx="3" fill="#FFFFFF" />
     </g>
 
-    <!-- Letter "B" Serif Bowls (Didone High Contrast) -->
-    <g id="letter-b-bowls">
-      <!-- Upper Bowl -->
-      <path d="M 498,216 C 565,216 630,238 630,310 C 630,362 584,392 506,395 C 496,395 492,393 492,383 C 550,380 588,354 588,310 C 588,254 538,236 498,236 Z" 
-            fill="#FFFFFF" />
-      <!-- Lower Bowl with Sweeping Tail -->
-      <path d="M 498,392 C 590,392 648,424 648,500 C 648,566 592,610 472,616 C 448,617 348,617 348,605 C 362,605 402,603 424,603 C 552,597 604,554 604,498 C 604,440 550,408 498,408 Z" 
+    <!-- Letter "D" Serif Bowl (Didone High Contrast Grand Arc) -->
+    <g id="letter-d-bowl">
+      <!-- Single Grand Serif Bowl for "D" with Classical Column as Left Stem -->
+      <path d="M 498,216 C 590,216 662,285 662,410 C 662,535 590,616 472,616 C 448,617 348,617 348,605 C 362,605 402,603 424,603 C 545,598 614,530 614,410 C 614,290 545,236 498,236 Z" 
             fill="#FFFFFF" />
     </g>
 
@@ -119,9 +116,9 @@
     </g>
   
 
-    <!-- Brand Header: BARIN ENF -->
+    <!-- Brand Header: DHENZE ENF -->
     <text x="500" y="872" class="serif-brand" font-size="112" fill="#FFFFFF" text-anchor="middle">
-      BARIN ENF
+      DHENZE ENF
     </text>
 
     <!-- Subtitle: Horizontal Rules and "ELECTRONIC NOTARIZATION FACILITY" -->

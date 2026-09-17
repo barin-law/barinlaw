@@ -85,7 +85,7 @@ export const AuthenticatedFooter: React.FC<AuthenticatedFooterProps> = ({
           <div className="pt-2 border-t border-black/5 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-neutral-500">
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
               <span className="font-semibold text-neutral-900 dark:text-neutral-100">
-                Barin Electronic Notarization Facility
+                Dhenze Electronic Notarization Facility
               </span>
               <span>•</span>
               <span className="font-mono text-[10px]">Session Role: {currentRole}</span>

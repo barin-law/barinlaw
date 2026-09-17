@@ -14,9 +14,9 @@ export const NotarialBookView: React.FC = () => {
   const exportRegister = () => {
     const data = JSON.stringify(
       {
-        facility: 'Barin Electronic Notarization Facility',
+        facility: 'Dhenze Electronic Notarization Facility',
         jurisdiction: 'RTC Makati Branch 138',
-        enp: 'Atty. Leandro V. Barin, En.P. (NP-2025-0814-MKT)',
+        enp: 'Atty. Leandro V. Dhenze, En.P. (NP-2025-0814-MKT)',
         accreditationStatus: 'CANDIDATE',
         seriesYear: 2026,
         exportTimestamp: new Date().toISOString(),
@@ -41,7 +41,7 @@ export const NotarialBookView: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `barin-electronic-notarial-book-series-2026-${Date.now()}.json`;
+    a.download = `dhenze-electronic-notarial-book-series-2026-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -84,7 +84,7 @@ export const NotarialBookView: React.FC = () => {
       <div className="border border-black/20 bg-neutral-50 p-4 text-xs font-mono dark:border-white/20 dark:bg-neutral-900 grid grid-cols-2 md:grid-cols-4 gap-4">
         <div>
           <span className="text-neutral-500 block text-[10px] uppercase">Commissioned ENP</span>
-          <span className="font-bold text-black dark:text-white">Atty. Leandro V. Barin, En.P. (Candidate)</span>
+          <span className="font-bold text-black dark:text-white">Atty. Leandro V. Dhenze, En.P. (Candidate)</span>
         </div>
         <div>
           <span className="text-neutral-500 block text-[10px] uppercase">Commission Jurisdiction</span>

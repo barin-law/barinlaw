@@ -123,7 +123,7 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
           />
           <div className="flex flex-col">
             <span className="text-sm font-bold tracking-tight text-black dark:text-white leading-none">
-              Barin ENF
+              Dhenze ENF
             </span>
             <span className="hidden text-[10px] text-neutral-500 dark:text-neutral-400 sm:inline-block leading-none mt-0.5">
               Electronic Notarization Facility
@@ -334,17 +334,17 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
               {/* Public Portal Navigation Links */}
               <div className="border-t border-black/10 py-2 space-y-1 dark:border-white/10 text-xs">
                 <a
-                  href="/barin-law-firm"
+                  href="/dhenze-law-firm"
                   onClick={(e) => {
                     e.preventDefault();
                     setIsProfileMenuOpen(false);
-                    window.history.pushState({}, '', '/barin-law-firm');
+                    window.history.pushState({}, '', '/dhenze-law-firm');
                     window.dispatchEvent(new PopStateEvent('popstate'));
                   }}
                   className="flex items-center justify-between px-2 py-1 hover:bg-neutral-100 dark:hover:bg-neutral-900 text-neutral-700 dark:text-neutral-300"
                 >
-                  <span>Barin Law Firm &amp; Assistant</span>
-                  <span className="text-[10px] font-mono text-neutral-400">/barin-law-firm</span>
+                  <span>Dhenze Law Firm &amp; Assistant</span>
+                  <span className="text-[10px] font-mono text-neutral-400">/dhenze-law-firm</span>
                 </a>
                 <a
                   href="/verify"

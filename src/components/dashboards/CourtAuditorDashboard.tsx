@@ -108,7 +108,7 @@ export const CourtAuditorDashboard: React.FC<CourtAuditorDashboardProps> = ({
               </span>
             </div>
             <p>
-              In strict accordance with the Guidelines on the Accreditation of Electronic Notarization Facilities (A.M. No. 24-10-14-SC), the Supreme Court of the Philippines Electronic Notarial Automated Registry (SC-ENAR) technical interface and API specifications have not yet been formally gazetted. The Barin ENF candidate platform enforces client-side fail-closed safeguards and maintains local immutable registers pending national rollout.
+              In strict accordance with the Guidelines on the Accreditation of Electronic Notarization Facilities (A.M. No. 24-10-14-SC), the Supreme Court of the Philippines Electronic Notarial Automated Registry (SC-ENAR) technical interface and API specifications have not yet been formally gazetted. The Dhenze ENF candidate platform enforces client-side fail-closed safeguards and maintains local immutable registers pending national rollout.
             </p>
           </div>
         </div>

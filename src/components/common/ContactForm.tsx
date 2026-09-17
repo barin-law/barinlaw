@@ -173,7 +173,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           Contact Inquiry &amp; Support Intake
         </h2>
         <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-1">
-          Submit your matter or technical inquiry for official intake review by Atty. Enrico Barin and administrator support.
+          Submit your matter or technical inquiry for official intake review by Supreme Court of the Philippines and administrator support.
         </p>
       </div>
 

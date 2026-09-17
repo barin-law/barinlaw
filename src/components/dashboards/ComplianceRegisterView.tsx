@@ -6,7 +6,7 @@ export const ComplianceRegisterView: React.FC = () => {
   const exportComplianceRegister = () => {
     const data = JSON.stringify(
       {
-        registerName: 'Barin ENF Authoritative Requirements Register',
+        registerName: 'Dhenze ENF Authoritative Requirements Register',
         governingLaw: 'Supreme Court A.M. No. 24-10-14-SC, R.A. 8792, R.A. 10173',
         exportDate: new Date().toISOString(),
         requirements: AUTHORITATIVE_REQUIREMENTS,
@@ -19,7 +19,7 @@ export const ComplianceRegisterView: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `barin-enf-compliance-register-${Date.now()}.json`;
+    a.download = `dhenze-enf-compliance-register-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };

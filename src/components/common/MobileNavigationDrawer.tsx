@@ -74,7 +74,7 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
               className="shrink-0"
             />
             <div>
-              <div className="text-sm font-bold leading-none">Barin ENF</div>
+              <div className="text-sm font-bold leading-none">Dhenze ENF</div>
               <div className="text-[10px] text-neutral-500 font-mono mt-0.5">
                 {activeRole.replace(/_/g, ' ')}
               </div>

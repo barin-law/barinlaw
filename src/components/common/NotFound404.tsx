@@ -20,13 +20,13 @@ export const NotFound404: React.FC<NotFound404Props> = ({ onNavigate }) => {
           <div
             onClick={() => onNavigate('/')}
             className="flex items-center cursor-pointer select-none"
-            title="Barin Electronic Notarization Facility"
+            title="Dhenze Electronic Notarization Facility"
           >
             <BrandLogo
               variant="full"
               height={38}
               priority
-              alt="BARIN ENF"
+              alt="DHENZE ENF"
               className="max-h-[42px]"
             />
           </div>
@@ -55,7 +55,7 @@ export const NotFound404: React.FC<NotFound404Props> = ({ onNavigate }) => {
               Page Not Found
             </h1>
             <p className="text-xs text-neutral-600 max-w-md mx-auto leading-relaxed">
-              The requested URL could not be located on the BARIN Electronic Notarization Facility system. The document or route may have been relocated, or your link may be invalid.
+              The requested URL could not be located on the DHENZE Electronic Notarization Facility system. The document or route may have been relocated, or your link may be invalid.
             </p>
           </div>
 

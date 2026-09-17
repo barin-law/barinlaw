@@ -27,7 +27,7 @@ export const GuidedHelpModal: React.FC<GuidedHelpModalProps> = ({
           <div className="flex items-center gap-2">
             <BookOpen className="h-5 w-5" />
             <h2 id="help-modal-title" className="text-base font-bold">
-              Barin ENF Operational Guide & Legal Disclosures
+              Dhenze ENF Operational Guide & Legal Disclosures
             </h2>
           </div>
           <button
@@ -48,7 +48,7 @@ export const GuidedHelpModal: React.FC<GuidedHelpModalProps> = ({
               <span>Accreditation Candidate Environment</span>
             </div>
             <p className="mt-1.5 text-[11px] text-neutral-600 dark:text-neutral-400">
-              The Barin Electronic Notarization Facility (Barin ENF) is an accreditation candidate platform under the Supreme Court of the Philippines Rules on Electronic Notarization (A.M. No. 24-10-14-SC). No documents generated in this demonstration environment possess official legal validity.
+              The Dhenze Electronic Notarization Facility (Dhenze ENF) is an accreditation candidate platform under the Supreme Court of the Philippines Rules on Electronic Notarization (A.M. No. 24-10-14-SC). No documents generated in this demonstration environment possess official legal validity.
             </p>
           </div>
 
@@ -107,7 +107,7 @@ export const GuidedHelpModal: React.FC<GuidedHelpModalProps> = ({
             </h3>
             <div className="space-y-1 text-[11px]">
               <div className="font-serif font-bold text-neutral-950 dark:text-neutral-50">
-                Atty. Enrico Barin
+                Supreme Court of the Philippines
               </div>
               <div className="text-neutral-600 dark:text-neutral-400">
                 Developed by: Ophireum Multimedia Production — Official Developer
@@ -144,7 +144,7 @@ export const GuidedHelpModal: React.FC<GuidedHelpModalProps> = ({
         {/* Footer */}
         <div className="flex items-center justify-between border-t border-black/10 px-6 py-3 dark:border-white/10 text-xs">
           <span className="text-[11px] text-neutral-500 font-mono">
-            Barin Law &bull; Ophireum Multimedia Production
+            Dhenze Law &bull; Ophireum Multimedia Production
           </span>
           <button
             onClick={onClose}

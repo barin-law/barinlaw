@@ -37,7 +37,7 @@ import { ROLE_NAVIGATION_MAP } from './data/navigationConfig';
 import { ROLE_ROUTE_MAP, ROUTE_ROLE_MAP } from './data/routesConfig';
 
 // Public & Security Route Pages
-import { BarinLawFirmPublicPage } from './pages/BarinLawFirmPublicPage';
+import { DhenzeLawFirmPublicPage } from './pages/DhenzeLawFirmPublicPage';
 import { SignInPage } from './pages/SignInPage';
 import { PublicHomePage } from './pages/PublicHomePage';
 import { PublicVerifyPage } from './pages/PublicVerifyPage';
@@ -274,9 +274,9 @@ const AppRouter: React.FC = () => {
     setCurrentPath(path);
   };
 
-  // 1. Isolated Route: /barin-law-firm
-  if (currentPath === '/barin-law-firm') {
-    return <BarinLawFirmPublicPage onNavigate={navigate} />;
+  // 1. Isolated Route: /dhenze-law-firm (with backwards-compatible alias /barin-law-firm)
+  if (currentPath === '/dhenze-law-firm' || currentPath === '/barin-law-firm') {
+    return <DhenzeLawFirmPublicPage onNavigate={navigate} />;
   }
 
   // 2. Demo Sign-In: /sign-in

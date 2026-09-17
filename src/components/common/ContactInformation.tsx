@@ -15,7 +15,7 @@ interface ContactInformationProps {
  * Standardized Contact Information Component
  *
  * Implements the approved organizational hierarchy:
- * 1. Atty. Enrico Barin
+ * 1. Supreme Court of the Philippines
  * 2. Developed by: Ophireum Multimedia Production — Official Developer
  * 3. Contact Us: +63 917 966 8814 (Temporary Contact Number)
  * 4. Email: ophireum.admin@gmail.com (Temporary Email Address)

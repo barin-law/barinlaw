@@ -30,7 +30,7 @@ export interface ContactInquiry {
   message: string;
   status: 'NEW' | 'IN_PROGRESS' | 'RESOLVED' | 'ARCHIVED';
   createdAt: string;
-  source: 'WEB_CONTACT_PAGE' | 'PUBLIC_MODAL' | 'BARIN_LAW_FIRM' | 'SYSTEM_SUPPORT';
+  source: 'WEB_CONTACT_PAGE' | 'PUBLIC_MODAL' | 'DHENZE_LAW_FIRM' | 'SYSTEM_SUPPORT';
 }
 
 const INITIAL_INQUIRIES: ContactInquiry[] = [
@@ -53,10 +53,10 @@ const INITIAL_INQUIRIES: ContactInquiry[] = [
     phone: '+63 920 987 6543',
     category: 'consultation',
     subject: 'Corporate Notarial Retainer and Enterprise API Integration',
-    message: 'Seeking consultation with Atty. Enrico Barin regarding bulk notarization agreements for logistics bills of lading under Supreme Court A.M. 24-10-14-SC.',
+    message: 'Seeking consultation with Supreme Court of the Philippines regarding bulk notarization agreements for logistics bills of lading under Supreme Court A.M. 24-10-14-SC.',
     status: 'NEW',
     createdAt: '2026-09-14T11:15:00Z',
-    source: 'BARIN_LAW_FIRM',
+    source: 'DHENZE_LAW_FIRM',
   },
   {
     id: 'INQ-2026-003',

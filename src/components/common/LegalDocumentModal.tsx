@@ -87,7 +87,7 @@ export const LegalDocumentModal: React.FC<LegalDocumentModalProps> = ({
             <div>
               <h4 className="font-bold text-neutral-900 dark:text-neutral-100 mb-1">1. Candidate Environment Status</h4>
               <p>
-                The Barin Electronic Notarization Facility (Barin ENF) is deployed strictly as an architectural candidate and testing demonstrator. Nothing in this preview constitutes final administrative accreditation until certified by the Supreme Court of the Philippines.
+                The Dhenze Electronic Notarization Facility (Dhenze ENF) is deployed strictly as an architectural candidate and testing demonstrator. Nothing in this preview constitutes final administrative accreditation until certified by the Supreme Court of the Philippines.
               </p>
             </div>
 
@@ -113,14 +113,14 @@ export const LegalDocumentModal: React.FC<LegalDocumentModalProps> = ({
             <div className="border border-amber-400 bg-amber-50 dark:bg-amber-950/40 p-3.5 space-y-1 text-amber-900 dark:text-amber-200">
               <span className="font-bold">Official Legal Disclaimer &amp; Non-Representation Notice</span>
               <p className="text-[11px]">
-                Republic of the Philippines • Barin Law &amp; Barin ENF
+                Republic of the Philippines • Dhenze Law &amp; Dhenze ENF
               </p>
             </div>
 
             <div>
               <h4 className="font-bold text-neutral-900 dark:text-neutral-100 mb-1">No Attorney-Client Relationship</h4>
               <p className="leading-relaxed">
-                {siteContact.disclaimerNotice} Accessing this website, submitting an inquiry, or interacting with the Barin Assistant AI does not create an attorney-client relationship between you and {siteContact.attorneyName} or Barin Law Firm.
+                {siteContact.disclaimerNotice} Accessing this website, submitting an inquiry, or interacting with the Dhenze Assistant AI does not create an attorney-client relationship between you and {siteContact.attorneyName} or Dhenze Law Firm.
               </p>
             </div>
 
@@ -192,9 +192,9 @@ export const LegalDocumentModal: React.FC<LegalDocumentModalProps> = ({
                   Public Gateways
                 </h4>
                 <ul className="space-y-1 text-[11px]">
-                  <li>• / — Barin ENF Candidate Public Homepage</li>
+                  <li>• / — Dhenze ENF Candidate Public Homepage</li>
                   <li>• /contact — Official Contact Us &amp; Inquiry Intake</li>
-                  <li>• /barin-law-firm — Barin Law Firm Profile &amp; Barin Assistant</li>
+                  <li>• /dhenze-law-firm — Dhenze Law Firm Profile &amp; Dhenze Assistant</li>
                   <li>• /verify — Cryptographic Document Hash Verification</li>
                   <li>• /sign-in — Demo Persona Switcher &amp; Authentication</li>
                 </ul>
@@ -256,7 +256,7 @@ export const LegalDocumentModal: React.FC<LegalDocumentModalProps> = ({
 
         <div className="flex items-center justify-between border-t border-black/10 dark:border-white/10 px-5 py-3 bg-neutral-50 dark:bg-neutral-950 text-xs">
           <span className="text-[11px] text-neutral-500 font-mono">
-            Barin ENF • {siteContact.developerAttribution}
+            Dhenze ENF • {siteContact.developerAttribution}
           </span>
           <button
             onClick={onClose}

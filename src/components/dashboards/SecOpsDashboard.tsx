@@ -67,7 +67,7 @@ export const SecOpsDashboard: React.FC<SecOpsDashboardProps> = ({
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `barin-enf-siem-${selectedExportFormat.toLowerCase()}-${Date.now()}.txt`;
+    a.download = `dhenze-enf-siem-${selectedExportFormat.toLowerCase()}-${Date.now()}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   };

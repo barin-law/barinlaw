@@ -45,7 +45,7 @@ export const IntegrationCenterView: React.FC = () => {
       <PageHeader
         breadcrumbs={[{ label: 'System Architecture' }, { label: 'Integration Center', active: true }]}
         title="Integration Center & Service Adapters"
-        purpose="Inspect, diagnose and test all 18 external integration adapters supporting the Barin ENF accreditation candidate facility."
+        purpose="Inspect, diagnose and test all 18 external integration adapters supporting the Dhenze ENF accreditation candidate facility."
         statusBadge={<StatusBadge status="18 ADAPTERS" variant="demo" />}
       />
 
