@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 // Import optimized crisp vector branding assets with D symbol and DHENZE ENF
-import logoBwSvg from '../../assets/branding/dhenze-enf-logo-bw.svg';
-import logoWhiteSvg from '../../assets/branding/dhenze-enf-logo-white.svg';
-import emblemBwSvg from '../../assets/branding/dhenze-enf-emblem-bw.svg';
-import emblemWhiteSvg from '../../assets/branding/dhenze-enf-emblem-white.svg';
+import logoBwSvg from '../../assets/branding/barin-enf-logo-bw.svg';
+import logoWhiteSvg from '../../assets/branding/barin-enf-logo-white.svg';
+import emblemBwSvg from '../../assets/branding/barin-enf-emblem-bw.svg';
+import emblemWhiteSvg from '../../assets/branding/barin-enf-emblem-white.svg';
 
 export type BrandLogoVariant = 'full' | 'emblem';
 export type BrandLogoTheme = 'light' | 'dark' | 'auto';
