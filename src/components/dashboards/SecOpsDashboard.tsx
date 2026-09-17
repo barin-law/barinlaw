@@ -423,7 +423,7 @@ export const SecOpsDashboard: React.FC<SecOpsDashboardProps> = ({
                     </td>
                     <td className="px-4 py-3.5">
                       <div className="flex items-center gap-1.5">
-                        {threat.dispatchedChannels.map((c) => (
+                        {(threat.dispatchedChannels || []).map((c) => (
                           <span
                             key={c}
                             className="border border-black/20 px-1 py-0.2 text-[9px] font-mono font-bold dark:border-white/20"

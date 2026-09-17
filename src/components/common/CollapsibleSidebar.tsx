@@ -41,7 +41,7 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
   onOpenSupport,
 }) => {
   // Group menu items by category if available
-  const categories = Array.from(new Set(menuItems.map((item) => item.category || 'Workspace')));
+  const categories = Array.from(new Set((menuItems || []).map((item) => item.category || 'Workspace')));
 
   return (
     <aside

@@ -18,7 +18,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
         <Home className="h-3 w-3" />
         <span>Workspace</span>
       </div>
-      {items.map((item, idx) => (
+      {(items || []).map((item, idx) => (
         <React.Fragment key={idx}>
           <ChevronRight className="h-3 w-3 shrink-0 text-neutral-400 dark:text-neutral-600" />
           {item.onClick && !item.active ? (

@@ -4,6 +4,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { SecurityProvider } from './context/SecurityContext';
 import { NotarizationProvider } from './context/NotarizationContext';
+import { ClientCaseProvider } from './context/ClientCaseContext';
 import { IntegrationProvider } from './context/IntegrationContext';
 
 // Application Shell
@@ -702,9 +703,11 @@ export default function App() {
       <AuthProvider>
         <SecurityProvider>
           <NotarizationProvider>
-            <IntegrationProvider>
-              <AppRouter />
-            </IntegrationProvider>
+            <ClientCaseProvider>
+              <IntegrationProvider>
+                <AppRouter />
+              </IntegrationProvider>
+            </ClientCaseProvider>
           </NotarizationProvider>
         </SecurityProvider>
       </AuthProvider>

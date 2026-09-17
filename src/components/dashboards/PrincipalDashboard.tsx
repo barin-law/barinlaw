@@ -32,6 +32,15 @@ import { useNotarization } from '../../context/NotarizationContext';
 import { useAuth } from '../../context/AuthContext';
 import { NotarizationMode, NotarialAct, NotarizationRequest } from '../../types';
 import { truncateHash, sha256 } from '../../utils/crypto';
+import { ClientJourneyTracker } from './principal/ClientJourneyTracker';
+import { ClientIdentitySection } from './principal/ClientIdentitySection';
+import { ClientCasesSection } from './principal/ClientCasesSection';
+import { ClientParticipantsSection } from './principal/ClientParticipantsSection';
+import { ClientEvidenceSection } from './principal/ClientEvidenceSection';
+import { ClientConsultationSection } from './principal/ClientConsultationSection';
+import { ClientNotarizationSection } from './principal/ClientNotarizationSection';
+import { ClientAccountSection } from './principal/ClientAccountSection';
+import { useClientCase } from '../../context/ClientCaseContext';
 
 interface PrincipalDashboardProps {
   activeModuleId: string;
@@ -64,6 +73,82 @@ export const PrincipalDashboard: React.FC<PrincipalDashboardProps> = ({
   const [scanningLiveness, setScanningLiveness] = useState(false);
   const [filterState, setFilterState] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
+
+  // 8-Category Navigation Matchers
+  const isIdentityModule = [
+    'principal-personal-info',
+    'principal-contact-info',
+    'principal-id-documents',
+    'principal-identity',
+    'principal-liveness',
+    'principal-consent',
+    'principal-verify-history',
+    'principal-security-mfa',
+  ].includes(activeModuleId);
+
+  const isCasesModule = [
+    'principal-requests',
+    'principal-active-cases',
+    'principal-awaiting-client',
+    'principal-awaiting-lawyer',
+    'principal-ready-signing',
+    'principal-completed',
+    'principal-refused',
+    'principal-archived',
+  ].includes(activeModuleId);
+
+  const isParticipantsModule = [
+    'principal-participants',
+    'principal-invite-witness',
+    'principal-pending-invitations',
+    'principal-participation-requests',
+    'principal-id-requirements',
+    'principal-participant-access',
+  ].includes(activeModuleId);
+
+  const isEvidenceModule = [
+    'principal-documents',
+    'principal-upload-docs',
+    'principal-camera-capture',
+    'principal-photographs',
+    'principal-audio-evidence',
+    'principal-video-evidence',
+    'principal-testimonies',
+    'principal-supporting-docs',
+    'principal-ai-organized',
+    'principal-duplicate-review',
+    'principal-shared-lawyer',
+  ].includes(activeModuleId);
+
+  const isConsultationModule = [
+    'principal-lawyer-messages',
+    'principal-calendar',
+    'principal-live-sessions',
+    'principal-meeting-history',
+    'principal-shared-screen',
+    'principal-consultation-notes',
+    'principal-action-items',
+  ].includes(activeModuleId);
+
+  const isNotarizationModule = [
+    'principal-notarization-requests',
+    'principal-appearance-reqs',
+    'principal-signing-session',
+    'principal-reverify',
+    'principal-notarial-status',
+    'principal-completed-docs',
+    'principal-hash-qr',
+  ].includes(activeModuleId);
+
+  const isAccountModule = [
+    'principal-profile',
+    'principal-privacy',
+    'principal-devices',
+    'principal-security-settings',
+    'principal-payments',
+    'principal-support',
+    'principal-sign-out',
+  ].includes(activeModuleId);
 
   // Payment simulator state
   const [paidReqId, setPaidReqId] = useState<string | null>(null);
@@ -202,22 +287,59 @@ export const PrincipalDashboard: React.FC<PrincipalDashboardProps> = ({
       </div>
 
       {/* Legal & Security Safeguard Banner */}
-      <div className="border border-black/15 bg-neutral-50 p-4 dark:border-white/15 dark:bg-neutral-950 text-xs">
-        <div className="flex items-start gap-2.5">
-          <ShieldCheck className="h-4 w-4 text-neutral-600 dark:text-neutral-400 shrink-0 mt-0.5" />
-          <div className="space-y-1 text-neutral-600 dark:text-neutral-400">
-            <p className="font-semibold text-black dark:text-white">
-              Demonstration & Accreditation Candidate Safeguards
-            </p>
-            <p>
-              In this development and candidate environment, document storage, ClamAV antivirus scanning, and PhilSys biometric authentication run in isolated demonstration sandboxes. Transactions are strictly demonstrative and are not legally binding notarial instruments.
-            </p>
+      <div className="border border-black/20 bg-neutral-100 p-4 dark:border-white/20 dark:bg-neutral-900 text-xs space-y-2">
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex items-start gap-2.5">
+            <ShieldCheck className="h-4 w-4 text-black dark:text-white shrink-0 mt-0.5" />
+            <div className="space-y-1">
+              <p className="font-bold text-black dark:text-white uppercase tracking-wider font-mono">
+                DEMONSTRATION ENVIRONMENT — NOT FOR LEGAL USE
+              </p>
+              <p className="text-neutral-600 dark:text-neutral-400">
+                This function uses simulated demonstration data and does not create a legally valid identity verification, signature, notarization, certificate, seal, payment, or government record.
+              </p>
+            </div>
           </div>
+          <span className="text-[10px] font-mono border border-black/30 px-2 py-0.5 dark:border-white/30 shrink-0">
+            A.M. No. 24-10-14-SC
+          </span>
+        </div>
+        <div className="flex flex-wrap gap-2 text-[10px] font-mono text-neutral-500 pt-1.5 border-t border-black/10 dark:border-white/10">
+          <span>APP_ENV=demo</span>
+          <span>•</span>
+          <span>DEMO_MODE=true</span>
+          <span>•</span>
+          <span>DEMO_LEGAL_VALIDITY=false</span>
+          <span>•</span>
+          <span>EGOVPH=simulated</span>
+          <span>•</span>
+          <span>PHILSYS=simulated</span>
+          <span>•</span>
+          <span>MALWARE_SCANNER=simulated</span>
+          <span>•</span>
+          <span>NOTARIZATION=simulated</span>
         </div>
       </div>
 
+      {/* 24-Step Client Journey Tracker */}
+      <ClientJourneyTracker onNavigateModule={onSelectModule} />
+
       {/* SUB-VIEWS */}
-      {activeModuleId === 'principal-start' ? (
+      {isIdentityModule ? (
+        <ClientIdentitySection activeSubModule={activeModuleId} />
+      ) : isCasesModule ? (
+        <ClientCasesSection activeSubModule={activeModuleId} onNavigateModule={onSelectModule} />
+      ) : isParticipantsModule ? (
+        <ClientParticipantsSection activeSubModule={activeModuleId} />
+      ) : isEvidenceModule ? (
+        <ClientEvidenceSection activeSubModule={activeModuleId} />
+      ) : isConsultationModule ? (
+        <ClientConsultationSection activeSubModule={activeModuleId} />
+      ) : isNotarizationModule ? (
+        <ClientNotarizationSection activeSubModule={activeModuleId} onNavigateModule={onSelectModule} />
+      ) : isAccountModule ? (
+        <ClientAccountSection activeSubModule={activeModuleId} onNavigateModule={onSelectModule} />
+      ) : activeModuleId === 'principal-start' ? (
         /* Request Intake Wizard */
         <div className="border border-black/15 bg-white p-6 dark:border-white/15 dark:bg-neutral-950 space-y-6">
           <div className="flex items-center justify-between border-b border-black/10 pb-3 dark:border-white/10">

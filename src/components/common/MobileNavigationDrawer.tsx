@@ -47,7 +47,7 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
 
   if (!isOpen) return null;
 
-  const categories = Array.from(new Set(menuItems.map((item) => item.category || 'Workspace')));
+  const categories = Array.from(new Set((menuItems || []).map((item) => item.category || 'Workspace')));
 
   return (
     <div className="fixed inset-0 z-50 flex md:hidden">
