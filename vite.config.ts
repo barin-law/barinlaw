@@ -1,25 +1,35 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'node:path';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 
-export default defineConfig(() => ({
-  // Required because the app is hosted inside the /barinlaw/ repository path.
-  base: '/barinlaw/',
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
 
-  plugins: [react(), tailwindcss()],
+  const disableHmr = env.DISABLE_HMR === 'true';
 
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, '.'),
+  return {
+    // GitHub Pages project:
+    // https://barin-law.github.io/barinlaw/
+    base: '/barinlaw/',
+
+    plugins: [
+      react(),
+      tailwindcss(),
+    ],
+
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '.'),
+      },
     },
-  },
 
-  server: {
-    // HMR is disabled in AI Studio through the DISABLE_HMR environment variable.
-    hmr: process.env.DISABLE_HMR !== 'true',
+    server: {
+      // AI Studio may disable HMR while editing.
+      hmr: !disableHmr,
 
-    // Disable file watching during AI Studio edits.
-    watch: process.env.DISABLE_HMR === 'true' ? null : {},
-  },
-}));
+      // Disable file watching when HMR is disabled.
+      watch: disableHmr ? null : {},
+    },
+  };
+});
