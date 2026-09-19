@@ -100,8 +100,26 @@ const MainWorkspace: React.FC = () => {
     return navItems[0]?.id || 'principal-overview';
   };
 
+  const getInitialModule = (role: string) => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const mod = params.get('module');
+      const navItems =
+        ROLE_NAVIGATION_MAP[
+          role as keyof typeof ROLE_NAVIGATION_MAP
+        ] || ROLE_NAVIGATION_MAP.PRINCIPAL;
+
+      if (mod && navItems.some((item) => item.id === mod)) {
+        return mod;
+      }
+    } catch {
+      // Fall back to default
+    }
+    return defaultModuleForRole(role);
+  };
+
   const [activeModuleId, setActiveModuleId] = useState<string>(() =>
-    defaultModuleForRole(currentUser.role)
+    getInitialModule(currentUser.role)
   );
 
   const [overlayView, setOverlayView] =
@@ -111,12 +129,36 @@ const MainWorkspace: React.FC = () => {
    * Synchronize the default module whenever the user's role changes.
    */
   useEffect(() => {
-    setActiveModuleId(defaultModuleForRole(currentUser.role));
+    setActiveModuleId(getInitialModule(currentUser.role));
     setOverlayView('NONE');
   }, [currentUser.role]);
 
   /**
-   * Handle navigation between workspace modules.
+   * Listen to browser back/forward popstate to restore correct module.
+   */
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const mod = params.get('module');
+      const navItems =
+        ROLE_NAVIGATION_MAP[
+          currentUser.role as keyof typeof ROLE_NAVIGATION_MAP
+        ] || ROLE_NAVIGATION_MAP.PRINCIPAL;
+
+      if (mod && navItems.some((item) => item.id === mod)) {
+        setActiveModuleId(mod);
+      } else {
+        setActiveModuleId(defaultModuleForRole(currentUser.role));
+      }
+      setOverlayView('NONE');
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [currentUser.role]);
+
+  /**
+   * Handle navigation between workspace modules with URL sync.
    */
   const handleSelectModule = (moduleId: string) => {
     if (moduleId === 'global-integration-center') {
@@ -144,6 +186,20 @@ const MainWorkspace: React.FC = () => {
 
     setOverlayView('NONE');
     setActiveModuleId(moduleId);
+
+    // Synchronize browser history and URL query parameter without page reload
+    try {
+      const url = new URL(window.location.href);
+      const defaultMod = defaultModuleForRole(currentUser.role);
+      if (moduleId === defaultMod) {
+        url.searchParams.delete('module');
+      } else {
+        url.searchParams.set('module', moduleId);
+      }
+      window.history.pushState({ moduleId }, '', url.pathname + url.search);
+    } catch {
+      // Ignore if history manipulation fails in test environment
+    }
   };
 
   return (
