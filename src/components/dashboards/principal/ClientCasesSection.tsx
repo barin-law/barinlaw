@@ -141,21 +141,6 @@ export const ClientCasesSection: React.FC<ClientCasesSectionProps> = ({
 
   return (
     <div className="space-y-5 text-xs">
-      {/* Notice Banner */}
-      <div className="border border-black/15 bg-neutral-50 p-3.5 text-xs text-neutral-600 dark:border-white/15 dark:bg-neutral-900/60 dark:text-neutral-400">
-        <div className="flex items-start gap-2">
-          <Shield className="h-4 w-4 shrink-0 text-black dark:text-white mt-0.5" />
-          <div className="space-y-1">
-            <p className="font-semibold text-black dark:text-white">
-              Demonstration Environment — Case Workflow Sandbox
-            </p>
-            <p className="text-[11px]">
-              This function uses simulated demonstration data and does not create a legally valid identity verification, signature, notarization, certificate, seal, payment, or government record.
-            </p>
-          </div>
-        </div>
-      </div>
-
       {approvalNotice && (
         <div className="border border-emerald-500 bg-emerald-50 p-3 text-xs text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300">
           {approvalNotice}

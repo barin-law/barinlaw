@@ -61,6 +61,7 @@ export const ClientJourneyTracker: React.FC<ClientJourneyTrackerProps> = ({
   const profile = propsProfile || context.profile;
   const activeCase = propsActiveCase || context.activeCase;
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isCardCollapsed, setIsCardCollapsed] = useState(false);
 
   // Determine current step index based on active case status & profile
   const getCurrentStepIndex = (): number => {
@@ -94,6 +95,41 @@ export const ClientJourneyTracker: React.FC<ClientJourneyTrackerProps> = ({
   const currentStepObj = JOURNEY_STEPS[currentStep] || JOURNEY_STEPS[0];
   const percentComplete = Math.round(((currentStep + 1) / JOURNEY_STEPS.length) * 100);
 
+  if (isCardCollapsed) {
+    return (
+      <div className="border border-black/15 bg-white p-3 dark:border-white/15 dark:bg-neutral-950 text-xs flex items-center justify-between gap-3 shadow-xs">
+        <div className="flex items-center gap-2.5 truncate">
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-black bg-black text-white text-[10px] font-bold dark:border-white dark:bg-white dark:text-black">
+            {currentStep + 1}
+          </span>
+          <div className="truncate">
+            <span className="text-[10px] font-mono text-neutral-500 mr-2 uppercase">Step {currentStep + 1}/24</span>
+            <span className="font-semibold text-black dark:text-white truncate">{currentStepObj.label}</span>
+            <span className="text-[10px] text-neutral-400 font-mono ml-2">({percentComplete}% done)</span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={() => onNavigateModule(currentStepObj.moduleId)}
+            className="inline-flex items-center gap-1 border border-black bg-black px-2.5 py-1 text-[11px] font-semibold text-white hover:bg-neutral-800 dark:border-white dark:bg-white dark:text-black dark:hover:bg-neutral-200 cursor-pointer"
+          >
+            <span>Action</span>
+            <ArrowRight className="h-3 w-3" />
+          </button>
+          <button
+            onClick={() => setIsCardCollapsed(false)}
+            className="border border-black/20 px-2 py-1 text-[11px] hover:bg-neutral-100 dark:border-white/20 dark:hover:bg-neutral-900 cursor-pointer flex items-center gap-1 text-neutral-600 dark:text-neutral-400"
+            title="Expand Journey Details"
+          >
+            <span>Expand</span>
+            <ChevronDown className="h-3 w-3" />
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="border border-black/15 bg-white p-4 dark:border-white/15 dark:bg-neutral-950 text-xs space-y-3">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-black/10 pb-2.5 dark:border-white/10">
@@ -111,17 +147,25 @@ export const ClientJourneyTracker: React.FC<ClientJourneyTrackerProps> = ({
           </h4>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex flex-col items-end">
             <span className="text-[10px] text-neutral-500 font-mono">Workflow Progress</span>
             <span className="font-bold text-xs font-mono">{percentComplete}% Completed</span>
           </div>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center gap-1 border border-black/20 px-2.5 py-1 text-[11px] hover:bg-neutral-100 dark:border-white/20 dark:hover:bg-neutral-900 cursor-pointer"
+            className="flex items-center gap-1 border border-black/20 px-2 py-1 text-[11px] hover:bg-neutral-100 dark:border-white/20 dark:hover:bg-neutral-900 cursor-pointer"
           >
-            <span>{isExpanded ? 'Hide All 24 Steps' : 'View All 24 Steps'}</span>
+            <span>{isExpanded ? 'Hide Steps' : '24 Steps'}</span>
             {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+          </button>
+          <button
+            onClick={() => setIsCardCollapsed(true)}
+            className="flex items-center gap-1 border border-black/20 px-2 py-1 text-[11px] hover:bg-neutral-100 dark:border-white/20 dark:hover:bg-neutral-900 cursor-pointer text-neutral-500"
+            title="Collapse to minimal bar"
+          >
+            <span>Minimize</span>
+            <ChevronUp className="h-3 w-3" />
           </button>
         </div>
       </div>

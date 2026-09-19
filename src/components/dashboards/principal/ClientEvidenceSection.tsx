@@ -57,6 +57,11 @@ export const ClientEvidenceSection: React.FC<ClientEvidenceSectionProps> = ({
   const [audioTranscriptCorrection, setAudioTranscriptCorrection] = useState('');
   const [transcriptSaved, setTranscriptSaved] = useState(false);
 
+  // Video player state
+  const [isPlayingVideo, setIsPlayingVideo] = useState(false);
+  const [videoTimecode, setVideoTimecode] = useState('02:14');
+  const [activeMarkerName, setActiveMarkerName] = useState('00:45 - Front Entrance Boundary');
+
   // Camera capture simulation state
   const [cameraCaptured, setCameraCaptured] = useState(false);
   const [rotationAngle, setRotationAngle] = useState(0);
@@ -159,21 +164,6 @@ export const ClientEvidenceSection: React.FC<ClientEvidenceSectionProps> = ({
 
   return (
     <div className="space-y-5 text-xs">
-      {/* Notice Banner */}
-      <div className="border border-black/15 bg-neutral-50 p-3.5 text-xs text-neutral-600 dark:border-white/15 dark:bg-neutral-900/60 dark:text-neutral-400">
-        <div className="flex items-start gap-2">
-          <ShieldCheck className="h-4 w-4 shrink-0 text-black dark:text-white mt-0.5" />
-          <div className="space-y-1">
-            <p className="font-semibold text-black dark:text-white">
-              Demonstration Environment — Document & Evidence Pipeline
-            </p>
-            <p className="text-[11px]">
-              This function uses simulated demonstration data and does not create a legally valid identity verification, signature, notarization, certificate, seal, payment, or government record.
-            </p>
-          </div>
-        </div>
-      </div>
-
       {duplicateNotice && (
         <div className="border border-blue-500 bg-blue-50 p-3 text-xs text-blue-900 dark:bg-blue-950/40 dark:text-blue-300">
           {duplicateNotice}
@@ -421,28 +411,51 @@ export const ClientEvidenceSection: React.FC<ClientEvidenceSectionProps> = ({
                 [SYNTHETIC MP4 VIDEO PLAYER CONTAINER]
               </div>
               <div className="flex items-center justify-between border-t border-white/20 pt-2 text-xs">
-                <button className="flex items-center gap-1 hover:text-neutral-300">
-                  <Play className="h-3 w-3" /> Play
+                <button
+                  onClick={() => setIsPlayingVideo(!isPlayingVideo)}
+                  className="flex items-center gap-1.5 hover:text-neutral-300 font-mono cursor-pointer"
+                >
+                  {isPlayingVideo ? <Pause className="h-3.5 w-3.5 text-emerald-400" /> : <Play className="h-3.5 w-3.5 text-white" />}
+                  <span>{isPlayingVideo ? 'Pause Video' : 'Play Video'}</span>
                 </button>
-                <span className="font-mono text-[10px]">02:14 / 08:30</span>
+                <div className="flex items-center gap-2">
+                  {isPlayingVideo && (
+                    <span className="flex items-center gap-1 text-[10px] text-emerald-400 font-mono">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      PLAYING
+                    </span>
+                  )}
+                  <span className="font-mono text-[10px]">{videoTimecode} / 08:30</span>
+                </div>
               </div>
             </div>
 
             <div className="border border-black/10 p-3 bg-neutral-50 dark:border-white/10 dark:bg-neutral-900 space-y-2">
               <h4 className="font-bold text-xs">Timecode Markers</h4>
               <div className="space-y-1.5 text-[11px]">
-                <div className="p-1.5 border border-black/10 bg-white dark:border-white/10 dark:bg-black flex justify-between cursor-pointer hover:bg-neutral-100">
-                  <span>00:45 - Front Entrance Boundary</span>
-                  <span className="font-mono text-neutral-500">Jump</span>
-                </div>
-                <div className="p-1.5 border border-black/10 bg-white dark:border-white/10 dark:bg-black flex justify-between cursor-pointer hover:bg-neutral-100">
-                  <span>03:12 - Ground Floor Structural Column</span>
-                  <span className="font-mono text-neutral-500">Jump</span>
-                </div>
-                <div className="p-1.5 border border-black/10 bg-white dark:border-white/10 dark:bg-black flex justify-between cursor-pointer hover:bg-neutral-100">
-                  <span>06:50 - Perimeter Fence & Adjacent Lot</span>
-                  <span className="font-mono text-neutral-500">Jump</span>
-                </div>
+                {[
+                  { time: '00:45', label: '00:45 - Front Entrance Boundary' },
+                  { time: '03:12', label: '03:12 - Ground Floor Structural Column' },
+                  { time: '06:50', label: '06:50 - Perimeter Fence & Adjacent Lot' },
+                ].map((marker) => (
+                  <button
+                    key={marker.time}
+                    type="button"
+                    onClick={() => {
+                      setVideoTimecode(marker.time);
+                      setActiveMarkerName(marker.label);
+                      setIsPlayingVideo(true);
+                    }}
+                    className={`w-full p-2 border text-left flex justify-between items-center cursor-pointer transition-colors ${
+                      activeMarkerName === marker.label
+                        ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black font-semibold'
+                        : 'border-black/10 bg-white hover:bg-neutral-100 dark:border-white/10 dark:bg-black dark:text-white dark:hover:bg-neutral-900'
+                    }`}
+                  >
+                    <span className="truncate">{marker.label}</span>
+                    <span className="font-mono text-[10px] uppercase opacity-75 shrink-0 ml-2">Jump</span>
+                  </button>
+                ))}
               </div>
             </div>
           </div>

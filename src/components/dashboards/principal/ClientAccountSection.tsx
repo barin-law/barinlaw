@@ -1,6 +1,6 @@
 /**
  * Dhenze Electronic Notarization Facility (Dhenze ENF)
- * Client Account, Security, Devices & Payments Module
+ * Client Account, Security, Devices, Privacy & Payments Module
  * Official Statutory Settlements, Device Authorizations & Support
  */
 
@@ -16,6 +16,13 @@ import {
   ExternalLink,
   Receipt,
   FileText,
+  Download,
+  Key,
+  ShieldCheck,
+  Check,
+  AlertCircle,
+  Eye,
+  Sliders,
 } from 'lucide-react';
 import { useClientCase } from '../../../context/ClientCaseContext';
 import { useAuth } from '../../../context/AuthContext';
@@ -35,42 +42,39 @@ export const ClientAccountSection: React.FC<ClientAccountSectionProps> = ({
 
   const [simulatingPayment, setSimulatingPayment] = useState(false);
   const [paymentDone, setPaymentDone] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Security settings state
+  const [sessionTimeout, setSessionTimeout] = useState('15');
+  const [biometricPrompt, setBiometricPrompt] = useState(true);
+  const [smsAlerts, setSmsAlerts] = useState(true);
 
   const handleSimulatePayment = () => {
     setSimulatingPayment(true);
     setTimeout(() => {
       setSimulatingPayment(false);
       setPaymentDone(true);
-      setTimeout(() => setPaymentDone(false), 5000);
+      setToastMessage('Statutory notarial fee of ₱500.00 settled via Maya Sandbox. Official Electronic Receipt #OER-2026-914 generated.');
+      setTimeout(() => setToastMessage(null), 5000);
     }, 1200);
+  };
+
+  const handleExportData = () => {
+    setToastMessage('Exporting GDPR & DPA compliant case audit archive (JSON/ZIP)... Download will commence shortly.');
+    setTimeout(() => setToastMessage(null), 4000);
   };
 
   return (
     <div className="space-y-5 text-xs">
-      {/* Notice Banner */}
-      <div className="border border-black/15 bg-neutral-50 p-3.5 text-xs text-neutral-600 dark:border-white/15 dark:bg-neutral-900/60 dark:text-neutral-400">
-        <div className="flex items-start gap-2">
-          <Shield className="h-4 w-4 shrink-0 text-black dark:text-white mt-0.5" />
-          <div className="space-y-1">
-            <p className="font-semibold text-black dark:text-white">
-              Demonstration Environment — Account & Settings Sandbox
-            </p>
-            <p className="text-[11px]">
-              This function uses simulated demonstration data and does not create a legally valid identity verification, signature, notarization, certificate, seal, payment, or government record.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {paymentDone && (
+      {toastMessage && (
         <div className="border border-emerald-500 bg-emerald-50 p-3 text-xs text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300">
-          ✓ Statutory notarial fee of ₱500.00 settled via Maya Sandbox. Official Electronic Receipt #OER-2026-914 generated.
+          ✓ {toastMessage}
         </div>
       )}
 
       {/* SUB-VIEW ROUTING */}
       {activeSubModule === 'principal-payments' ? (
-        /* STATUTORY PAYMENTS & RECEIPTS (Preserving existing payment flow) */
+        /* STATUTORY PAYMENTS & RECEIPTS */
         <div className="border border-black/15 bg-white p-5 dark:border-white/15 dark:bg-neutral-950 space-y-4">
           <div className="flex items-center justify-between border-b border-black/10 pb-3 dark:border-white/10">
             <div>
@@ -121,6 +125,115 @@ export const ClientAccountSection: React.FC<ClientAccountSectionProps> = ({
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      ) : activeSubModule === 'principal-privacy' ? (
+        /* DATA PRIVACY & RA 10173 COMPLIANCE */
+        <div className="border border-black/15 bg-white p-5 dark:border-white/15 dark:bg-neutral-950 space-y-4">
+          <div className="flex items-center justify-between border-b border-black/10 pb-3 dark:border-white/10">
+            <div>
+              <h3 className="text-sm font-bold text-black dark:text-white">
+                Data Privacy & Statutory Client Rights
+              </h3>
+              <p className="text-xs text-neutral-500">
+                Compliance with Republic Act No. 10173 (Data Privacy Act of 2012) and Supreme Court confidentiality mandates.
+              </p>
+            </div>
+            <StatusBadge status="NPC REGISTERED" variant="success" size="sm" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="border border-black/10 p-4 bg-neutral-50 dark:border-white/10 dark:bg-neutral-900 space-y-2">
+              <h4 className="font-bold text-xs">Your Statutory Privacy Rights</h4>
+              <ul className="list-disc pl-5 space-y-1 text-[11px] text-neutral-600 dark:text-neutral-400">
+                <li>Right to be Informed of data processing scope</li>
+                <li>Right to Access stored identification records and hash digests</li>
+                <li>Right to Rectification of inaccurate personal particulars</li>
+                <li>Right to Data Portability for court-mandated records</li>
+                <li>Confidentiality protected under Attorney-Client Privilege</li>
+              </ul>
+            </div>
+
+            <div className="border border-black/10 p-4 bg-neutral-50 dark:border-white/10 dark:bg-neutral-900 space-y-3 flex flex-col justify-between">
+              <div>
+                <h4 className="font-bold text-xs">Data Portability & Audit Archive</h4>
+                <p className="text-[11px] text-neutral-600 dark:text-neutral-400 mt-1">
+                  Request an immutable extract of your personal transaction audit log, certificate tokens, and uploaded evidence manifests.
+                </p>
+              </div>
+
+              <button
+                onClick={handleExportData}
+                className="flex items-center justify-center gap-1.5 border border-black bg-black py-2 font-semibold text-white hover:bg-neutral-800 dark:border-white dark:bg-white dark:text-black cursor-pointer"
+              >
+                <Download className="h-3.5 w-3.5" />
+                <span>Export Personal Data Package</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : activeSubModule === 'principal-security-settings' ? (
+        /* SECURITY & CREDENTIALS SETTINGS */
+        <div className="border border-black/15 bg-white p-5 dark:border-white/15 dark:bg-neutral-950 space-y-4">
+          <div className="flex items-center justify-between border-b border-black/10 pb-3 dark:border-white/10">
+            <div>
+              <h3 className="text-sm font-bold text-black dark:text-white">
+                Account Security & Authentication Settings
+              </h3>
+              <p className="text-xs text-neutral-500">
+                Multi-factor authentication, cryptographic key storage, and active session controls.
+              </p>
+            </div>
+            <StatusBadge status="MFA PROTECTED" variant="success" size="sm" />
+          </div>
+
+          <div className="space-y-4">
+            <div className="border border-black/10 p-4 bg-neutral-50 dark:border-white/10 dark:bg-neutral-900 flex items-center justify-between">
+              <div>
+                <div className="font-bold text-xs">Two-Factor Authentication (TOTP / SMS)</div>
+                <div className="text-[11px] text-neutral-500">Enforces secondary one-time verification during signing sessions.</div>
+              </div>
+              <span className="text-emerald-600 font-bold text-xs border border-emerald-500 px-2 py-0.5">
+                ENFORCED
+              </span>
+            </div>
+
+            <div className="border border-black/10 p-4 bg-neutral-50 dark:border-white/10 dark:bg-neutral-900 flex items-center justify-between">
+              <div>
+                <div className="font-bold text-xs">Inactivity Session Timeout</div>
+                <div className="text-[11px] text-neutral-500">Automatically terminates session if no mouse/keyboard interaction is detected.</div>
+              </div>
+              <select
+                value={sessionTimeout}
+                onChange={(e) => {
+                  setSessionTimeout(e.target.value);
+                  setToastMessage(`Session inactivity timeout adjusted to ${e.target.value} minutes.`);
+                  setTimeout(() => setToastMessage(null), 3000);
+                }}
+                className="border border-black/20 bg-white p-1.5 text-xs font-mono dark:border-white/20 dark:bg-black"
+              >
+                <option value="15">15 Minutes</option>
+                <option value="30">30 Minutes</option>
+                <option value="60">60 Minutes</option>
+              </select>
+            </div>
+
+            <div className="border border-black/10 p-4 bg-neutral-50 dark:border-white/10 dark:bg-neutral-900 flex items-center justify-between">
+              <div>
+                <div className="font-bold text-xs">Biometric Prompt for Document Signing</div>
+                <div className="text-[11px] text-neutral-500">Require camera passive liveness re-check immediately prior to digital seal affixation.</div>
+              </div>
+              <button
+                onClick={() => setBiometricPrompt(!biometricPrompt)}
+                className={`px-3 py-1 font-semibold text-xs border cursor-pointer ${
+                  biometricPrompt
+                    ? 'border-emerald-600 bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
+                    : 'border-neutral-400 text-neutral-500'
+                }`}
+              >
+                {biometricPrompt ? 'Enabled' : 'Disabled'}
+              </button>
+            </div>
           </div>
         </div>
       ) : activeSubModule === 'principal-devices' ? (
@@ -203,7 +316,6 @@ export const ClientAccountSection: React.FC<ClientAccountSectionProps> = ({
           <button
             onClick={() => {
               logout();
-              window.location.href = '/sign-in';
             }}
             className="w-full border border-black bg-black py-2.5 font-semibold text-white hover:bg-neutral-800 dark:border-white dark:bg-white dark:text-black cursor-pointer"
           >
