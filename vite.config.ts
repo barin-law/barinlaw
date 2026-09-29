@@ -1,34 +1,11 @@
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import path from 'node:path';
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '');
-
-  const disableHmr = env.DISABLE_HMR === 'true';
-
-  return {
-    // Official JuriMbrella Philippine eNotarization
-    base: process.env.VITE_BASE || '/',
-
-    plugins: [
-      react(),
-      tailwindcss(),
-    ],
-
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
-    },
-
-    server: {
-      // AI Studio may disable HMR while editing.
-      hmr: !disableHmr,
-
-      // Disable file watching when HMR is disabled.
-      watch: disableHmr ? null : {},
-    },
-  };
-});
+export default defineConfig({
+  base: '/barinlaw/',
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+})
