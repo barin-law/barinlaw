@@ -13,9 +13,9 @@ export const PublicVerifyPage: React.FC<PublicVerifyPageProps> = ({ onNavigate }
   const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900 font-sans antialiased selection:bg-neutral-900 selection:text-white">
+    <div className="min-h-screen bg-[#F4F7F9] text-[#17212B] font-sans antialiased selection:bg-[#002D5B] selection:text-white">
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur-xs">
+      <header className="sticky top-0 z-40 border-b border-[#D9E1E8] bg-white/95 backdrop-blur-xs">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
           <div
             onClick={() => onNavigate('/')}
@@ -24,39 +24,39 @@ export const PublicVerifyPage: React.FC<PublicVerifyPageProps> = ({ onNavigate }
           >
             <BrandLogo
               variant="compact"
-              height={36}
+              height={38}
               priority
               alt="JuriMbrella Emblem"
               className="shrink-0"
             />
           </div>
 
-          <div className="flex items-center gap-3 sm:gap-4 text-xs">
+          <div className="flex items-center gap-2 sm:gap-5 text-xs font-medium">
             <button
               type="button"
               onClick={() => onNavigate('/')}
-              className="text-neutral-600 hover:text-black font-medium"
+              className="text-slate-600 hover:text-[#002D5B] transition-colors hidden sm:inline-block cursor-pointer"
             >
               Public Home
             </button>
             <button
               type="button"
               onClick={() => onNavigate('/jurimbrella-portal')}
-              className="text-neutral-600 hover:text-black font-medium"
+              className="text-slate-600 hover:text-[#002D5B] transition-colors hidden md:inline-block cursor-pointer"
             >
               Legal Information
             </button>
             <button
               type="button"
               onClick={() => onNavigate('/contact')}
-              className="text-neutral-600 hover:text-black font-medium"
+              className="text-slate-600 hover:text-[#002D5B] transition-colors hidden sm:inline-block cursor-pointer"
             >
               Contact Us
             </button>
             <button
               type="button"
               onClick={() => onNavigate('/sign-in')}
-              className="border border-black bg-black px-3.5 py-1.5 text-white font-semibold hover:bg-neutral-800"
+              className="rounded-lg bg-[#002D5B] px-3.5 py-1.5 sm:px-4 sm:py-2 text-white font-semibold hover:bg-[#0078CE] transition-all cursor-pointer shadow-xs text-xs"
             >
               Sign In
             </button>

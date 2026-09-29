@@ -176,14 +176,14 @@ export const JurimbrellaAssistantWorkspace: React.FC<JurimbrellaAssistantWorkspa
         <div className="flex items-center gap-2.5">
           <BrandMark size={28} />
           <div>
-            <h2 className="text-sm font-bold tracking-tight text-[#0B192C] leading-none">
+            <h2 className="text-sm font-bold tracking-tight text-[#002D5B] leading-none">
               JuriMbrella Assistant
             </h2>
             <span className="text-[10px] text-slate-500 font-mono">
               Philippine eNotarization Procedural Guidance
             </span>
           </div>
-          <span className="ml-2 border border-[#C5A059]/40 bg-[#F4EAD4]/30 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[#0B192C] rounded-full">
+          <span className="ml-2 border border-[#2EAF4A]/40 bg-[#E8F5E9]/30 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[#002D5B] rounded-full">
             Evaluation Sandbox
           </span>
         </div>
@@ -192,14 +192,14 @@ export const JurimbrellaAssistantWorkspace: React.FC<JurimbrellaAssistantWorkspa
         <div className="flex items-center gap-3">
           <span className="text-xs font-mono text-slate-600 bg-white border border-slate-200 px-2.5 py-1 rounded-xs">
             Free queries remaining:{' '}
-            <strong className="text-[#0B192C]">{creditProfile.questionsRemaining}</strong>
+            <strong className="text-[#002D5B]">{creditProfile.questionsRemaining}</strong>
           </span>
 
           <button
             type="button"
             onClick={handleClearConversation}
             title="Clear Conversation"
-            className="flex items-center gap-1 border border-slate-200 px-2.5 py-1 text-xs text-slate-600 hover:text-[#0B192C] hover:bg-white transition-colors rounded-xs"
+            className="flex items-center gap-1 border border-slate-200 px-2.5 py-1 text-xs text-slate-600 hover:text-[#002D5B] hover:bg-white transition-colors rounded-xs"
           >
             <Trash2 className="h-3 w-3" />
             <span className="hidden sm:inline">Clear</span>
@@ -210,7 +210,7 @@ export const JurimbrellaAssistantWorkspace: React.FC<JurimbrellaAssistantWorkspa
       {/* Demonstration Banner */}
       <div className="border-b border-slate-200 bg-amber-50/40 px-4 py-2 text-[11px] text-slate-700 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Info className="h-3.5 w-3.5 text-[#C5A059] shrink-0" />
+          <Info className="h-3.5 w-3.5 text-[#2EAF4A] shrink-0" />
           <span>
             DEMO / SIMULATED IDENTITY &amp; PROCEDURAL ASSISTANT — No live government database was queried.
           </span>
@@ -230,8 +230,8 @@ export const JurimbrellaAssistantWorkspace: React.FC<JurimbrellaAssistantWorkspa
               <div
                 className={`max-w-2xl border p-4 text-xs leading-relaxed space-y-2 rounded-xs ${
                   isAssistant
-                    ? 'border-slate-200 bg-white text-slate-900 border-l-4 border-l-[#0B192C]'
-                    : 'border-[#0B192C] bg-[#0B192C] text-white'
+                    ? 'border-slate-200 bg-white text-slate-900 border-l-4 border-l-[#002D5B]'
+                    : 'border-[#002D5B] bg-[#002D5B] text-white'
                 }`}
               >
                 <div className="flex items-center justify-between text-[10px] opacity-75 font-mono pb-1 border-b border-current/10">
@@ -249,14 +249,14 @@ export const JurimbrellaAssistantWorkspace: React.FC<JurimbrellaAssistantWorkspa
                     <ul className="space-y-1">
                       {msg.sources.map((src) => (
                         <li key={src.id} className="text-[11px] text-slate-600 flex items-center gap-1.5">
-                          <FileText className="h-3 w-3 text-[#C5A059] shrink-0" />
+                          <FileText className="h-3 w-3 text-[#2EAF4A] shrink-0" />
                           <span>{src.title}</span>
                           {src.url && (
                             <a
                               href={src.url}
                               target="_blank"
                               rel="noreferrer"
-                              className="text-[#0B192C] hover:underline"
+                              className="text-[#002D5B] hover:underline"
                             >
                               <ExternalLink className="h-3 w-3 inline" />
                             </a>
@@ -295,7 +295,7 @@ export const JurimbrellaAssistantWorkspace: React.FC<JurimbrellaAssistantWorkspa
 
         {isLoading && (
           <div className="flex items-center gap-2 text-xs text-slate-500 font-mono italic">
-            <span className="h-2 w-2 rounded-full bg-[#C5A059] animate-pulse" />
+            <span className="h-2 w-2 rounded-full bg-[#2EAF4A] animate-pulse" />
             <span>Evaluating legal sources under A.M. No. 24-10-14-SC...</span>
           </div>
         )}
@@ -317,7 +317,7 @@ export const JurimbrellaAssistantWorkspace: React.FC<JurimbrellaAssistantWorkspa
             key={idx}
             type="button"
             onClick={() => handleSuggestedClick(prompt)}
-            className="border border-slate-200 bg-white px-2.5 py-1 text-[11px] text-slate-700 hover:border-[#0B192C] hover:text-[#0B192C] whitespace-nowrap transition-colors rounded-xs shadow-2xs"
+            className="border border-slate-200 bg-white px-2.5 py-1 text-[11px] text-slate-700 hover:border-[#002D5B] hover:text-[#002D5B] whitespace-nowrap transition-colors rounded-xs shadow-2xs"
           >
             {prompt}
           </button>
@@ -328,9 +328,9 @@ export const JurimbrellaAssistantWorkspace: React.FC<JurimbrellaAssistantWorkspa
       {creditProfile.isExhausted && (
         <div className="border-t border-slate-200 bg-slate-50 p-4 text-xs space-y-3">
           <div className="flex items-start gap-2.5 text-slate-800">
-            <AlertTriangle className="h-4 w-4 text-[#C5A059] shrink-0 mt-0.5" />
+            <AlertTriangle className="h-4 w-4 text-[#2EAF4A] shrink-0 mt-0.5" />
             <div>
-              <p className="font-semibold text-[#0B192C]">Daily Evaluation Allowance Reached</p>
+              <p className="font-semibold text-[#002D5B]">Daily Evaluation Allowance Reached</p>
               <p className="text-slate-600 mt-0.5">
                 You have reached your free daily evaluation questions. Please sign in or contact administration for expanded quota.
               </p>
@@ -341,7 +341,7 @@ export const JurimbrellaAssistantWorkspace: React.FC<JurimbrellaAssistantWorkspa
             <button
               type="button"
               onClick={onContactAdminClick || (() => window.open(`mailto:${siteContact.email}`, '_blank'))}
-              className="border border-[#0B192C] bg-[#0B192C] px-3 py-1.5 text-xs text-white font-semibold hover:bg-[#112240] transition-colors"
+              className="border border-[#002D5B] bg-[#002D5B] px-3 py-1.5 text-xs text-white font-semibold hover:bg-[#0078CE] transition-colors"
             >
               Contact Administration
             </button>
@@ -359,7 +359,7 @@ export const JurimbrellaAssistantWorkspace: React.FC<JurimbrellaAssistantWorkspa
 
       {/* Input Composer Section */}
       <div className="border-t border-slate-200 p-3 sm:p-4 bg-white">
-        <div className="relative border border-slate-300 focus-within:border-[#0B192C] transition-colors rounded-xs">
+        <div className="relative border border-slate-300 focus-within:border-[#002D5B] transition-colors rounded-xs">
           <textarea
             ref={textareaRef}
             rows={2}
@@ -385,7 +385,7 @@ export const JurimbrellaAssistantWorkspace: React.FC<JurimbrellaAssistantWorkspa
                 type="button"
                 disabled={!inputQuery.trim() || isLoading || creditProfile.isExhausted}
                 onClick={handleSend}
-                className="border border-[#0B192C] bg-[#0B192C] px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-[#112240] disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center gap-1.5 rounded-xs"
+                className="border border-[#002D5B] bg-[#002D5B] px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-[#0078CE] disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center gap-1.5 rounded-xs"
               >
                 <span>Send</span>
                 <Send className="h-3 w-3" />

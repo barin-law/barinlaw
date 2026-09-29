@@ -73,7 +73,6 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
     const activeItem = (menuItems || []).find((i) => i.id === activeItemId);
     const activeCat = activeItem?.category || categories[0] || 'Overview';
     categories.forEach((cat) => {
-      // Keep active category and Overview open by default, others collapsed to keep layout tidy
       initial[cat] = cat === activeCat || cat === 'Overview';
     });
     return initial;
@@ -109,27 +108,28 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
     <aside
       id="application-sidebar"
       aria-label="Application Navigation Sidebar"
-      className={`hidden md:flex flex-col border-r border-black/15 bg-neutral-50 dark:border-white/15 dark:bg-neutral-950 transition-all duration-200 select-none ${
+      className={`hidden md:flex flex-col border-r border-[#001F3F] bg-[#002D5B] text-white transition-all duration-200 select-none ${
         isCollapsed ? 'w-[76px]' : 'w-[270px]'
       }`}
     >
       {/* Sidebar Header / Role Info */}
-      <div className={`flex items-center border-b border-black/10 dark:border-white/10 ${
-        isCollapsed ? 'flex-col gap-2 py-2 px-1' : 'justify-between px-3 py-2.5'
+      <div className={`flex items-center border-b border-white/10 ${
+        isCollapsed ? 'flex-col gap-2 py-3 px-1' : 'justify-between px-3 py-3'
       }`}>
         {!isCollapsed ? (
           <div className="flex items-center gap-2.5 truncate pr-1">
             <BrandLogo
               variant="emblem"
               height={34}
+              themeMode="dark"
               decorative
               className="shrink-0"
             />
             <div className="flex flex-col truncate">
-              <span className="text-[9px] font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-                Role Workspace
+              <span className="text-[9px] font-mono uppercase tracking-wider text-slate-300">
+                Workspace Role
               </span>
-              <span className="text-xs font-bold text-black dark:text-white truncate">
+              <span className="text-xs font-bold text-white truncate">
                 {activeRole.replace(/_/g, ' ')}
               </span>
             </div>
@@ -139,6 +139,7 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
             <BrandLogo
               variant="emblem"
               height={32}
+              themeMode="dark"
               decorative
               className="shrink-0"
             />
@@ -147,7 +148,7 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
         <button
           onClick={onToggleCollapse}
           aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          className={`flex h-7 w-7 items-center justify-center border border-black/20 hover:bg-neutral-200 dark:border-white/20 dark:hover:bg-neutral-800 transition-colors ${
+          className={`flex h-7 w-7 items-center justify-center rounded-md border border-white/20 text-slate-200 hover:bg-white/10 transition-colors ${
             isCollapsed ? 'mx-auto' : ''
           }`}
         >
@@ -156,13 +157,13 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
       </div>
 
       {/* Nav Menu Items */}
-      <nav className="flex-1 overflow-y-auto px-2 py-2 space-y-2 scrollbar-thin">
+      <nav className="flex-1 overflow-y-auto px-2 py-3 space-y-2 scrollbar-thin">
         {!isCollapsed && categories.length > 1 && (
-          <div className="flex items-center justify-between px-2 pb-1 text-[10px] font-mono text-neutral-500 border-b border-black/10 dark:border-white/10 mb-2">
+          <div className="flex items-center justify-between px-2 pb-1.5 text-[10px] font-mono text-slate-300 border-b border-white/10 mb-2">
             <span className="uppercase tracking-wider">Workspace Modules</span>
             <button
               onClick={toggleAllCategories}
-              className="flex items-center gap-1 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+              className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors cursor-pointer"
               title={areAllExpanded ? 'Collapse all categories' : 'Expand all categories'}
             >
               <ChevronsUpDown className="h-3 w-3" />
@@ -188,14 +189,14 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
                   type="button"
                   onClick={() => toggleCategory(category)}
                   aria-expanded={isCategoryOpen}
-                  className={`w-full flex items-center justify-between px-2 py-1.5 rounded-sm text-left transition-colors cursor-pointer ${
+                  className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left transition-colors cursor-pointer ${
                     hasActiveChild
-                      ? 'bg-neutral-200/70 text-black font-semibold dark:bg-neutral-800/80 dark:text-white'
-                      : 'text-neutral-600 hover:bg-neutral-200/40 hover:text-black dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-white'
+                      ? 'bg-white/10 text-white font-semibold'
+                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-2 truncate">
-                    <CategoryIcon className="h-3.5 w-3.5 shrink-0 text-neutral-500" />
+                    <CategoryIcon className="h-3.5 w-3.5 shrink-0 text-slate-300" />
                     <span className="text-[11px] font-bold uppercase tracking-wider truncate">
                       {category}
                     </span>
@@ -203,28 +204,27 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
 
                   <div className="flex items-center gap-1.5 shrink-0">
                     {totalBadgeCount > 0 && (
-                      <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-black px-1 text-[9px] font-bold text-white dark:bg-white dark:text-black">
+                      <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-[#2EAF4A] px-1 text-[9px] font-bold text-white">
                         {totalBadgeCount}
                       </span>
                     )}
-                    <span className="text-[10px] font-mono text-neutral-400">
+                    <span className="text-[10px] font-mono text-slate-400">
                       {itemsInCategory.length}
                     </span>
                     {isCategoryOpen ? (
-                      <ChevronDown className="h-3.5 w-3.5 text-neutral-400" />
+                      <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
                     ) : (
-                      <ChevronRight className="h-3.5 w-3.5 text-neutral-400" />
+                      <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
                     )}
                   </div>
                 </button>
               ) : (
-                /* Icon mode divider or indicator */
-                <div className="my-1 border-t border-black/10 dark:border-white/10" />
+                <div className="my-1 border-t border-white/10" />
               )}
 
-              {/* Items List (only if open or if sidebar is collapsed into icons) */}
+              {/* Items List */}
               {(isCategoryOpen || isCollapsed) && (
-                <div className={`space-y-0.5 ${!isCollapsed ? 'pl-2' : ''}`}>
+                <div className={`space-y-1 ${!isCollapsed ? 'pl-2' : ''}`}>
                   {itemsInCategory.map((item) => {
                     const Icon = item.icon;
                     const isActive = activeItemId === item.id;
@@ -232,13 +232,13 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
                     const buttonElement = (
                       <button
                         onClick={() => onSelectItem(item.id)}
-                        className={`group flex w-full items-center gap-2.5 rounded-sm px-2.5 py-1.5 text-xs transition-colors cursor-pointer ${
+                        className={`group flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-xs transition-all duration-150 cursor-pointer ${
                           isActive
-                            ? 'border border-black bg-black font-semibold text-white shadow-xs dark:border-white dark:bg-white dark:text-black'
-                            : 'text-neutral-700 hover:bg-neutral-200/60 hover:text-black dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white'
+                            ? 'bg-[#0078CE] font-semibold text-white shadow-xs border-l-4 border-[#2EAF4A]'
+                            : 'text-slate-200 hover:bg-white/10 hover:text-white'
                         } ${isCollapsed ? 'justify-center px-0' : ''}`}
                       >
-                        <Icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-white dark:text-black' : 'text-neutral-500 group-hover:text-black dark:group-hover:text-white'}`} />
+                        <Icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-white' : 'text-slate-300 group-hover:text-white'}`} />
                         
                         {!isCollapsed && (
                           <div className="flex flex-1 items-center justify-between truncate">
@@ -246,10 +246,10 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
                             <div className="flex items-center gap-1.5 ml-1.5">
                               {item.statusBadge && (
                                 <span
-                                  className={`text-[9px] font-mono px-1 py-0.2 border uppercase ${
+                                  className={`text-[9px] font-mono px-1.5 py-0.5 rounded uppercase font-semibold ${
                                     isActive
-                                      ? 'border-neutral-500 bg-neutral-800 text-white dark:bg-neutral-200 dark:text-black'
-                                      : 'border-neutral-300 bg-neutral-100 text-neutral-600 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400'
+                                      ? 'bg-white/20 text-white'
+                                      : 'bg-black/30 text-slate-200'
                                   }`}
                                 >
                                   {item.statusBadge}
@@ -259,8 +259,8 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
                                 <span
                                   className={`flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[10px] font-bold ${
                                     isActive
-                                      ? 'bg-white text-black dark:bg-black dark:text-white'
-                                      : 'bg-neutral-300 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200'
+                                      ? 'bg-[#2EAF4A] text-white'
+                                      : 'bg-white/20 text-slate-100'
                                   }`}
                                 >
                                   {item.badge}
@@ -288,9 +288,9 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
       </nav>
 
       {/* Global Utilities in Sidebar Footer */}
-      <div className="border-t border-black/10 p-2 dark:border-white/10 space-y-1">
+      <div className="border-t border-white/10 p-2.5 space-y-1 bg-[#002447]">
         {!isCollapsed && (
-          <div className="px-2 pt-1 pb-1 text-[10px] font-mono uppercase tracking-wider text-neutral-500">
+          <div className="px-2 pt-1 pb-1 text-[10px] font-mono uppercase tracking-wider text-slate-300">
             Platform Utilities
           </div>
         )}
@@ -300,7 +300,7 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
           <AccessibleTooltip content="Integration Center (18 Adapters)" position="right">
             <button
               onClick={onOpenIntegrationCenter}
-              className="flex w-full items-center justify-center p-2 text-neutral-600 hover:bg-neutral-200 dark:text-neutral-400 dark:hover:bg-neutral-800 cursor-pointer"
+              className="flex w-full items-center justify-center p-2 rounded-lg text-slate-300 hover:bg-white/10 hover:text-white cursor-pointer"
             >
               <Activity className="h-4 w-4" />
             </button>
@@ -308,9 +308,9 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
         ) : (
           <button
             onClick={onOpenIntegrationCenter}
-            className="flex w-full items-center gap-2 px-2 py-1.5 text-xs text-neutral-600 hover:bg-neutral-200 dark:text-neutral-400 dark:hover:bg-neutral-800 cursor-pointer"
+            className="flex w-full items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-slate-300 hover:bg-white/10 hover:text-white cursor-pointer"
           >
-            <Activity className="h-3.5 w-3.5" />
+            <Activity className="h-3.5 w-3.5 text-[#0078CE]" />
             <span className="truncate">Integration Center</span>
           </button>
         )}
@@ -320,7 +320,7 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
           <AccessibleTooltip content="Accreditation Invariant Tests" position="right">
             <button
               onClick={onOpenUnitTests}
-              className="flex w-full items-center justify-center p-2 text-neutral-600 hover:bg-neutral-200 dark:text-neutral-400 dark:hover:bg-neutral-800 cursor-pointer"
+              className="flex w-full items-center justify-center p-2 rounded-lg text-slate-300 hover:bg-white/10 hover:text-white cursor-pointer"
             >
               <CheckCircle className="h-4 w-4" />
             </button>
@@ -328,9 +328,9 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
         ) : (
           <button
             onClick={onOpenUnitTests}
-            className="flex w-full items-center gap-2 px-2 py-1.5 text-xs text-neutral-600 hover:bg-neutral-200 dark:text-neutral-400 dark:hover:bg-neutral-800 cursor-pointer"
+            className="flex w-full items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-slate-300 hover:bg-white/10 hover:text-white cursor-pointer"
           >
-            <CheckCircle className="h-3.5 w-3.5" />
+            <CheckCircle className="h-3.5 w-3.5 text-[#2EAF4A]" />
             <span className="truncate">Invariant Unit Tests</span>
           </button>
         )}
@@ -340,7 +340,7 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
           <AccessibleTooltip content="Public Verification Portal" position="right">
             <button
               onClick={onOpenVerificationPortal}
-              className="flex w-full items-center justify-center p-2 text-neutral-600 hover:bg-neutral-200 dark:text-neutral-400 dark:hover:bg-neutral-800 cursor-pointer"
+              className="flex w-full items-center justify-center p-2 rounded-lg text-slate-300 hover:bg-white/10 hover:text-white cursor-pointer"
             >
               <FileSearch className="h-4 w-4" />
             </button>
@@ -348,9 +348,9 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
         ) : (
           <button
             onClick={onOpenVerificationPortal}
-            className="flex w-full items-center gap-2 px-2 py-1.5 text-xs text-neutral-600 hover:bg-neutral-200 dark:text-neutral-400 dark:hover:bg-neutral-800 cursor-pointer"
+            className="flex w-full items-center gap-2 px-2.5 py-2 rounded-lg text-xs text-slate-300 hover:bg-white/10 hover:text-white cursor-pointer"
           >
-            <FileSearch className="h-3.5 w-3.5" />
+            <FileSearch className="h-3.5 w-3.5 text-[#A8E063]" />
             <span className="truncate">Public Verification</span>
           </button>
         )}
@@ -361,7 +361,7 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
             <AccessibleTooltip content="Contact Administrator & Support Desk" position="right">
               <button
                 onClick={onOpenSupport}
-                className="flex w-full items-center justify-center p-2 text-neutral-700 hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-800 cursor-pointer"
+                className="flex w-full items-center justify-center p-2 rounded-lg text-slate-300 hover:bg-white/10 hover:text-white cursor-pointer"
               >
                 <Headphones className="h-4 w-4" />
               </button>
@@ -369,9 +369,9 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
           ) : (
             <button
               onClick={onOpenSupport}
-              className="flex w-full items-center gap-2 px-2 py-1.5 text-xs font-semibold text-neutral-800 hover:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-800 cursor-pointer"
+              className="flex w-full items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-semibold text-white hover:bg-white/10 cursor-pointer"
             >
-              <Headphones className="h-3.5 w-3.5" />
+              <Headphones className="h-3.5 w-3.5 text-slate-300" />
               <span className="truncate">Contact Admin / Support</span>
             </button>
           )

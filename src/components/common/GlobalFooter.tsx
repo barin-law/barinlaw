@@ -127,6 +127,16 @@ export const GlobalFooter: React.FC<GlobalFooterProps> = ({
                 <li>
                   <button
                     type="button"
+                    onClick={() => handleLinkClick('/enf')}
+                    className="hover:text-neutral-950 dark:hover:text-neutral-100 hover:underline cursor-pointer text-left font-semibold text-[#002D5B] dark:text-[#A8E063] flex items-center gap-1"
+                  >
+                    <span>ENF Development Portal</span>
+                    <span className="text-[10px] bg-[#2EAF4A]/20 text-[#1B6C2E] dark:text-[#A8E063] px-1 rounded">NEW</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
                     onClick={() => handleLinkClick('/contact')}
                     className="hover:text-neutral-950 dark:hover:text-neutral-100 hover:underline cursor-pointer text-left"
                   >
@@ -183,11 +193,11 @@ export const GlobalFooter: React.FC<GlobalFooterProps> = ({
           </div>
 
           {/* Bottom Bar: Copyright & Candidate Disclaimer */}
-          <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-500">
+          <div className="mt-8 pt-6 border-t border-[#D9E1E8] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
             <p>
-              &copy; {siteContact.copyrightYear} {siteContact.attorneyName} • JuriMbrella Philippine Electronic Notarization. All rights reserved.
+              &copy; {siteContact.copyrightYear} {siteContact.attorneyName} • JuriMbrella — Protection over every signature. All rights reserved.
             </p>
-            <p className="text-[11px] font-mono">
+            <p className="text-[11px] font-mono text-slate-500">
               Official Developer: Ophireum Multimedia Production
             </p>
           </div>

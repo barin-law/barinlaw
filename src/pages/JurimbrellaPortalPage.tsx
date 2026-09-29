@@ -6,6 +6,8 @@ import {
   MessageSquare,
   ShieldCheck,
   FileCheck2,
+  Lock,
+  ArrowRight,
 } from 'lucide-react';
 import { JurimbrellaAssistantWorkspace } from '../components/jurimbrella-assistant/JurimbrellaAssistantWorkspace';
 import { GlobalFooter } from '../components/common/GlobalFooter';
@@ -51,10 +53,10 @@ export const JurimbrellaPortalPage: React.FC<JurimbrellaPortalPageProps> = ({
   return (
     <div
       id="jurimbrella-portal-page"
-      className="min-h-screen bg-slate-50 text-slate-900 selection:bg-[#0B192C] selection:text-white font-sans antialiased"
+      className="min-h-screen bg-[#F4F7F9] text-[#17212B] selection:bg-[#002D5B] selection:text-white font-sans antialiased"
     >
       {/* 1. Header */}
-      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-xs">
+      <header className="sticky top-0 z-40 border-b border-[#D9E1E8] bg-white/95 backdrop-blur-xs shadow-xs">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
           <div
             onClick={() => scrollToSection('top-intro')}
@@ -72,31 +74,31 @@ export const JurimbrellaPortalPage: React.FC<JurimbrellaPortalPageProps> = ({
           <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-6 text-xs font-medium">
             <button
               onClick={() => handleNav('/')}
-              className="text-slate-600 hover:text-[#0B192C] transition-colors"
+              className="text-slate-600 hover:text-[#002D5B] transition-colors"
             >
               Public Home
             </button>
             <button
               onClick={() => scrollToSection('about-section')}
-              className="text-slate-600 hover:text-[#0B192C] transition-colors"
+              className="text-slate-600 hover:text-[#002D5B] transition-colors"
             >
               Platform Overview
             </button>
             <button
               onClick={scrollToAssistant}
-              className="text-slate-600 hover:text-[#0B192C] transition-colors"
+              className="text-slate-600 hover:text-[#002D5B] transition-colors"
             >
               Assistant
             </button>
             <button
               onClick={() => scrollToSection('contact-section')}
-              className="text-slate-600 hover:text-[#0B192C] transition-colors"
+              className="text-slate-600 hover:text-[#002D5B] transition-colors"
             >
               Contact Desk
             </button>
             <button
               onClick={() => handleNav('/sign-in')}
-              className="border border-[#0B192C] bg-[#0B192C] px-4 py-1.5 text-white hover:bg-[#112240] transition-colors font-semibold rounded-xs shadow-xs"
+              className="rounded-lg bg-[#002D5B] px-4 py-2 text-white hover:bg-[#0078CE] transition-all font-semibold shadow-xs cursor-pointer"
             >
               Sign In
             </button>
@@ -107,7 +109,7 @@ export const JurimbrellaPortalPage: React.FC<JurimbrellaPortalPageProps> = ({
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle navigation menu"
-            className="flex h-9 w-9 items-center justify-center border border-slate-300 md:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#D9E1E8] md:hidden cursor-pointer"
           >
             {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -115,7 +117,7 @@ export const JurimbrellaPortalPage: React.FC<JurimbrellaPortalPageProps> = ({
 
         {/* Mobile Dropdown Navigation */}
         {isMobileMenuOpen && (
-          <div className="border-b border-slate-200 bg-white px-4 py-3 md:hidden space-y-2 text-xs">
+          <div className="border-b border-[#D9E1E8] bg-white px-4 py-3 md:hidden space-y-2 text-xs">
             <button
               onClick={() => handleNav('/')}
               className="block w-full text-left py-1.5 text-slate-700 font-medium"
@@ -140,10 +142,10 @@ export const JurimbrellaPortalPage: React.FC<JurimbrellaPortalPageProps> = ({
             >
               Contact Desk
             </button>
-            <div className="pt-2 border-t border-slate-100">
+            <div className="pt-2 border-t border-[#D9E1E8]">
               <button
                 onClick={() => handleNav('/sign-in')}
-                className="w-full border border-[#0B192C] bg-[#0B192C] py-2 text-center text-white font-semibold"
+                className="w-full rounded-lg bg-[#002D5B] py-2 text-center text-white font-semibold cursor-pointer"
               >
                 Sign In
               </button>
@@ -153,7 +155,7 @@ export const JurimbrellaPortalPage: React.FC<JurimbrellaPortalPageProps> = ({
       </header>
 
       {/* Main Container */}
-      <main className="mx-auto max-w-5xl px-4 sm:px-6 py-12 sm:py-20 space-y-20">
+      <main className="mx-auto max-w-5xl px-4 sm:px-6 py-10 sm:py-16 space-y-16">
         {/* 2. Main Introduction */}
         <section id="top-intro" className="text-center max-w-3xl mx-auto space-y-6">
           <div className="flex justify-center">
@@ -161,29 +163,31 @@ export const JurimbrellaPortalPage: React.FC<JurimbrellaPortalPageProps> = ({
           </div>
 
           <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 border border-[#C5A059]/40 bg-white px-3 py-1 text-xs font-mono text-[#0B192C] rounded-full shadow-2xs">
-              <span className="font-semibold">PHILIPPINE eNOTARIZATION</span>
+            <div className="inline-flex items-center gap-2 border border-[#2EAF4A]/40 bg-white px-3.5 py-1 text-xs text-[#002D5B] rounded-full shadow-xs">
+              <span className="h-2 w-2 rounded-full bg-[#2EAF4A]" />
+              <span className="font-bold">PHILIPPINE eNOTARIZATION</span>
             </div>
-            <h1 className="font-serif text-3xl sm:text-5xl font-black tracking-tight text-[#0B192C]">
-              Juri<span className="text-[#C5A059]">M</span>brella
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#002D5B] font-sans">
+              <span>Juri</span><span className="text-[#2EAF4A]">Mbrella</span>
             </h1>
             <p className="text-base sm:text-lg text-slate-600 font-normal tracking-wide max-w-xl mx-auto leading-relaxed">
               Protection over every signature. Secure, compliant, traceable, and professionally controlled digital notarization workflows.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <button
               type="button"
               onClick={scrollToAssistant}
-              className="w-full sm:w-auto border border-[#0B192C] bg-[#0B192C] px-6 py-3 text-xs font-semibold text-white hover:bg-[#112240] transition-colors shadow-xs"
+              className="w-full sm:w-auto rounded-lg bg-[#002D5B] px-6 py-3 text-xs font-semibold text-white hover:bg-[#0078CE] transition-all shadow-xs cursor-pointer flex items-center justify-center gap-2"
             >
-              Consult JuriMbrella Assistant
+              <MessageSquare className="h-4 w-4 text-[#A8E063]" />
+              <span>Consult JuriMbrella Assistant</span>
             </button>
             <button
               type="button"
               onClick={() => scrollToSection('contact-section')}
-              className="w-full sm:w-auto border border-slate-300 bg-white px-6 py-3 text-xs font-semibold text-slate-800 hover:border-[#0B192C] transition-colors shadow-2xs"
+              className="w-full sm:w-auto rounded-lg border border-[#002D5B] bg-white px-6 py-3 text-xs font-semibold text-[#002D5B] hover:bg-[#F4F7F9] transition-all shadow-xs cursor-pointer"
             >
               Contact Support Desk
             </button>
@@ -193,13 +197,13 @@ export const JurimbrellaPortalPage: React.FC<JurimbrellaPortalPageProps> = ({
         {/* 3. About Section */}
         <section
           id="about-section"
-          className="border-t border-slate-200 pt-16 max-w-3xl mx-auto space-y-4 text-center sm:text-left"
+          className="bg-white rounded-xl border border-[#D9E1E8] p-8 max-w-3xl mx-auto space-y-4 shadow-xs"
         >
-          <div className="flex items-center gap-2 text-xs font-mono text-[#C5A059] uppercase tracking-wider font-bold">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#0078CE] uppercase tracking-wider font-bold">
             <ShieldCheck className="h-4 w-4" />
             <span>Platform Overview</span>
           </div>
-          <h2 className="font-serif text-2xl font-bold tracking-tight text-[#0B192C]">
+          <h2 className="text-2xl font-bold tracking-tight text-[#002D5B] font-sans">
             About JuriMbrella Electronic Notarization
           </h2>
           <p className="text-sm text-slate-700 leading-relaxed font-normal">
@@ -211,13 +215,13 @@ export const JurimbrellaPortalPage: React.FC<JurimbrellaPortalPageProps> = ({
         </section>
 
         {/* 4. Assistant Section */}
-        <section id="jurimbrella-assistant-section" className="border-t border-slate-200 pt-16 space-y-6">
+        <section id="jurimbrella-assistant-section" className="space-y-6">
           <div className="max-w-3xl mx-auto text-center sm:text-left space-y-2">
-            <div className="inline-flex items-center gap-2 border border-[#C5A059]/40 bg-white px-2.5 py-1 text-xs font-mono text-[#0B192C] rounded-full">
-              <MessageSquare className="h-3.5 w-3.5 text-[#C5A059]" />
-              <span>Interactive Procedural Assistant</span>
+            <div className="inline-flex items-center gap-2 border border-[#2EAF4A]/40 bg-white px-3 py-1 text-xs text-[#002D5B] rounded-full">
+              <MessageSquare className="h-3.5 w-3.5 text-[#2EAF4A]" />
+              <span className="font-semibold">Interactive Procedural Assistant</span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-[#0B192C]">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#002D5B] font-sans">
               JuriMbrella Assistant
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
@@ -235,10 +239,10 @@ export const JurimbrellaPortalPage: React.FC<JurimbrellaPortalPageProps> = ({
         {/* 5. Contact Section */}
         <section
           id="contact-section"
-          className="border-t border-slate-200 pt-16 max-w-3xl mx-auto space-y-6 text-left"
+          className="space-y-6 max-w-4xl mx-auto text-left"
         >
-          <div className="space-y-2">
-            <h2 className="font-serif text-2xl font-bold tracking-tight text-[#0B192C]">
+          <div className="space-y-1">
+            <h2 className="text-2xl font-bold tracking-tight text-[#002D5B] font-sans">
               Contact JuriMbrella Legal &amp; Administrative Support
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -247,13 +251,13 @@ export const JurimbrellaPortalPage: React.FC<JurimbrellaPortalPageProps> = ({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
             <div className="space-y-4">
               <ContactInformation />
             </div>
 
-            <div className="border border-slate-200 bg-white p-5 rounded-xs shadow-xs">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-[#0B192C] font-mono mb-3">
+            <div className="border border-[#D9E1E8] bg-white p-6 rounded-xl shadow-xs">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#002D5B] font-mono mb-3">
                 Send an Inquiry
               </h3>
               <ContactForm
@@ -280,4 +284,5 @@ export const JurimbrellaPortalPage: React.FC<JurimbrellaPortalPageProps> = ({
     </div>
   );
 };
+
 export default JurimbrellaPortalPage;

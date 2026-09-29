@@ -65,7 +65,8 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
 
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>(() => {
     const initial: Record<string, boolean> = {};
-    const activeCat = (menuItems || []).find((i) => i.id === activeItemId)?.category || categories[0] || 'Overview';
+    const activeItem = (menuItems || []).find((i) => i.id === activeItemId);
+    const activeCat = activeItem?.category || categories[0] || 'Overview';
     categories.forEach((cat) => {
       initial[cat] = cat === activeCat || cat === 'Overview';
     });
@@ -86,7 +87,7 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
     }));
   };
 
-  const areAllExpanded = categories.length > 0 && categories.every((cat) => openCategories[cat]);
+  const areAllExpanded = categories.length > 0 && categories.every((c) => openCategories[c]);
 
   const toggleAll = () => {
     const next = !areAllExpanded;
@@ -94,6 +95,7 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
     categories.forEach((c) => (res[c] = next));
     setOpenCategories(res);
   };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
@@ -120,25 +122,28 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
         onClick={onClose}
       />
 
-      {/* Drawer */}
+      {/* Drawer Container */}
       <div
         role="dialog"
         aria-modal="true"
         aria-label="Mobile Navigation Menu"
-        className="relative z-10 flex h-full w-[280px] flex-col border-r border-black bg-white text-black shadow-2xl transition-all dark:border-white dark:bg-black dark:text-white"
+        className="relative z-10 flex h-full w-[280px] flex-col border-r border-[#001F3F] bg-[#002D5B] text-white shadow-2xl transition-all"
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-black/10 px-4 py-3 dark:border-white/10">
+        <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
           <div className="flex items-center gap-2.5">
             <BrandLogo
               variant="emblem"
               height={32}
+              themeMode="dark"
               decorative
               className="shrink-0"
             />
             <div>
-              <div className="text-sm font-bold leading-none">JuriMbrella</div>
-              <div className="text-[10px] text-neutral-500 font-mono mt-0.5">
+              <div className="text-sm font-bold leading-none font-sans text-white">
+                <span>Juri</span><span className="text-[#A8E063]">Mbrella</span>
+              </div>
+              <div className="text-[10px] text-slate-300 font-mono mt-0.5">
                 {activeRole.replace(/_/g, ' ')}
               </div>
             </div>
@@ -146,20 +151,20 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
           <button
             onClick={onClose}
             aria-label="Close navigation menu"
-            className="flex h-7 w-7 items-center justify-center border border-black/20 hover:bg-neutral-100 dark:border-white/20 dark:hover:bg-neutral-900"
+            className="flex h-7 w-7 items-center justify-center rounded-lg border border-white/20 hover:bg-white/10 text-white cursor-pointer"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
 
-      {/* Menu list */}
+        {/* Menu list */}
         <nav className="flex-1 overflow-y-auto p-3 space-y-2 scrollbar-thin">
           {categories.length > 1 && (
-            <div className="flex items-center justify-between px-2 pb-1 text-[10px] font-mono text-neutral-500 border-b border-black/10 dark:border-white/10 mb-2">
+            <div className="flex items-center justify-between px-2 pb-1 text-[10px] font-mono text-slate-300 border-b border-white/10 mb-2">
               <span className="uppercase tracking-wider">Workspace Modules</span>
               <button
                 onClick={toggleAll}
-                className="flex items-center gap-1 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+                className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors cursor-pointer"
               >
                 <ChevronsUpDown className="h-3 w-3" />
                 <span>{areAllExpanded ? 'Collapse All' : 'Expand All'}</span>
@@ -169,52 +174,32 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
 
           {categories.map((category) => {
             const itemsInCategory = menuItems.filter((i) => (i.category || 'Workspace') === category);
-            const isCategoryOpen = openCategories[category] ?? false;
+            const isOpen = openCategories[category] ?? false;
             const CategoryIcon = getCategoryIcon(category);
             const hasActiveChild = itemsInCategory.some((i) => i.id === activeItemId);
-            const totalBadgeCount = itemsInCategory.reduce((acc, item) => {
-              const count = typeof item.badge === 'number' ? item.badge : parseInt(item.badge as string, 10);
-              return isNaN(count) ? acc : acc + count;
-            }, 0);
 
             return (
               <div key={category} className="space-y-1">
                 <button
                   type="button"
                   onClick={() => toggleCategory(category)}
-                  aria-expanded={isCategoryOpen}
-                  className={`w-full flex items-center justify-between px-2 py-2 rounded-sm text-left transition-colors cursor-pointer ${
-                    hasActiveChild
-                      ? 'bg-neutral-100 text-black font-semibold dark:bg-neutral-900 dark:text-white'
-                      : 'text-neutral-600 hover:bg-neutral-100/70 hover:text-black dark:text-neutral-400 dark:hover:bg-neutral-900'
+                  aria-expanded={isOpen}
+                  className={`flex w-full items-center justify-between px-2 py-1.5 rounded-lg text-left text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer ${
+                    hasActiveChild ? 'bg-white/10 text-white' : 'text-slate-300 hover:bg-white/5 hover:text-white'
                   }`}
                 >
-                  <div className="flex items-center gap-2 truncate">
-                    <CategoryIcon className="h-3.5 w-3.5 shrink-0 text-neutral-500" />
-                    <span className="text-[11px] font-bold uppercase tracking-wider truncate">
-                      {category}
-                    </span>
+                  <div className="flex items-center gap-2">
+                    <CategoryIcon className="h-3.5 w-3.5 text-slate-300" />
+                    <span>{category}</span>
                   </div>
-
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    {totalBadgeCount > 0 && (
-                      <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-black px-1 text-[9px] font-bold text-white dark:bg-white dark:text-black">
-                        {totalBadgeCount}
-                      </span>
-                    )}
-                    <span className="text-[10px] font-mono text-neutral-400">
-                      {itemsInCategory.length}
-                    </span>
-                    {isCategoryOpen ? (
-                      <ChevronDown className="h-3.5 w-3.5 text-neutral-400" />
-                    ) : (
-                      <ChevronRight className="h-3.5 w-3.5 text-neutral-400" />
-                    )}
+                  <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
+                    <span>{itemsInCategory.length}</span>
+                    {isOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
                   </div>
                 </button>
 
-                {isCategoryOpen && (
-                  <div className="space-y-1 pl-2">
+                {isOpen && (
+                  <div className="space-y-0.5 pl-2">
                     {itemsInCategory.map((item) => {
                       const Icon = item.icon;
                       const isActive = activeItemId === item.id;
@@ -226,18 +211,18 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
                             onSelectItem(item.id);
                             onClose();
                           }}
-                          className={`flex w-full items-center justify-between px-2.5 py-1.5 text-xs transition-colors rounded-sm cursor-pointer ${
+                          className={`flex w-full items-center justify-between px-2.5 py-2 text-xs transition-colors rounded-lg cursor-pointer ${
                             isActive
-                              ? 'border border-black bg-black font-semibold text-white dark:border-white dark:bg-white dark:text-black'
-                              : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-900'
+                              ? 'bg-[#0078CE] font-semibold text-white border-l-4 border-[#2EAF4A]'
+                              : 'text-slate-200 hover:bg-white/10'
                           }`}
                         >
                           <div className="flex items-center gap-2.5 truncate">
-                            <Icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-white dark:text-black' : 'text-neutral-500'}`} />
+                            <Icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-white' : 'text-slate-300'}`} />
                             <span className="truncate">{item.label}</span>
                           </div>
                           {item.badge && (
-                            <span className="rounded-full bg-neutral-200 px-1.5 py-0.2 text-[10px] font-bold text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200">
+                            <span className="rounded-full bg-[#2EAF4A] px-1.5 py-0.2 text-[10px] font-bold text-white">
                               {item.badge}
                             </span>
                           )}
@@ -252,15 +237,15 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
         </nav>
 
         {/* Utilities in footer */}
-        <div className="border-t border-black/10 p-3 dark:border-white/10 space-y-1.5">
+        <div className="border-t border-white/10 p-3 bg-[#002447] space-y-1.5">
           <button
             onClick={() => {
               onOpenIntegrationCenter();
               onClose();
             }}
-            className="flex w-full items-center gap-2 px-2.5 py-1.5 text-xs text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-900"
+            className="flex w-full items-center gap-2 px-2.5 py-2 text-xs text-slate-300 hover:bg-white/10 rounded-lg cursor-pointer"
           >
-            <Activity className="h-3.5 w-3.5" />
+            <Activity className="h-3.5 w-3.5 text-[#0078CE]" />
             <span>Integration Center</span>
           </button>
           <button
@@ -268,9 +253,9 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
               onOpenUnitTests();
               onClose();
             }}
-            className="flex w-full items-center gap-2 px-2.5 py-1.5 text-xs text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-900"
+            className="flex w-full items-center gap-2 px-2.5 py-2 text-xs text-slate-300 hover:bg-white/10 rounded-lg cursor-pointer"
           >
-            <CheckCircle className="h-3.5 w-3.5" />
+            <CheckCircle className="h-3.5 w-3.5 text-[#2EAF4A]" />
             <span>Invariant Unit Tests</span>
           </button>
           <button
@@ -278,9 +263,9 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
               onOpenVerificationPortal();
               onClose();
             }}
-            className="flex w-full items-center gap-2 px-2.5 py-1.5 text-xs text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-900"
+            className="flex w-full items-center gap-2 px-2.5 py-2 text-xs text-slate-300 hover:bg-white/10 rounded-lg cursor-pointer"
           >
-            <FileSearch className="h-3.5 w-3.5" />
+            <FileSearch className="h-3.5 w-3.5 text-[#A8E063]" />
             <span>Public Verification</span>
           </button>
           {onOpenSupport && (
@@ -289,9 +274,9 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
                 onOpenSupport();
                 onClose();
               }}
-              className="flex w-full items-center gap-2 px-2.5 py-1.5 text-xs font-semibold text-neutral-800 hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-900"
+              className="flex w-full items-center gap-2 px-2.5 py-2 text-xs font-semibold text-white hover:bg-white/10 rounded-lg cursor-pointer"
             >
-              <Headphones className="h-3.5 w-3.5" />
+              <Headphones className="h-3.5 w-3.5 text-slate-300" />
               <span>Contact Admin / Support</span>
             </button>
           )}
@@ -300,3 +285,5 @@ export const MobileNavigationDrawer: React.FC<MobileNavigationDrawerProps> = ({
     </div>
   );
 };
+
+export default MobileNavigationDrawer;

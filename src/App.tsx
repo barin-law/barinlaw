@@ -46,6 +46,7 @@ import { PublicVerifyPage } from './pages/PublicVerifyPage';
 import { ContactUsPage } from './pages/ContactUsPage';
 import { AccessDenied403 } from './components/common/AccessDenied403';
 import { NotFound404 } from './components/common/NotFound404';
+import { EnfPortalRoot } from './pages/enf/EnfPortalRoot';
 
 /**
  * ============================================================
@@ -608,6 +609,22 @@ const AppRouter: React.FC = () => {
   ) {
     return (
       <ContactUsPage
+        onNavigate={navigate}
+      />
+    );
+  }
+
+  /**
+   * 5. ENF Development & Prepaid Access Portal
+   * Operations on /enf and all /enf/* subviews
+   */
+  if (
+    currentPath === '/enf' ||
+    currentPath.startsWith('/enf/')
+  ) {
+    return (
+      <EnfPortalRoot
+        currentPath={currentPath}
         onNavigate={navigate}
       />
     );

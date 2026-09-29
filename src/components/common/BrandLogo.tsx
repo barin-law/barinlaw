@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
+import { useTheme } from '../../context/ThemeContext';
 
 // Official JuriMbrella Vector Branding Assets
 import logoNavySvg from '../../assets/branding/jurimbrella-logo.svg';
 import logoWhiteSvg from '../../assets/branding/jurimbrella-logo-white.svg';
 import emblemNavySvg from '../../assets/branding/jurimbrella-emblem.svg';
 import emblemWhiteSvg from '../../assets/branding/jurimbrella-emblem-white.svg';
+import horizNavySvg from '../../assets/branding/jurimbrella-horizontal.svg';
+import horizWhiteSvg from '../../assets/branding/jurimbrella-horizontal-white.svg';
 
-export type BrandLogoVariant = 'full' | 'compact' | 'emblem' | 'wordmark';
+export type BrandLogoVariant = 'full' | 'compact' | 'horizontal' | 'emblem' | 'wordmark';
 export type BrandLogoTheme = 'light' | 'dark' | 'auto';
 
 export interface BrandLogoProps {
   /**
-   * 'full': Complete official logo (Emblem + JuriMbrella + Tagline + Service Descriptor)
-   * 'compact': Compact horizontal logo
-   * 'emblem': Icon-only presentation (Umbrella + Document + Fountain Pen Nib)
+   * 'full': Complete official logo (Emblem on top, Wordmark + Tagline below, zero overlap)
+   * 'compact' / 'horizontal': Horizontal lockup for navbars and headers (Emblem on left, Wordmark on right)
+   * 'emblem': Icon-only circular emblem (Umbrella + Pen Nib + Leaves + Anchor)
    * 'wordmark': Typography only
    */
   variant?: BrandLogoVariant;
   /**
-   * 'light': Deep Navy & Gold on transparent (for light backgrounds)
-   * 'dark': White & Gold on transparent (for dark backgrounds)
-   * 'auto': Uses CSS / DOM dark mode
+   * 'light': Deep Blue & Emerald (for light backgrounds)
+   * 'dark': White & Vibrant Green (for dark backgrounds #002D5B)
+   * 'auto': Uses active application theme
    */
   themeMode?: BrandLogoTheme;
   alt?: string;
@@ -28,14 +31,35 @@ export interface BrandLogoProps {
   className?: string;
   width?: number | string;
   height?: number | string;
+  size?: number | string;
   priority?: boolean;
   id?: string;
   onClick?: () => void;
 }
 
 /**
- * 1. BrandMark Component
- * Icon-only presentation featuring the protective umbrella, legal document, and fountain pen signature nib.
+ * Helper hook to safely detect if dark mode is active
+ */
+function useSafeIsDark(themeMode?: BrandLogoTheme | string): boolean {
+  let isSystemDark = false;
+  try {
+    const themeContext = useTheme();
+    isSystemDark = themeContext.isDark;
+  } catch {
+    if (typeof document !== 'undefined') {
+      isSystemDark = document.documentElement.classList.contains('dark');
+    }
+  }
+
+  if (themeMode === 'dark') return true;
+  if (themeMode === 'light') return false;
+  return isSystemDark;
+}
+
+/**
+ * BrandMark / BrandIcon Component
+ * Circular emblem with sunburst umbrella, golden burst, pen nib, leaves, and anchor.
+ * Guaranteed to render a SINGLE image with NO overlapping.
  */
 export const BrandMark: React.FC<{
   themeMode?: BrandLogoTheme;
@@ -48,17 +72,19 @@ export const BrandMark: React.FC<{
   themeMode = 'auto',
   className = '',
   size = 40,
-  alt = 'JuriMbrella Emblem',
+  alt = 'JuriMbrella — Protection over every signature',
   decorative = false,
   onClick,
 }) => {
   const [loadError, setLoadError] = useState(false);
+  const isDark = useSafeIsDark(themeMode);
   const resolvedAlt = decorative ? '' : alt;
+  const asset = isDark ? emblemWhiteSvg : emblemNavySvg;
 
   if (loadError) {
     return (
       <span
-        className={`inline-flex items-center justify-center font-serif font-black text-[#0B192C] dark:text-[#E5C07B] rounded-full border border-[#C5A059]/40 ${className}`}
+        className={`inline-flex items-center justify-center font-bold text-[#002D5B] dark:text-[#A8E063] rounded-full border border-[#2EAF4A]/40 bg-[#FFFFFF] ${className}`}
         style={{ width: size, height: size }}
         onClick={onClick}
       >
@@ -67,343 +93,172 @@ export const BrandMark: React.FC<{
     );
   }
 
-  if (themeMode === 'light') {
-    return (
-      <img
-        src={emblemNavySvg}
-        alt={resolvedAlt}
-        width={size}
-        height={size}
-        onError={() => setLoadError(true)}
-        className={`inline-block object-contain ${className}`}
-        style={{ width: size, height: size }}
-        onClick={onClick}
-      />
-    );
-  }
-
-  if (themeMode === 'dark') {
-    return (
-      <img
-        src={emblemWhiteSvg}
-        alt={resolvedAlt}
-        width={size}
-        height={size}
-        onError={() => setLoadError(true)}
-        className={`inline-block object-contain ${className}`}
-        style={{ width: size, height: size }}
-        onClick={onClick}
-      />
-    );
-  }
-
   return (
-    <span
-      className={`inline-flex items-center justify-center shrink-0 ${className}`}
+    <img
+      src={asset}
+      alt={resolvedAlt}
+      width={size}
+      height={size}
+      onError={() => setLoadError(true)}
+      className={`inline-block aspect-square object-contain select-none shrink-0 ${onClick ? 'cursor-pointer' : ''} ${className}`}
       style={{ width: size, height: size }}
       onClick={onClick}
-    >
-      <img
-        src={emblemNavySvg}
-        alt={resolvedAlt}
-        width={size}
-        height={size}
-        onError={() => setLoadError(true)}
-        className="dark:hidden inline-block object-contain"
-        style={{ width: size, height: size }}
-      />
-      <img
-        src={emblemWhiteSvg}
-        alt={resolvedAlt}
-        width={size}
-        height={size}
-        onError={() => setLoadError(true)}
-        className="hidden dark:inline-block object-contain"
-        style={{ width: size, height: size }}
-      />
-    </span>
+    />
   );
 };
 
+export const BrandIcon = BrandMark;
+
 /**
- * 2. BrandWordmark Component
- * Clean typography with official brand name, tagline, and Philippine eNotarization descriptor.
+ * BrandWordmark Component
+ * Official typography "JuriMbrella" with subtitle/tagline option.
  */
 export const BrandWordmark: React.FC<{
   themeMode?: BrandLogoTheme;
-  showTagline?: boolean;
-  showDescriptor?: boolean;
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  showTagline?: boolean;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   onClick?: () => void;
 }> = ({
   themeMode = 'auto',
-  showTagline = true,
-  showDescriptor = true,
   className = '',
+  showTagline = true,
   size = 'md',
   onClick,
 }) => {
+  const isDark = useSafeIsDark(themeMode);
+
   const sizeClasses = {
-    sm: {
-      name: 'text-base',
-      tagline: 'text-[10px]',
-      descriptor: 'text-[8px] tracking-[0.2em]',
-    },
-    md: {
-      name: 'text-xl',
-      tagline: 'text-xs',
-      descriptor: 'text-[9px] tracking-[0.24em]',
-    },
-    lg: {
-      name: 'text-3xl',
-      tagline: 'text-sm',
-      descriptor: 'text-xs tracking-[0.28em]',
-    },
+    sm: { title: 'text-base font-bold', sub: 'text-[9px] tracking-wide' },
+    md: { title: 'text-xl font-extrabold', sub: 'text-[11px] tracking-wide' },
+    lg: { title: 'text-2xl font-extrabold', sub: 'text-xs tracking-wider' },
+    xl: { title: 'text-3xl font-extrabold', sub: 'text-sm tracking-wider' },
   }[size];
 
-  const colorStyles =
-    themeMode === 'light'
-      ? {
-          name: 'text-[#0B192C]',
-          tagline: 'text-slate-600',
-          divider: 'bg-[#C5A059]/40',
-          descriptor: 'text-[#0B192C]',
-        }
-      : themeMode === 'dark'
-      ? {
-          name: 'text-white',
-          tagline: 'text-slate-300',
-          divider: 'bg-[#E5C07B]/40',
-          descriptor: 'text-slate-200',
-        }
-      : {
-          name: 'text-[#0B192C] dark:text-white',
-          tagline: 'text-slate-600 dark:text-slate-300',
-          divider: 'bg-[#C5A059]/40 dark:bg-[#E5C07B]/40',
-          descriptor: 'text-[#0B192C] dark:text-slate-200',
-        };
+  const juriColor = isDark ? 'text-white' : 'text-[#002D5B]';
+  const mbrellaColor = isDark ? 'text-[#A8E063]' : 'text-[#2EAF4A]';
+  const taglineColor = isDark ? 'text-slate-300' : 'text-[#17212B]';
 
   return (
     <div
-      className={`flex flex-col select-none ${className}`}
+      className={`inline-flex flex-col select-none ${onClick ? 'cursor-pointer' : ''} ${className}`}
       onClick={onClick}
     >
-      <div className={`font-serif font-black tracking-tight ${sizeClasses.name} ${colorStyles.name} leading-none`}>
-        Juri<span className="text-[#C5A059] dark:text-[#E5C07B]">M</span>brella
+      <div className={`font-sans tracking-tight leading-none ${sizeClasses.title}`}>
+        <span className={juriColor}>Juri</span>
+        <span className={mbrellaColor}>Mbrella</span>
       </div>
       {showTagline && (
-        <div className={`italic font-medium ${sizeClasses.tagline} ${colorStyles.tagline} mt-1 leading-tight`}>
-          Protection over every signature
+        <div className={`flex items-center gap-1.5 mt-1 font-medium ${sizeClasses.sub} ${taglineColor}`}>
+          <span className="h-[1.5px] w-2.5 bg-[#2EAF4A] rounded-full inline-block" />
+          <span>Protection over every signature</span>
+          <span className="h-[1.5px] w-2.5 bg-[#2EAF4A] rounded-full inline-block" />
         </div>
-      )}
-      {showDescriptor && (
-        <>
-          <div className={`h-[1px] w-full ${colorStyles.divider} my-1`} />
-          <div className={`font-mono font-bold uppercase ${sizeClasses.descriptor} ${colorStyles.descriptor} leading-tight`}>
-            PHILIPPINE eNOTARIZATION
-          </div>
-        </>
       )}
     </div>
   );
 };
 
 /**
- * 3. BrandLogo Component
- * Master official logo supporting full, compact, emblem, or wordmark variants.
+ * Centralized BrandLogo Component
+ * Supports:
+ * - full: Circular full logo (Emblem on top, Wordmark + Tagline cleanly below it)
+ * - compact / horizontal: Horizontal lockup with emblem + wordmark + tagline
+ * - emblem: Icon-only presentation
+ * - wordmark: Text only
+ * Guaranteed to render a SINGLE image with NO overlapping!
  */
 export const BrandLogo: React.FC<BrandLogoProps> = ({
-  variant = 'full',
+  variant = 'compact',
   themeMode = 'auto',
-  alt,
+  alt = 'JuriMbrella — Protection over every signature',
   decorative = false,
   className = '',
   width,
   height,
+  size,
   priority = false,
   id,
   onClick,
 }) => {
   const [loadError, setLoadError] = useState(false);
+  const isDark = useSafeIsDark(themeMode);
+  const resolvedAlt = decorative ? '' : alt;
 
-  const resolvedAlt = decorative
-    ? ''
-    : alt !== undefined
-    ? alt
-    : variant === 'emblem'
-    ? 'JuriMbrella Emblem'
-    : 'JuriMbrella — Protection over every signature — Philippine eNotarization';
-
-  const defaultHeight = variant === 'full' ? 48 : variant === 'compact' ? 40 : 36;
-  const resolvedHeight = height ?? defaultHeight;
-
-  // Fallback if SVG fails to load
-  if (loadError) {
-    return (
-      <div
-        id={id}
-        className={`inline-flex items-center gap-2.5 select-none ${className}`}
-        onClick={onClick}
-      >
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0B192C] text-[#C5A059] font-serif font-bold text-lg">
-          J
-        </span>
-        {variant !== 'emblem' && (
-          <div className="flex flex-col leading-none">
-            <span className="font-serif font-black text-lg text-[#0B192C] dark:text-white">
-              Juri<span className="text-[#C5A059]">M</span>brella
-            </span>
-            <span className="text-[9px] uppercase tracking-widest text-slate-500 font-mono mt-0.5">
-              Philippine eNotarization
-            </span>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  // Emblem only
+  // Handle emblem-only presentation
   if (variant === 'emblem') {
+    const emblemSize = size || height || width || 44;
     return (
       <BrandMark
         themeMode={themeMode}
-        size={resolvedHeight}
+        className={className}
+        size={emblemSize}
         alt={resolvedAlt}
         decorative={decorative}
-        className={className}
         onClick={onClick}
       />
     );
   }
 
-  // Wordmark only
+  // Handle wordmark-only presentation
   if (variant === 'wordmark') {
     return (
       <BrandWordmark
         themeMode={themeMode}
-        size="md"
         className={className}
         onClick={onClick}
       />
     );
   }
 
-  // Compact variant (Emblem + horizontal wordmark)
-  if (variant === 'compact') {
+  // Fallback if asset fails to load
+  if (loadError) {
     return (
       <div
         id={id}
-        className={`inline-flex items-center gap-3 select-none cursor-pointer group ${className}`}
+        className={`inline-flex items-center gap-2.5 ${onClick ? 'cursor-pointer' : ''} ${className}`}
         onClick={onClick}
-        style={{
-          height: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
-          width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
-        }}
       >
-        <BrandMark
-          themeMode={themeMode}
-          size={typeof resolvedHeight === 'number' ? resolvedHeight : 38}
-          alt={resolvedAlt}
-          decorative
-        />
-        <div className="flex flex-col justify-center leading-none">
-          <span className="font-serif font-black text-lg sm:text-xl tracking-tight text-[#0B192C] dark:text-white group-hover:text-[#C5A059] transition-colors">
-            Juri<span className="text-[#C5A059] dark:text-[#E5C07B]">M</span>brella
-          </span>
-          <span className="text-[9px] uppercase tracking-[0.2em] font-semibold text-slate-500 dark:text-slate-400 font-mono mt-0.5">
-            Philippine eNotarization
-          </span>
-        </div>
+        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#002D5B] text-white font-bold text-base shadow-xs">
+          J
+        </span>
+        <BrandWordmark themeMode={themeMode} showTagline={variant === 'full'} />
       </div>
     );
   }
 
-  // Explicit 'light' mode (Full Logo)
-  if (themeMode === 'light') {
-    return (
-      <img
-        id={id}
-        src={logoNavySvg}
-        alt={resolvedAlt}
-        width={width}
-        height={height}
-        loading={priority ? 'eager' : 'lazy'}
-        decoding="async"
-        onError={() => setLoadError(true)}
-        className={`inline-block h-full w-auto object-contain transition-opacity duration-150 ${className}`}
-        style={{
-          maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
-          width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
-        }}
-        onClick={onClick}
-      />
-    );
-  }
+  // Determine which asset to load based on variant and theme
+  const isHorizontal = variant === 'compact' || variant === 'horizontal';
+  const lightAsset = isHorizontal ? horizNavySvg : logoNavySvg;
+  const darkAsset = isHorizontal ? horizWhiteSvg : logoWhiteSvg;
+  const selectedAsset = isDark ? darkAsset : lightAsset;
 
-  // Explicit 'dark' mode (Full Logo)
-  if (themeMode === 'dark') {
-    return (
-      <img
-        id={id}
-        src={logoWhiteSvg}
-        alt={resolvedAlt}
-        width={width}
-        height={height}
-        loading={priority ? 'eager' : 'lazy'}
-        decoding="async"
-        onError={() => setLoadError(true)}
-        className={`inline-block h-full w-auto object-contain transition-opacity duration-150 ${className}`}
-        style={{
-          maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
-          width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
-        }}
-        onClick={onClick}
-      />
-    );
-  }
+  // Determine heights and aspect ratio based on variant
+  const defaultHeight = variant === 'full' ? 90 : 42;
+  const resolvedHeight = height || size || defaultHeight;
+  const aspectClass = isHorizontal ? 'aspect-[440/100]' : 'aspect-[512/540]';
 
-  // Auto mode: responsive to light/dark themes
   return (
-    <span
+    <img
       id={id}
-      className={`inline-flex items-center justify-center ${className}`}
-      onClick={onClick}
+      src={selectedAsset}
+      alt={resolvedAlt}
+      width={width}
+      height={height}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding="async"
+      onError={() => setLoadError(true)}
+      className={`inline-block ${aspectClass} object-contain select-none shrink-0 ${onClick ? 'cursor-pointer' : ''} ${className}`}
       style={{
         height: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
         width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
+        maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
       }}
-    >
-      <img
-        src={logoNavySvg}
-        alt={resolvedAlt}
-        width={width}
-        height={height}
-        loading={priority ? 'eager' : 'lazy'}
-        decoding="async"
-        onError={() => setLoadError(true)}
-        className="dark:hidden inline-block h-full w-auto object-contain"
-        style={{
-          maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
-          width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
-        }}
-      />
-      <img
-        src={logoWhiteSvg}
-        alt={resolvedAlt}
-        width={width}
-        height={height}
-        loading={priority ? 'eager' : 'lazy'}
-        decoding="async"
-        onError={() => setLoadError(true)}
-        className="hidden dark:inline-block h-full w-auto object-contain"
-        style={{
-          maxHeight: typeof resolvedHeight === 'number' ? `${resolvedHeight}px` : resolvedHeight,
-          width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto',
-        }}
-      />
-    </span>
+      onClick={onClick}
+    />
   );
 };
 
+// Aliases for unified brand system
+export const Logo = BrandLogo;
 export default BrandLogo;

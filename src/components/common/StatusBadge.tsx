@@ -1,11 +1,13 @@
 import React from 'react';
 import { TransactionState, AdapterState, AuditSeverity } from '../../types';
+import { CheckCircle2, AlertTriangle, AlertCircle, Info, ShieldCheck, Sparkles } from 'lucide-react';
 
 interface StatusBadgeProps {
   status?: string | TransactionState | AdapterState | AuditSeverity;
   label?: string;
   variant?: 'default' | 'success' | 'warning' | 'error' | 'info' | 'demo';
   size?: 'sm' | 'md';
+  showIcon?: boolean;
 }
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({
@@ -13,6 +15,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   label,
   variant,
   size = 'md',
+  showIcon = true,
 }) => {
   const displayLabel = label || (typeof status === 'string' ? status.replace(/_/g, ' ') : '');
 
@@ -34,24 +37,38 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   }
 
   const variantStyles = {
-    default: 'border-neutral-400 bg-neutral-100 text-neutral-800 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-200',
-    success: 'border-emerald-500 bg-emerald-50 text-emerald-800 dark:border-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-300',
-    warning: 'border-amber-500 bg-amber-50 text-amber-800 dark:border-amber-600 dark:bg-amber-950/40 dark:text-amber-300',
-    error: 'border-red-500 bg-red-50 text-red-800 dark:border-red-600 dark:bg-red-950/40 dark:text-red-300',
-    info: 'border-neutral-800 bg-neutral-100 text-neutral-900 dark:border-neutral-200 dark:bg-neutral-900 dark:text-neutral-100',
-    demo: 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black',
+    default: 'border-[#D9E1E8] bg-[#F4F7F9] text-[#17212B]',
+    success: 'border-[#2EAF4A]/40 bg-[#2EAF4A]/10 text-[#1B6C2E]',
+    warning: 'border-[#E8B949]/50 bg-[#E8B949]/15 text-[#8F6B12]',
+    error: 'border-[#D64545]/40 bg-[#D64545]/10 text-[#A32929]',
+    info: 'border-[#0078CE]/40 bg-[#0078CE]/10 text-[#002D5B]',
+    demo: 'border-[#002D5B] bg-[#002D5B] text-white',
   };
 
+  const icons = {
+    default: Info,
+    success: CheckCircle2,
+    warning: AlertTriangle,
+    error: AlertCircle,
+    info: Info,
+    demo: Sparkles,
+  };
+
+  const Icon = icons[computedVariant];
+
   const sizeStyles = {
-    sm: 'px-1.5 py-0.2 text-[10px]',
-    md: 'px-2 py-0.5 text-xs',
+    sm: 'px-2 py-0.5 text-[10px] gap-1',
+    md: 'px-2.5 py-1 text-xs gap-1.5',
   };
 
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-sm border font-mono font-medium tracking-tight uppercase ${variantStyles[computedVariant]} ${sizeStyles[size]}`}
+      className={`inline-flex items-center rounded-md border font-sans font-semibold tracking-tight uppercase select-none ${variantStyles[computedVariant]} ${sizeStyles[size]}`}
     >
-      {displayLabel}
+      {showIcon && <Icon className={size === 'sm' ? 'h-3 w-3 shrink-0' : 'h-3.5 w-3.5 shrink-0'} />}
+      <span>{displayLabel}</span>
     </span>
   );
 };
+
+export default StatusBadge;

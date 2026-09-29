@@ -386,76 +386,126 @@ export const SignInPage: React.FC<SignInPageProps> = ({
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-10 sm:py-16 flex items-center justify-center">
+      <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-8 sm:py-12 flex items-center justify-center">
         {!isAuthenticated ? (
-          /* Auth Gateway Container */
-          <div className="w-full max-w-lg border border-neutral-200 bg-white p-6 sm:p-8 shadow-sm space-y-5">
-            <div className="text-center space-y-2">
-              <div className="flex justify-center pb-1">
-                <BrandLogo
-                  variant="full"
-                  height={80}
-                  priority
-                  alt="JuriMbrella Philippine Electronic Notarization"
-                  className="max-w-[320px]"
-                />
+          /* Auth Gateway Container with 2-Column Corporate Layout */
+          <div className="w-full grid grid-cols-1 md:grid-cols-12 rounded-2xl overflow-hidden border border-[#D9E1E8] bg-white shadow-lg">
+            {/* LEFT COLUMN: Official JuriMbrella Brand Presentation */}
+            <div className="md:col-span-5 bg-[#002D5B] text-white p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+              <div className="relative z-10 space-y-6">
+                <div className="flex items-center gap-3">
+                  <BrandLogo
+                    variant="emblem"
+                    size={48}
+                    themeMode="dark"
+                    priority
+                    alt="JuriMbrella"
+                  />
+                  <div>
+                    <h2 className="text-xl font-extrabold tracking-tight">
+                      <span>Juri</span><span className="text-[#A8E063]">Mbrella</span>
+                    </h2>
+                    <span className="text-[10px] font-mono text-slate-300 uppercase tracking-wider block">
+                      Philippine eNotarization
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-2 pt-2">
+                  <h3 className="text-lg font-bold font-sans text-white leading-snug">
+                    "Protection over every signature"
+                  </h3>
+                  <div className="inline-flex items-center gap-1.5 bg-[#0078CE]/20 border border-[#0078CE]/40 px-3 py-1 rounded-full text-xs font-semibold text-[#A8E063]">
+                    <ShieldCheck className="h-3.5 w-3.5" />
+                    <span>Secure. Legal. Digital. Nationwide.</span>
+                  </div>
+                </div>
+
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  A professional Philippine electronic notarization platform focused on secure, compliant, traceable, and professionally controlled digital notarization workflows.
+                </p>
+
+                <div className="space-y-2 pt-1 text-xs text-slate-200">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-[#2EAF4A] shrink-0" />
+                    <span>A.M. No. 24-10-14-SC Aligned Workflows</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-[#2EAF4A] shrink-0" />
+                    <span>SHA-256 Tamper-Evident Audit Chains</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-[#2EAF4A] shrink-0" />
+                    <span>Nationwide Accessibility for Signers & ENPs</span>
+                  </div>
+                </div>
               </div>
-              <h1 className="text-lg font-bold tracking-tight font-serif text-neutral-900">
-                Electronic Notarization Authentication Gateway
-              </h1>
-              <p className="text-[11px] text-neutral-500 max-w-sm mx-auto">
-                Supreme Court A.M. No. 24-10-14-SC & R.A. 10173 Secure Client Access
-              </p>
+
+              <div className="relative z-10 pt-6 mt-6 border-t border-white/10 text-[10px] text-slate-300 flex items-center justify-between">
+                <span>Supreme Court of the Philippines</span>
+                <span>R.A. 8792 • R.A. 10173</span>
+              </div>
             </div>
 
-            {/* Top Auth Mode Tabs */}
-            <div className="grid grid-cols-3 border-b border-neutral-200 text-xs font-semibold text-center">
-              <button
-                type="button"
-                onClick={() => {
-                  setAuthMode('SIGN_IN');
-                  setErrorNotice(null);
-                }}
-                className={`pb-2.5 cursor-pointer transition-colors border-b-2 ${
-                  authMode === 'SIGN_IN'
-                    ? 'border-black text-black font-bold'
-                    : 'border-transparent text-neutral-400 hover:text-neutral-700'
-                }`}
-              >
-                Sign In
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setAuthMode('REGISTER');
-                  setErrorNotice(null);
-                  if (!regInternalPersonId) {
-                    setRegInternalPersonId(`DHZ-PER-2026-${Math.floor(100000 + Math.random() * 900000)}`);
-                  }
-                }}
-                className={`pb-2.5 cursor-pointer transition-colors border-b-2 ${
-                  authMode === 'REGISTER'
-                    ? 'border-black text-black font-bold'
-                    : 'border-transparent text-neutral-400 hover:text-neutral-700'
-                }`}
-              >
-                Create Account
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setAuthMode('FORGOT_PASSWORD');
-                  setErrorNotice(null);
-                }}
-                className={`pb-2.5 cursor-pointer transition-colors border-b-2 ${
-                  authMode === 'FORGOT_PASSWORD'
-                    ? 'border-black text-black font-bold'
-                    : 'border-transparent text-neutral-400 hover:text-neutral-700'
-                }`}
-              >
-                Forgot Password
-              </button>
-            </div>
+            {/* RIGHT COLUMN: Auth Form */}
+            <div className="md:col-span-7 p-6 sm:p-8 space-y-5 bg-white">
+              <div className="space-y-1">
+                <h1 className="text-lg font-bold tracking-tight text-[#002D5B] font-sans">
+                  Electronic Notarization Authentication Gateway
+                </h1>
+                <p className="text-[11px] text-neutral-500">
+                  Supreme Court A.M. No. 24-10-14-SC & R.A. 10173 Secure Client Access
+                </p>
+              </div>
+
+              {/* Top Auth Mode Tabs */}
+              <div className="grid grid-cols-3 border-b border-[#D9E1E8] text-xs font-semibold text-center">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode('SIGN_IN');
+                    setErrorNotice(null);
+                  }}
+                  className={`pb-2.5 cursor-pointer transition-colors border-b-2 ${
+                    authMode === 'SIGN_IN'
+                      ? 'border-[#002D5B] text-[#002D5B] font-bold'
+                      : 'border-transparent text-neutral-400 hover:text-neutral-700'
+                  }`}
+                >
+                  Sign In
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode('REGISTER');
+                    setErrorNotice(null);
+                    if (!regInternalPersonId) {
+                      setRegInternalPersonId(`JMB-PER-2026-${Math.floor(100000 + Math.random() * 900000)}`);
+                    }
+                  }}
+                  className={`pb-2.5 cursor-pointer transition-colors border-b-2 ${
+                    authMode === 'REGISTER'
+                      ? 'border-[#002D5B] text-[#002D5B] font-bold'
+                      : 'border-transparent text-neutral-400 hover:text-neutral-700'
+                  }`}
+                >
+                  Create Account
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode('FORGOT_PASSWORD');
+                    setErrorNotice(null);
+                  }}
+                  className={`pb-2.5 cursor-pointer transition-colors border-b-2 ${
+                    authMode === 'FORGOT_PASSWORD'
+                      ? 'border-[#002D5B] text-[#002D5B] font-bold'
+                      : 'border-transparent text-neutral-400 hover:text-neutral-700'
+                  }`}
+                >
+                  Forgot Password
+                </button>
+              </div>
 
             {/* TAB 1: SIGN IN */}
             {authMode === 'SIGN_IN' && (
@@ -562,10 +612,10 @@ export const SignInPage: React.FC<SignInPageProps> = ({
                   <button
                     type="submit"
                     disabled={isLockedOut}
-                    className={`w-full border py-2.5 text-xs font-semibold ${
+                    className={`w-full py-2.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
                       isLockedOut
-                        ? 'border-neutral-300 bg-neutral-200 text-neutral-400 cursor-not-allowed'
-                        : 'border-black bg-black text-white hover:bg-neutral-800 cursor-pointer'
+                        ? 'border border-neutral-300 bg-neutral-200 text-neutral-400 cursor-not-allowed'
+                        : 'bg-[#002D5B] text-white hover:bg-[#0078CE] border border-transparent shadow-xs'
                     }`}
                   >
                     {isLockedOut ? `Locked Out (${lockoutSecondsRemaining}s)` : 'Sign In to Workspace'}
@@ -1111,6 +1161,7 @@ export const SignInPage: React.FC<SignInPageProps> = ({
               </div>
             </div>
           </div>
+        </div>
         ) : (
           /* Step 2: Role / Persona Selector */
           <div className="w-full space-y-6">

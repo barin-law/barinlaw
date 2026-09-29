@@ -91,7 +91,7 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
   return (
     <header
       id="top-application-bar"
-      className="sticky top-0 z-40 flex h-14 w-full items-center justify-between border-b border-black/15 bg-white px-3 sm:px-4 text-black transition-colors dark:border-white/15 dark:bg-black dark:text-white"
+      className="sticky top-0 z-40 flex h-14 w-full items-center justify-between border-b border-[#D9E1E8] bg-white px-3 sm:px-4 text-[#17212B] transition-colors shadow-2xs"
     >
       {/* Left Section: Sidebar Toggle & Brand */}
       <div className="flex items-center gap-2 sm:gap-3">
@@ -99,7 +99,7 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
         <button
           onClick={onOpenMobileDrawer}
           aria-label="Open mobile navigation menu"
-          className="flex h-8 w-8 items-center justify-center border border-black/20 hover:bg-neutral-100 dark:border-white/20 dark:hover:bg-neutral-900 md:hidden cursor-pointer"
+          className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#D9E1E8] text-[#002D5B] hover:bg-[#F4F7F9] hover:border-[#0078CE] md:hidden cursor-pointer"
         >
           <Menu className="h-4 w-4" />
         </button>
@@ -108,7 +108,7 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
         <button
           onClick={onToggleSidebar}
           aria-label={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          className="hidden md:flex h-8 w-8 items-center justify-center border border-black/20 hover:bg-neutral-100 dark:border-white/20 dark:hover:bg-neutral-900 cursor-pointer"
+          className="hidden md:flex h-8 w-8 items-center justify-center rounded-lg border border-[#D9E1E8] text-[#002D5B] hover:bg-[#F4F7F9] hover:border-[#0078CE] cursor-pointer"
         >
           <Menu className="h-4 w-4" />
         </button>
@@ -117,15 +117,15 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
         <div className="flex items-center gap-2.5">
           <BrandLogo
             variant="emblem"
-            height={30}
+            height={32}
             decorative
             className="shrink-0"
           />
           <div className="flex flex-col">
-            <span className="text-sm font-bold tracking-tight text-black dark:text-white leading-none">
-              JuriMbrella
+            <span className="text-base font-extrabold tracking-tight font-sans text-[#002D5B] leading-none">
+              <span>Juri</span><span className="text-[#2EAF4A]">Mbrella</span>
             </span>
-            <span className="hidden text-[10px] text-neutral-500 dark:text-neutral-400 sm:inline-block leading-none mt-0.5">
+            <span className="hidden text-[10px] text-slate-500 sm:inline-block leading-none mt-0.5 font-medium">
               Philippine eNotarization
             </span>
           </div>
@@ -133,11 +133,11 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
 
         {/* Environment & Accreditation Badges */}
         <div className="hidden lg:flex items-center gap-1.5 ml-2">
-          <span className="inline-flex items-center gap-1 border border-black/20 bg-neutral-100 px-2 py-0.5 text-[10px] font-mono font-semibold tracking-tight text-neutral-800 dark:border-white/20 dark:bg-neutral-900 dark:text-neutral-200">
+          <span className="inline-flex items-center gap-1 border border-[#0078CE]/30 bg-[#0078CE]/10 px-2 py-0.5 text-[10px] font-mono font-semibold tracking-tight text-[#002D5B] rounded-md">
             DEV / CANDIDATE
           </span>
-          <span className="inline-flex items-center gap-1 border border-black/20 bg-neutral-100 px-2 py-0.5 text-[10px] font-mono font-semibold tracking-tight text-neutral-800 dark:border-white/20 dark:bg-neutral-900 dark:text-neutral-200">
-            A.M. 24-10-14-SC CANDIDATE
+          <span className="inline-flex items-center gap-1 border border-[#2EAF4A]/40 bg-[#2EAF4A]/10 px-2 py-0.5 text-[10px] font-mono font-semibold tracking-tight text-[#1B6C2E] rounded-md">
+            A.M. 24-10-14-SC ALIGNED
           </span>
         </div>
       </div>
@@ -145,14 +145,14 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
       {/* Middle Section: Global Search */}
       <div className="hidden md:flex flex-1 max-w-md mx-4">
         <form onSubmit={handleSearchSubmit} className="relative w-full">
-          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-neutral-400" />
+          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400" />
           <input
             type="search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search filings, participants, hashes (e.g. BENF-2026)..."
             aria-label="Search filings and audit events"
-            className="h-8 w-full border border-black/20 bg-neutral-50 pl-8 pr-3 text-xs text-black placeholder:text-neutral-500 focus:border-black focus:bg-white focus:outline-none dark:border-white/20 dark:bg-neutral-950 dark:text-white dark:focus:border-white dark:focus:bg-black"
+            className="h-8 w-full rounded-lg border border-[#D9E1E8] bg-[#F4F7F9] pl-8 pr-3 text-xs text-[#17212B] placeholder:text-slate-400 focus:border-[#0078CE] focus:bg-white focus:outline-none"
           />
         </form>
       </div>
@@ -163,11 +163,11 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
         <button
           onClick={onOpenIntegrationCenter}
           title="Open Integration Center & Adapter Health"
-          className="flex h-8 items-center gap-1.5 border border-black/20 px-2 text-xs font-mono hover:bg-neutral-100 dark:border-white/20 dark:hover:bg-neutral-900 cursor-pointer"
+          className="flex h-8 items-center gap-1.5 rounded-lg border border-[#D9E1E8] px-2 text-xs font-mono text-[#002D5B] hover:bg-[#F4F7F9] hover:border-[#0078CE] cursor-pointer"
         >
-          <Activity className="h-3.5 w-3.5 text-neutral-600 dark:text-neutral-400" />
-          <span className="hidden xl:inline text-[11px]">Adapters</span>
-          <span className="inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-neutral-200 px-1 text-[10px] font-bold text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200">
+          <Activity className="h-3.5 w-3.5 text-[#0078CE]" />
+          <span className="hidden xl:inline text-[11px] font-semibold">Adapters</span>
+          <span className="inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-[#0078CE]/15 px-1 text-[10px] font-bold text-[#002D5B]">
             {demoCount + operationalCount}/{adapters.length}
           </span>
         </button>
@@ -176,11 +176,11 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
         <button
           onClick={onOpenNotifications}
           aria-label="Open notifications"
-          className="relative flex h-8 w-8 items-center justify-center border border-black/20 hover:bg-neutral-100 dark:border-white/20 dark:hover:bg-neutral-900 cursor-pointer"
+          className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-[#D9E1E8] text-[#002D5B] hover:bg-[#F4F7F9] hover:border-[#0078CE] cursor-pointer"
         >
           <Bell className="h-4 w-4" />
           {unreadCount > 0 && (
-            <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center border border-white bg-black px-1 text-[9px] font-bold text-white dark:border-black dark:bg-white dark:text-black">
+            <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#D64545] px-1 text-[9px] font-bold text-white shadow-2xs">
               {unreadCount}
             </span>
           )}
@@ -191,7 +191,7 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
           onClick={onOpenHelp}
           aria-label="Open operational guide and help"
           title="Operational Guide & Legal Framework"
-          className="flex h-8 w-8 items-center justify-center border border-black/20 hover:bg-neutral-100 dark:border-white/20 dark:hover:bg-neutral-900 cursor-pointer"
+          className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#D9E1E8] text-[#002D5B] hover:bg-[#F4F7F9] hover:border-[#0078CE] cursor-pointer"
         >
           <HelpCircle className="h-4 w-4" />
         </button>
@@ -202,10 +202,10 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
             onClick={onOpenSupport}
             aria-label="Contact Administrator & Support"
             title="Contact Administrator & Technical Support"
-            className="flex h-8 items-center gap-1 border border-black/20 px-2 text-xs hover:bg-neutral-100 dark:border-white/20 dark:hover:bg-neutral-900 cursor-pointer"
+            className="flex h-8 items-center gap-1 rounded-lg border border-[#D9E1E8] px-2 text-xs text-[#002D5B] hover:bg-[#F4F7F9] hover:border-[#0078CE] cursor-pointer"
           >
-            <Headphones className="h-3.5 w-3.5" />
-            <span className="hidden lg:inline text-[11px] font-medium">Support</span>
+            <Headphones className="h-3.5 w-3.5 text-[#0078CE]" />
+            <span className="hidden lg:inline text-[11px] font-semibold">Support</span>
           </button>
         )}
 
@@ -213,7 +213,7 @@ export const TopApplicationBar: React.FC<TopApplicationBarProps> = ({
         <button
           onClick={toggleTheme}
           aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-          className="flex h-8 w-8 items-center justify-center border border-black/20 hover:bg-neutral-100 dark:border-white/20 dark:hover:bg-neutral-900 cursor-pointer"
+          className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#D9E1E8] text-[#002D5B] hover:bg-[#F4F7F9] hover:border-[#0078CE] cursor-pointer"
         >
           {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
         </button>

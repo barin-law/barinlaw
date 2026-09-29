@@ -30,18 +30,18 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   statusBadge,
 }) => {
   return (
-    <div className="mb-6 space-y-3 border-b border-black/10 pb-5 dark:border-white/10">
+    <div className="mb-6 space-y-3 border-b border-[#D9E1E8] pb-5">
       <Breadcrumbs items={breadcrumbs} />
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold tracking-tight text-black sm:text-3xl dark:text-white">
+            <h1 className="text-2xl font-bold tracking-tight text-[#002D5B] sm:text-3xl font-sans">
               {title}
             </h1>
             {statusBadge}
           </div>
-          <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-3xl leading-relaxed">
+          <p className="text-sm text-slate-600 max-w-3xl leading-relaxed">
             {purpose}
           </p>
         </div>
@@ -56,7 +56,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                   key={idx}
                   onClick={action.onClick}
                   disabled={action.disabled}
-                  className="flex items-center gap-1.5 border border-black/20 bg-white px-3 py-2 text-xs font-semibold text-neutral-800 transition-colors hover:bg-neutral-100 disabled:opacity-50 disabled:cursor-not-allowed dark:border-white/20 dark:bg-black dark:text-neutral-200 dark:hover:bg-neutral-900"
+                  className="flex items-center gap-1.5 rounded-lg border border-[#002D5B] bg-white px-3.5 py-2 text-xs font-semibold text-[#002D5B] transition-colors hover:bg-[#F4F7F9] disabled:opacity-50 disabled:cursor-not-allowed shadow-2xs cursor-pointer"
                 >
                   {Icon && <Icon className="h-3.5 w-3.5" />}
                   <span>{action.label}</span>
@@ -69,7 +69,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 onClick={primaryAction.onClick}
                 disabled={primaryAction.disabled}
                 title={primaryAction.tooltip}
-                className="flex items-center gap-1.5 border border-black bg-black px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed dark:border-white dark:bg-white dark:text-black dark:hover:bg-neutral-200"
+                className="flex items-center gap-1.5 rounded-lg bg-[#002D5B] px-4 py-2 text-xs font-semibold text-white shadow-xs transition-all hover:bg-[#0078CE] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {primaryAction.icon && <primaryAction.icon className="h-3.5 w-3.5" />}
                 <span>{primaryAction.label}</span>
@@ -81,3 +81,5 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
     </div>
   );
 };
+
+export default PageHeader;
