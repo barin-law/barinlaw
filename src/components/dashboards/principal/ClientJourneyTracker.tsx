@@ -1,7 +1,7 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client Journey Progress Tracker & Step-by-Step Wizard
- * Dhenze ENF 24-Step Operational Workflow — Aligned with A.M. No. 24-10-14-SC
+ * JuriMbrella 24-Step Operational Workflow — Aligned with A.M. No. 24-10-14-SC
  */
 
 import React, { useState } from 'react';

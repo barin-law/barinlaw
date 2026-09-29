@@ -45,7 +45,7 @@ export const ComplianceDashboard: React.FC<ComplianceDashboardProps> = ({
   const exportComplianceRegister = () => {
     const data = JSON.stringify(
       {
-        facility: 'Dhenze Electronic Notarization Facility',
+        facility: 'JuriMbrella Philippine Electronic Notarization',
         environment: 'Accreditation Candidate / Staging',
         governingLaw: 'Supreme Court A.M. No. 24-10-14-SC, R.A. 8792, R.A. 10173',
         exportDate: new Date().toISOString(),
@@ -59,7 +59,7 @@ export const ComplianceDashboard: React.FC<ComplianceDashboardProps> = ({
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `dhenze-enf-compliance-matrix-${Date.now()}.json`;
+    a.download = `jurimbrella-compliance-matrix-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
 

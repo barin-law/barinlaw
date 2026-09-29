@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Initial Demonstrative Client Profile & Case Management Data
  * Non-PII Identifiers & Isolated Demonstration Sandbox
  */
@@ -38,7 +38,7 @@ export const INITIAL_CLIENT_PROFILE: ClientProfile = {
   },
   consents: [
     { id: 'cst-01', scope: 'Account Creation & Identity Terms', version: 'v2026.1', consentedAt: '2026-09-01T08:00:00Z', mandatory: true },
-    { id: 'cst-02', scope: 'DHENZE Internal Person ID Generation', version: 'v2026.1', consentedAt: '2026-09-01T08:00:00Z', mandatory: true },
+    { id: 'cst-02', scope: 'JuriMbrella Internal Person ID Generation', version: 'v2026.1', consentedAt: '2026-09-01T08:00:00Z', mandatory: true },
     { id: 'cst-03', scope: 'Biometric Liveness & PhilSys eKYC Simulated Match', version: 'v2026.1', consentedAt: '2026-09-01T08:00:00Z', mandatory: true },
     { id: 'cst-04', scope: 'AI-Assisted File Classification & OCR Analysis', version: 'v2026.1', consentedAt: '2026-09-01T08:00:00Z', mandatory: false },
     { id: 'cst-05', scope: 'Encrypted Vault Evidence Storage & Chain of Custody', version: 'v2026.1', consentedAt: '2026-09-01T08:00:00Z', mandatory: true },
@@ -97,7 +97,7 @@ export const INITIAL_CLIENT_CASES: ClientCase[] = [
     },
     jurisdiction: 'Regional Trial Court (RTC) Makati City — Branch 138',
     courtOrAgencyReference: 'Registry of Deeds Makati Registry Ref #RD-MKT-2026-901',
-    existingLawyerInfo: 'None prior to Dhenze ENF intake',
+    existingLawyerInfo: 'None prior to JuriMbrella intake',
     notarizationRequired: true,
     preferredConsultationMethod: 'VIDEO',
     preferredAppearanceMethod: 'REN',
@@ -410,7 +410,7 @@ export const INITIAL_CLIENT_CASES: ClientCase[] = [
     preferredAppearanceMethod: 'REN',
     conflictCheckConsent: true,
     assignedLawyer: {
-      name: 'Atty. Leandro V. Dhenze',
+      name: 'Atty. Leandro V. Morales',
       title: 'Managing Counsel & Notary Public',
       rollNumber: 'Roll of Attorneys No. 49214',
       ibpChapter: 'Integrated Bar of the Philippines — Makati Chapter',

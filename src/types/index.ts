@@ -1,5 +1,5 @@
 /**
- * Barin Electronic Notarization Facility (Barin ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Core Domain Types & Compliance Schemas
  * Compliant with Supreme Court A.M. No. 24-10-14-SC, R.A. 8792, and R.A. 10173
  */

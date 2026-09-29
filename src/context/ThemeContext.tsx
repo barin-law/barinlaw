@@ -12,7 +12,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('barin_enf_theme');
+      const stored = localStorage.getItem('jurimbrella_theme');
       if (stored) return stored === 'dark';
       return window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
@@ -23,10 +23,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const root = document.documentElement;
     if (isDark) {
       root.classList.add('dark');
-      localStorage.setItem('barin_enf_theme', 'dark');
+      localStorage.setItem('jurimbrella_theme', 'dark');
     } else {
       root.classList.remove('dark');
-      localStorage.setItem('barin_enf_theme', 'light');
+      localStorage.setItem('jurimbrella_theme', 'light');
     }
   }, [isDark]);
 

@@ -231,7 +231,7 @@ export const INITIAL_INTEGRATION_ADAPTERS: IntegrationAdapter[] = [
     lastHealthCheck: '2026-09-14T12:00:00Z',
     lastSuccessfulRequest: '2026-09-14T11:50:00Z',
     requiredEnvVars: ['WEBHOOK_SIGNING_SECRET', 'WEBHOOK_TIMEOUT_MS'],
-    docLink: 'https://webhooks.barin-enf.gov.ph/docs',
+    docLink: 'https://webhooks.jurimbrella.notary.ph/docs',
     auditHistoryCount: 27,
     description: 'Signed webhook notification engine delivering idempotently retried payloads with replay protection.',
   },

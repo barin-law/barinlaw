@@ -5,10 +5,22 @@
     color-scheme: light;
     --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
+    --brand-navy: #0B192C;
+    --brand-navy-light: #112240;
+    --brand-gold: #C5A059;
+    --brand-gold-hover: #B38F46;
+    --brand-gold-light: #F4EAD4;
+    --brand-charcoal: #1E293B;
   }
 
   html.dark {
     color-scheme: dark;
+    --brand-navy: #0B192C;
+    --brand-navy-light: #162B4D;
+    --brand-gold: #E5C07B;
+    --brand-gold-hover: #F3D28E;
+    --brand-gold-light: #2A2518;
+    --brand-charcoal: #0F172A;
   }
 
   body {
@@ -19,6 +31,23 @@
   code, pre, .font-mono {
     font-family: var(--font-mono);
   }
+}
+
+/* JuriMbrella Institutional Utility Accents */
+.text-brand-navy {
+  color: #0B192C;
+}
+.bg-brand-navy {
+  background-color: #0B192C;
+}
+.text-brand-gold {
+  color: #C5A059;
+}
+.bg-brand-gold {
+  background-color: #C5A059;
+}
+.border-brand-gold {
+  border-color: #C5A059;
 }
 
 /* Crisp custom scrollbar for monochrome aesthetic */

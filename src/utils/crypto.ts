@@ -1,5 +1,5 @@
 /**
- * Barin ENF Cryptographic Services
+ * JuriMbrella Cryptographic Services
  * Utilizes standard Web Crypto API (SubtleCrypto) for SHA-256 integrity validation,
  * tamper-evident hash chaining, and non-repudiation manifests.
  */

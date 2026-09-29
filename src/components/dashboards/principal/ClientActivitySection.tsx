@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client Activity & Audit Trail Module
  * Non-technical, clean chronological activity log with cryptographic integrity details
  */

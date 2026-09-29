@@ -1,0 +1,192 @@
+import fs from 'fs';
+import path from 'path';
+import { Resvg } from '@resvg/resvg-js';
+import sharp from 'sharp';
+
+/**
+ * Official JuriMbrella Brand Assets Generator
+ * Primary: Deep Navy (#0B192C)
+ * Secondary: Premium Gold (#C5A059 / #D4AF37)
+ * Tagline: "Protection over every signature"
+ * Service Descriptor: "PHILIPPINE eNOTARIZATION"
+ */
+
+function generateEmblemSvg({ isDark = false, size = 512 }) {
+  const navy = isDark ? '#FFFFFF' : '#0B192C';
+  const gold = isDark ? '#E5C07B' : '#C5A059';
+  const docFill = isDark ? '#0F172A' : '#FFFFFF';
+  const bgCircle = isDark ? '#1E293B' : '#F8FAFC';
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="${size}" height="${size}" fill="none">
+  <defs>
+    <linearGradient id="goldGrad${isDark ? 'Dark' : 'Light'}" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${isDark ? '#F3D28E' : '#DFBA73'}" />
+      <stop offset="50%" stop-color="${gold}" />
+      <stop offset="100%" stop-color="${isDark ? '#D4AF37' : '#A98338'}" />
+    </linearGradient>
+    <linearGradient id="navyGrad${isDark ? 'Dark' : 'Light'}" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${isDark ? '#FFFFFF' : '#112240'}" />
+      <stop offset="100%" stop-color="${navy}" />
+    </linearGradient>
+    <filter id="subtleShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.12" />
+    </filter>
+  </defs>
+
+  <!-- Circular Outer Shield Border -->
+  <circle cx="256" cy="256" r="236" stroke="url(#goldGrad${isDark ? 'Dark' : 'Light'})" stroke-width="6" fill="${bgCircle}" fill-opacity="${isDark ? '0.4' : '0.85'}" />
+  <circle cx="256" cy="256" r="222" stroke="${navy}" stroke-opacity="${isDark ? '0.3' : '0.15'}" stroke-width="2" fill="none" />
+
+  <!-- Protective Umbrella Canopy (Arching gracefully at top) -->
+  <g filter="url(#subtleShadow)">
+    <!-- Apex Finial Tip -->
+    <path d="M 256,76 L 260,94 L 252,94 Z" fill="url(#goldGrad${isDark ? 'Dark' : 'Light'})" />
+    <circle cx="256" cy="74" r="5" fill="url(#goldGrad${isDark ? 'Dark' : 'Light'})" />
+
+    <!-- Main Canopy Shell -->
+    <path d="M 120,206 C 130,120 200,94 256,94 C 312,94 382,120 392,206 C 362,198 334,204 316,212 C 298,198 274,196 256,200 C 238,196 214,198 196,212 C 178,204 150,198 120,206 Z" 
+          fill="url(#navyGrad${isDark ? 'Dark' : 'Light'})" stroke="${navy}" stroke-width="3" stroke-linejoin="round" />
+
+    <!-- Canopy Rib Arches / Accents -->
+    <path d="M 256,94 Q 256,150 256,200" stroke="url(#goldGrad${isDark ? 'Dark' : 'Light'})" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 256,94 Q 220,145 196,212" stroke="url(#goldGrad${isDark ? 'Dark' : 'Light'})" stroke-width="2" stroke-linecap="round" stroke-opacity="0.85" />
+    <path d="M 256,94 Q 292,145 316,212" stroke="url(#goldGrad${isDark ? 'Dark' : 'Light'})" stroke-width="2" stroke-linecap="round" stroke-opacity="0.85" />
+    <path d="M 256,94 Q 170,145 120,206" stroke="${navy}" stroke-width="2.5" />
+    <path d="M 256,94 Q 342,145 392,206" stroke="${navy}" stroke-width="2.5" />
+  </g>
+
+  <!-- Legal Document Silhouette (Protected beneath the umbrella canopy) -->
+  <g>
+    <!-- Document Base with folded corner -->
+    <path d="M 172,216 L 316,216 L 340,240 L 340,366 C 340,378 330,388 318,388 L 194,388 C 182,388 172,378 172,366 Z" 
+          fill="${docFill}" stroke="${navy}" stroke-width="4" stroke-linejoin="round" />
+    <!-- Document Corner Fold -->
+    <path d="M 316,216 L 316,240 L 340,240" fill="${isDark ? '#1E293B' : '#E2E8F0'}" stroke="${navy}" stroke-width="3" stroke-linejoin="round" />
+    
+    <!-- Legal Text Rules on Document -->
+    <line x1="202" y1="254" x2="310" y2="254" stroke="${navy}" stroke-opacity="${isDark ? '0.3' : '0.2'}" stroke-width="3" stroke-linecap="round" />
+    <line x1="202" y1="274" x2="310" y2="274" stroke="${navy}" stroke-opacity="${isDark ? '0.3' : '0.2'}" stroke-width="3" stroke-linecap="round" />
+    <line x1="202" y1="294" x2="270" y2="294" stroke="${navy}" stroke-opacity="${isDark ? '0.3' : '0.2'}" stroke-width="3" stroke-linecap="round" />
+    <line x1="202" y1="314" x2="250" y2="314" stroke="${navy}" stroke-opacity="${isDark ? '0.3' : '0.2'}" stroke-width="3" stroke-linecap="round" />
+    
+    <!-- Legal Seal Stamp Badge on Document -->
+    <circle cx="304" cy="336" r="18" fill="none" stroke="url(#goldGrad${isDark ? 'Dark' : 'Light'})" stroke-width="3" stroke-dasharray="3,2" />
+    <circle cx="304" cy="336" r="13" fill="url(#goldGrad${isDark ? 'Dark' : 'Light'})" fill-opacity="0.2" />
+    <path d="M 304,328 L 306,334 L 312,334 L 307,338 L 309,344 L 304,340 L 299,344 L 301,338 L 296,334 L 302,334 Z" fill="url(#goldGrad${isDark ? 'Dark' : 'Light'})" />
+  </g>
+
+  <!-- Central Fountain Pen Nib & Signature Symbol (Stem & Nib anchored at bottom) -->
+  <g filter="url(#subtleShadow)">
+    <!-- Umbrella Shaft / Pen Body -->
+    <path d="M 253,196 L 259,196 L 258,340 L 254,340 Z" fill="${navy}" />
+    
+    <!-- Fountain Pen Nib Head (Pointing down toward signature line) -->
+    <!-- Outer Nib Shoulders -->
+    <path d="M 242,340 C 242,348 245,356 248,368 L 256,412 L 264,368 C 267,356 270,348 270,340 Z" 
+          fill="url(#goldGrad${isDark ? 'Dark' : 'Light'})" stroke="${navy}" stroke-width="3" stroke-linejoin="round" />
+    <!-- Nib Breather Hole -->
+    <circle cx="256" cy="366" r="3.5" fill="${navy}" />
+    <!-- Nib Center Slit -->
+    <line x1="256" y1="369.5" x2="256" y2="411" stroke="${navy}" stroke-width="2.5" stroke-linecap="round" />
+    <!-- Nib Engraving Line -->
+    <path d="M 248,354 C 252,358 260,358 264,354" fill="none" stroke="${navy}" stroke-width="2" stroke-linecap="round" />
+    
+    <!-- Dynamic Flourishing Signature Curve under the Nib -->
+    <path d="M 186,428 C 220,412 248,416 256,412 C 266,408 284,424 326,422" 
+          fill="none" stroke="url(#goldGrad${isDark ? 'Dark' : 'Light'})" stroke-width="4.5" stroke-linecap="round" />
+  </g>
+</svg>`;
+}
+
+function generateFullLogoSvg({ isDark = false, width = 760, height = 180 }) {
+  const navy = isDark ? '#FFFFFF' : '#0B192C';
+  const gold = isDark ? '#E5C07B' : '#C5A059';
+  const subtitleColor = isDark ? '#94A3B8' : '#475569';
+  const descriptorColor = isDark ? '#E2E8F0' : '#0B192C';
+
+  const emblem = generateEmblemSvg({ isDark, size: 140 })
+    .replace('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="140" height="140" fill="none">', '<g transform="translate(20, 20) scale(0.2734)">')
+    .replace('</svg>', '</g>');
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" fill="none">
+  <!-- Embedded Emblem -->
+  ${emblem}
+
+  <!-- Typography Group -->
+  <g transform="translate(180, 0)">
+    <!-- Brand Wordmark: JuriMbrella -->
+    <text x="0" y="78" font-family="'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" letter-spacing="-0.02em" fill="${navy}">
+      Juri<tspan fill="${gold}">M</tspan>brella
+    </text>
+
+    <!-- Official Tagline: Protection over every signature -->
+    <text x="3" y="112" font-family="'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="18" font-weight="500" font-style="italic" letter-spacing="0.01em" fill="${subtitleColor}">
+      Protection over every signature
+    </text>
+
+    <!-- Divider Bar -->
+    <rect x="3" y="128" width="540" height="2" fill="${gold}" fill-opacity="${isDark ? '0.6' : '0.4'}" rx="1" />
+
+    <!-- Official Service Descriptor: PHILIPPINE eNOTARIZATION -->
+    <text x="4" y="152" font-family="'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" letter-spacing="0.28em" fill="${descriptorColor}">
+      PHILIPPINE eNOTARIZATION
+    </text>
+  </g>
+</svg>`;
+}
+
+async function buildAllAssets() {
+  const dirs = [
+    './public/assets/branding',
+    './src/assets/branding',
+    './public'
+  ];
+
+  for (const dir of dirs) {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+  }
+
+  // 1. Generate SVGs
+  const emblemLightSvg = generateEmblemSvg({ isDark: false });
+  const emblemDarkSvg = generateEmblemSvg({ isDark: true });
+  const logoLightSvg = generateFullLogoSvg({ isDark: false });
+  const logoDarkSvg = generateFullLogoSvg({ isDark: true });
+
+  fs.writeFileSync('./src/assets/branding/jurimbrella-emblem.svg', emblemLightSvg);
+  fs.writeFileSync('./src/assets/branding/jurimbrella-emblem-white.svg', emblemDarkSvg);
+  fs.writeFileSync('./src/assets/branding/jurimbrella-logo.svg', logoLightSvg);
+  fs.writeFileSync('./src/assets/branding/jurimbrella-logo-white.svg', logoDarkSvg);
+
+  fs.writeFileSync('./public/assets/branding/jurimbrella-emblem.svg', emblemLightSvg);
+  fs.writeFileSync('./public/assets/branding/jurimbrella-emblem-white.svg', emblemDarkSvg);
+  fs.writeFileSync('./public/assets/branding/jurimbrella-logo.svg', logoLightSvg);
+  fs.writeFileSync('./public/assets/branding/jurimbrella-logo-white.svg', logoDarkSvg);
+
+  fs.writeFileSync('./public/favicon.svg', emblemLightSvg);
+
+  // 2. Render high resolution PNGs using Resvg & Sharp
+  const resvgEmblem = new Resvg(emblemLightSvg, { fitTo: { mode: 'width', value: 512 } });
+  const emblemPngBuffer = resvgEmblem.render().asPng();
+
+  const resvgLogo = new Resvg(logoLightSvg, { fitTo: { mode: 'width', value: 1520 } });
+  const logoPngBuffer = resvgLogo.render().asPng();
+
+  fs.writeFileSync('./public/assets/branding/jurimbrella-emblem.png', emblemPngBuffer);
+  fs.writeFileSync('./public/assets/branding/jurimbrella-logo.png', logoPngBuffer);
+  fs.writeFileSync('./src/assets/branding/jurimbrella-emblem.png', emblemPngBuffer);
+  fs.writeFileSync('./src/assets/branding/jurimbrella-logo.png', logoPngBuffer);
+
+  // Favicons & Touch icons
+  await sharp(emblemPngBuffer).resize(192, 192).toFile('./public/favicon.png');
+  await sharp(emblemPngBuffer).resize(32, 32).toFile('./public/favicon-32x32.png');
+  await sharp(emblemPngBuffer).resize(180, 180).toFile('./public/apple-touch-icon.png');
+
+  console.log('✅ Successfully generated pristine JuriMbrella brand assets (SVG, PNG, and favicons).');
+}
+
+buildAllAssets().catch(err => {
+  console.error('Error generating assets:', err);
+  process.exit(1);
+});

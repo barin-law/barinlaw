@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client Identity & Credential Management Module
  * eGovPH / PhilSys Simulation, Consent, Passive Liveness (ISO/IEC 30107-3), and MFA
  */
@@ -178,7 +178,7 @@ export const ClientIdentitySection: React.FC<ClientIdentitySectionProps> = ({ ac
 
   const handleDownloadBiometricCert = () => {
     const certContent = `========================================================================
-DHENZE ELECTRONIC NOTARIZATION FACILITY (ENF)
+JURIMBRELLA — PHILIPPINE ELECTRONIC NOTARIZATION
 CERTIFICATE OF BIOMETRIC PRESENTATION ATTACK DETECTION (ISO/IEC 30107-3)
 Supreme Court A.M. No. 24-10-14-SC Electronic Notarization Rule 6 Compliance
 ========================================================================
@@ -203,7 +203,7 @@ HARDWARE & ENVIRONMENT AUDIT:
 • Camera Resolution: 1080p Full HD @ 30 FPS
 
 ISSUING FACILITY:
-Dhenze Electronic Notarization Facility
+JuriMbrella Philippine Electronic Notarization
 Accreditation Reference: SC-ENF-ACCR-2026-004
 ========================================================================`;
 

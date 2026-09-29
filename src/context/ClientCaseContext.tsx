@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client Case Workflow Context
  * Unified State Management for Signer & Principal Workspace
  * Demonstration Mode Only (APP_ENV=demo, DEMO_MODE=true)
@@ -278,7 +278,7 @@ export const ClientCaseProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       preferredAppearanceMethod: input.preferredAppearanceMethod,
       conflictCheckConsent: input.conflictCheckConsent,
       assignedLawyer: {
-        name: 'Atty. Leandro V. Dhenze',
+        name: 'Atty. Leandro V. Morales',
         title: 'Managing Counsel & Notary Public',
         rollNumber: 'Roll of Attorneys No. 49214',
         ibpChapter: 'Integrated Bar of the Philippines — Makati Chapter',
@@ -308,7 +308,7 @@ export const ClientCaseProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         {
           id: `msg-init-${timestamp}`,
           caseId,
-          senderName: 'Dhenze ENF Intake Officer',
+          senderName: 'JuriMbrella Intake Officer',
           senderRole: 'LAWYER',
           message:
             'Welcome. Your demonstrative case has been successfully staged and placed in the Counsel Preliminary Review Queue. You may upload evidence, invite witnesses, and inspect AI-assisted classification.',
@@ -327,7 +327,7 @@ export const ClientCaseProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         {
           id: `tsk-${timestamp}-2`,
           title: 'Complete preliminary conflict and jurisdiction check',
-          responsiblePerson: 'Atty. Leandro V. Dhenze (Counsel)',
+          responsiblePerson: 'Atty. Leandro V. Morales (Counsel)',
           status: 'IN_PROGRESS',
         },
       ],

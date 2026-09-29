@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client Hearing Appointments Module
  * Non-technical, clean schedule with one-click videoconference room entry
  */

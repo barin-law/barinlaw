@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client Cases Management Module
  * Comprehensive Case Portfolio, Creation Wizard, Document Versioning & Approvals
  */

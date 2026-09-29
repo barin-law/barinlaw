@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import { BrandLogo } from '../components/common/BrandLogo';
+import { BrandLogo, BrandMark } from '../components/common/BrandLogo';
 import {
-  Scale,
   ShieldCheck,
-  FileCheck2,
   Lock,
   ArrowRight,
-  ExternalLink,
   MessageSquare,
-  Building,
-  UserCheck,
-  Headphones,
+  FileCheck2,
+  CheckCircle2,
+  FileText,
+  Key,
 } from 'lucide-react';
 import { GlobalFooter } from '../components/common/GlobalFooter';
 import { SupportModal } from '../components/common/SupportModal';
@@ -24,48 +22,47 @@ export const PublicHomePage: React.FC<PublicHomePageProps> = ({ onNavigate }) =>
 
   return (
     <div
-      id="barin-enf-public-homepage"
-      className="min-h-screen bg-white text-neutral-900 font-sans antialiased selection:bg-neutral-900 selection:text-white"
+      id="jurimbrella-public-homepage"
+      className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased selection:bg-[#0B192C] selection:text-white"
     >
       {/* Public Header */}
-      <header className="sticky top-0 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur-xs">
+      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-xs">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
           <div
             onClick={() => onNavigate('/')}
             className="flex items-center cursor-pointer select-none"
-            title="Barin Electronic Notarization Facility"
+            title="JuriMbrella — Protection over every signature"
           >
             <BrandLogo
-              variant="full"
-              height={42}
+              variant="compact"
+              height={40}
               priority
-              alt="BARIN ENF Electronic Notarization Facility"
-              className="max-h-[46px]"
+              alt="JuriMbrella Philippine Electronic Notarization"
             />
           </div>
 
           <nav aria-label="Public Navigation" className="flex items-center gap-3 sm:gap-6 text-xs font-medium">
             <button
               onClick={() => onNavigate('/verify')}
-              className="text-neutral-600 hover:text-black transition-colors"
+              className="text-slate-600 hover:text-[#0B192C] transition-colors"
             >
               Verify Notarization
             </button>
             <button
-              onClick={() => onNavigate('/barin-law-firm')}
-              className="text-neutral-600 hover:text-black transition-colors"
+              onClick={() => onNavigate('/jurimbrella-portal')}
+              className="text-slate-600 hover:text-[#0B192C] transition-colors"
             >
-              Barin Law Firm &amp; Assistant
+              Legal Information
             </button>
             <button
               onClick={() => onNavigate('/contact')}
-              className="text-neutral-600 hover:text-black transition-colors"
+              className="text-slate-600 hover:text-[#0B192C] transition-colors"
             >
               Contact Us
             </button>
             <button
               onClick={() => onNavigate('/sign-in')}
-              className="border border-black bg-black px-4 py-1.5 text-white hover:bg-neutral-800 transition-colors font-semibold"
+              className="border border-[#0B192C] bg-[#0B192C] px-4 py-1.5 text-white hover:bg-[#112240] transition-colors font-semibold shadow-xs"
             >
               Sign In
             </button>
@@ -79,113 +76,120 @@ export const PublicHomePage: React.FC<PublicHomePageProps> = ({ onNavigate }) =>
           <div className="flex justify-center pb-2">
             <BrandLogo
               variant="full"
-              width={200}
-              height="auto"
+              height={100}
               priority
-              alt="BARIN ENF Electronic Notarization Facility"
-              className="max-w-[220px]"
+              alt="JuriMbrella — Protection over every signature — Philippine eNotarization"
+              className="max-w-[420px]"
             />
           </div>
 
-          <div className="inline-flex items-center gap-2 border border-neutral-300 bg-neutral-50 px-3 py-1 text-xs font-mono text-neutral-700">
-            <span>Supreme Court A.M. No. 24-10-14-SC</span>
+          <div className="inline-flex items-center gap-2 border border-[#C5A059]/40 bg-white px-3.5 py-1 text-xs font-mono text-[#0B192C] rounded-full shadow-xs">
+            <span className="h-2 w-2 rounded-full bg-[#C5A059]" />
+            <span className="font-semibold">PHILIPPINE eNOTARIZATION</span>
             <span>•</span>
-            <span>Candidate v1.0</span>
+            <span className="text-slate-500">A.M. No. 24-10-14-SC Aligned</span>
           </div>
 
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-neutral-950 leading-tight">
-            Philippine Electronic Notarization Facility
+          <h1 className="font-serif text-3xl sm:text-5xl font-black tracking-tight text-[#0B192C] leading-tight">
+            Protection Over Every Signature
           </h1>
 
-          <p className="text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed font-light">
-            A comprehensive digital infrastructure designed for accredited Electronic Notaries Public,
-            instrument parties, and regulatory auditors in compliance with Philippine Supreme Court rules.
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-light">
+            A professional Philippine electronic notarization platform focused on secure, compliant,
+            traceable, and professionally controlled digital notarization workflows.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
             <button
               type="button"
               onClick={() => onNavigate('/verify')}
-              className="w-full sm:w-auto border border-black bg-black px-6 py-3 text-xs font-semibold text-white hover:bg-neutral-800 transition-colors"
+              className="w-full sm:w-auto border border-[#0B192C] bg-[#0B192C] px-6 py-3 text-xs font-semibold text-white hover:bg-[#112240] transition-colors shadow-sm flex items-center justify-center gap-2"
             >
-              Verify Notarized Instrument
+              <FileCheck2 className="h-4 w-4 text-[#C5A059]" />
+              <span>Verify Notarized Instrument</span>
             </button>
 
             <button
               type="button"
-              onClick={() => onNavigate('/barin-law-firm')}
-              className="w-full sm:w-auto border border-neutral-300 bg-white px-6 py-3 text-xs font-semibold text-neutral-800 hover:border-black transition-colors"
+              onClick={() => onNavigate('/jurimbrella-portal')}
+              className="w-full sm:w-auto border border-slate-300 bg-white px-6 py-3 text-xs font-semibold text-slate-800 hover:border-[#0B192C] transition-colors shadow-xs"
             >
-              Visit Barin Law Firm &amp; Assistant
+              Legal Information &amp; Procedures
             </button>
 
             <button
               type="button"
               onClick={() => onNavigate('/sign-in')}
-              className="w-full sm:w-auto border border-neutral-300 bg-white px-6 py-3 text-xs font-semibold text-neutral-800 hover:border-black transition-colors"
+              className="w-full sm:w-auto border border-[#C5A059] bg-[#F4EAD4]/30 px-6 py-3 text-xs font-semibold text-[#0B192C] hover:bg-[#F4EAD4]/60 transition-colors shadow-xs"
             >
-              Portal Sign In (14 Roles)
+              Enter Workspace (14 Roles)
             </button>
           </div>
         </section>
 
         {/* 3 Pillar Features */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
-          <div className="border border-neutral-200 p-6 space-y-3 bg-white">
-            <div className="flex h-10 w-10 items-center justify-center border border-black bg-neutral-50">
-              <ShieldCheck className="h-5 w-5 text-neutral-900" />
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+          <div className="border border-slate-200 p-6 space-y-3 bg-white shadow-xs rounded-xs border-t-2 border-t-[#0B192C]">
+            <div className="flex h-10 w-10 items-center justify-center border border-slate-200 bg-slate-50 text-[#0B192C]">
+              <ShieldCheck className="h-5 w-5 text-[#0B192C]" />
             </div>
-            <h2 className="text-sm font-bold text-neutral-950 font-serif">
-              Supreme Court A.M. 24-10-14-SC
+            <h2 className="text-sm font-bold text-[#0B192C] font-serif">
+              Procedural &amp; Legal Compliance
             </h2>
-            <p className="text-xs text-neutral-600 leading-relaxed">
-              Engineered to meet the standards for electronic notarial commissions, multi-party teleconferences, and Philippine judicial evidence standards.
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Full alignment with Philippine Supreme Court Rules on Electronic Notarization (A.M. No. 24-10-14-SC),
+              supporting both Integrated In-Person (IEN) and Remote Electronic Notarization (REN).
             </p>
           </div>
 
-          <div className="border border-neutral-200 p-6 space-y-3 bg-white">
-            <div className="flex h-10 w-10 items-center justify-center border border-black bg-neutral-50">
-              <Lock className="h-5 w-5 text-neutral-900" />
+          <div className="border border-slate-200 p-6 space-y-3 bg-white shadow-xs rounded-xs border-t-2 border-t-[#C5A059]">
+            <div className="flex h-10 w-10 items-center justify-center border border-slate-200 bg-slate-50 text-[#C5A059]">
+              <Lock className="h-5 w-5 text-[#0B192C]" />
             </div>
-            <h2 className="text-sm font-bold text-neutral-950 font-serif">
-              Cryptographic SHA-256 Ledger
+            <h2 className="text-sm font-bold text-[#0B192C] font-serif">
+              Cryptographic Integrity &amp; Audit
             </h2>
-            <p className="text-xs text-neutral-600 leading-relaxed">
-              Every notarial register entry, document hash, and digital signature is anchored in a tamper-evident audit chain with verifiable mathematical integrity.
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Every document version receives an immutable SHA-256 hash computed directly from file bytes.
+              All ceremonies, certificates, and seals are preserved in a verifiable tamper-evident trail.
             </p>
           </div>
 
-          <div className="border border-neutral-200 p-6 space-y-3 bg-white">
-            <div className="flex h-10 w-10 items-center justify-center border border-black bg-neutral-50">
-              <MessageSquare className="h-5 w-5 text-neutral-900" />
+          <div className="border border-slate-200 p-6 space-y-3 bg-white shadow-xs rounded-xs border-t-2 border-t-[#0B192C]">
+            <div className="flex h-10 w-10 items-center justify-center border border-slate-200 bg-slate-50 text-[#0B192C]">
+              <MessageSquare className="h-5 w-5 text-[#0B192C]" />
             </div>
-            <h2 className="text-sm font-bold text-neutral-950 font-serif">
-              Barin Law Firm &amp; Assistant
+            <h2 className="text-sm font-bold text-[#0B192C] font-serif">
+              Authorized Professional Review
             </h2>
-            <p className="text-xs text-neutral-600 leading-relaxed">
-              An isolated public portal offering grounded Philippine legal information, court rulings, and consultation preparation via the dedicated Barin Assistant.
+            <p className="text-xs text-slate-600 leading-relaxed">
+              End-to-end procedural guidance, conflict checks, identity verification safeguards, and
+              notarial book recordings under authorized Electronic Notary Public oversight.
             </p>
           </div>
         </section>
 
         {/* Demonstration Disclaimer Banner */}
-        <section className="border border-neutral-300 bg-neutral-50 p-6 space-y-3 text-xs text-neutral-700">
-          <div className="flex items-center justify-between border-b border-neutral-200 pb-2">
-            <span className="font-bold uppercase font-mono text-[11px] text-neutral-900">
-              Demonstration &amp; Evaluation Notice
+        <section className="border border-slate-300 bg-white p-6 space-y-3 text-xs text-slate-700 shadow-xs">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+            <span className="font-bold uppercase font-mono text-[11px] text-[#0B192C] flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-[#C5A059]" />
+              Demonstration &amp; Evaluation Environment
             </span>
-            <span className="text-[10px] font-mono text-neutral-500">
-              CANDIDATE ENVIRONMENT
+            <span className="text-[10px] font-mono text-slate-500">
+              SIMULATED VERIFICATION
             </span>
           </div>
           <p className="leading-relaxed">
-            This platform is operating in an evaluation environment. No live notarial acts or binding legal services are executed without an accredited Electronic Notary Public and verified identity credentials. To explore the platform across all 14 statutory roles, use the shared demonstration credentials on the sign-in page.
+            This platform operates in an evaluation sandbox. No live government database was queried, and all
+            digital identity verification transactions are simulated in accordance with Supreme Court testing requirements.
+            To explore the platform across all 14 statutory roles, use the workspace credentials on the sign-in page.
           </p>
           <div className="pt-2">
             <button
               type="button"
               onClick={() => onNavigate('/sign-in')}
-              className="inline-flex items-center gap-1.5 font-semibold text-black hover:underline"
+              className="inline-flex items-center gap-1.5 font-semibold text-[#0B192C] hover:text-[#C5A059] transition-colors"
             >
               <span>Access Demonstration Workspace Selector</span>
               <ArrowRight className="h-3.5 w-3.5" />
@@ -209,3 +213,4 @@ export const PublicHomePage: React.FC<PublicHomePageProps> = ({ onNavigate }) =>
     </div>
   );
 };
+export default PublicHomePage;

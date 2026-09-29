@@ -1,11 +1,11 @@
 /**
- * Barin Assistant Credit Ledger
+ * JuriMbrella Assistant Credit Ledger
  * Manages daily and monthly credit allowances, rate limiting, and consumption tracking.
  */
 
-import { UserCreditProfile, UserCreditTier } from '../../types/barin-assistant';
+import { UserCreditProfile, UserCreditTier } from '../../types/jurimbrella-assistant';
 
-const STORAGE_KEY = 'barin_enf_demo_credits';
+const STORAGE_KEY = 'jurimbrella_demo_credits';
 
 const DEFAULT_LIMITS: Record<UserCreditTier, number> = {
   GUEST: 3,

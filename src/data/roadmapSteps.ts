@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * 24-Step Operational Workflow — Aligned with A.M. No. 24-10-14-SC
  * 
  * Each step is classified by its requirement type (statutory, procedural, technical, internal)
@@ -25,7 +25,7 @@ export interface OperationalWorkflowStep {
 }
 
 export const WORKFLOW_ROADMAP_TITLE =
-  'Dhenze ENF 24-Step Operational Workflow — Aligned with A.M. No. 24-10-14-SC';
+  'JuriMbrella 24-Step Operational Workflow — Aligned with A.M. No. 24-10-14-SC';
 
 export const OPERATIONAL_WORKFLOW_STEPS: OperationalWorkflowStep[] = [
   {
@@ -39,7 +39,7 @@ export const OPERATIONAL_WORKFLOW_STEPS: OperationalWorkflowStep[] = [
     blockingConditions: ['Password complexity failure', 'Unverified email or mobile contact', 'Signer under legal age without legal representation'],
     completionStatus: 'COMPLETED',
     auditEvent: 'CLIENT_ACCOUNT_REGISTERED',
-    legalOrPolicyRef: 'Supreme Court A.M. No. 24-10-14-SC, Rule III, Sec. 1; R.A. 10173 Sec. 11; Dhenze Security Policy SEC-01',
+    legalOrPolicyRef: 'Supreme Court A.M. No. 24-10-14-SC, Rule III, Sec. 1; R.A. 10173 Sec. 11; JuriMbrella Security Policy SEC-01',
     requirementType: 'PROCEDURAL',
     moduleId: 'principal-profile',
   },
@@ -69,7 +69,7 @@ export const OPERATIONAL_WORKFLOW_STEPS: OperationalWorkflowStep[] = [
     blockingConditions: ['Unconfirmed client registration', 'Integrity check failure on account key'],
     completionStatus: 'COMPLETED',
     auditEvent: 'INTERNAL_PERSON_ID_ISSUED',
-    legalOrPolicyRef: 'R.A. 10173 Sec. 20; Supreme Court A.M. No. 24-10-14-SC, Rule VIII, Sec. 2 (Data Minimization); Dhenze Archival Policy ARCH-02',
+    legalOrPolicyRef: 'R.A. 10173 Sec. 20; Supreme Court A.M. No. 24-10-14-SC, Rule VIII, Sec. 2 (Data Minimization); JuriMbrella Archival Policy ARCH-02',
     requirementType: 'TECHNICAL',
     moduleId: 'principal-profile',
   },
@@ -219,7 +219,7 @@ export const OPERATIONAL_WORKFLOW_STEPS: OperationalWorkflowStep[] = [
     blockingConditions: ['Unresolved legal objections from ENP', 'Unsigned revisions'],
     completionStatus: 'PENDING',
     auditEvent: 'DOCUMENT_REVISION_LOGGED',
-    legalOrPolicyRef: 'Supreme Court A.M. No. 24-10-14-SC, Rule V, Sec. 3 (Version Control); Dhenze Document Policy DOC-04',
+    legalOrPolicyRef: 'Supreme Court A.M. No. 24-10-14-SC, Rule V, Sec. 3 (Version Control); JuriMbrella Document Policy DOC-04',
     requirementType: 'INTERNAL',
     moduleId: 'principal-awaiting-client',
   },
@@ -234,7 +234,7 @@ export const OPERATIONAL_WORKFLOW_STEPS: OperationalWorkflowStep[] = [
     blockingConditions: ['Unresolved client dispute over text', 'Pending fee settlement'],
     completionStatus: 'PENDING',
     auditEvent: 'CLIENT_PRE_APPEARANCE_APPROVED',
-    legalOrPolicyRef: 'Supreme Court A.M. No. 24-10-14-SC, Rule IV, Sec. 1; Dhenze Workflow Policy WFL-03',
+    legalOrPolicyRef: 'Supreme Court A.M. No. 24-10-14-SC, Rule IV, Sec. 1; JuriMbrella Workflow Policy WFL-03',
     requirementType: 'PROCEDURAL',
     moduleId: 'principal-awaiting-client',
   },

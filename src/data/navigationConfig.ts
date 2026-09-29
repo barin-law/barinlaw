@@ -479,7 +479,7 @@ export const ROLE_NAVIGATION_MAP: Record<UserRole, NavItemConfig[]> = {
       id: 'principal-profile',
       label: 'Profile',
       icon: UserCheck,
-      description: 'Account settings, DHENZE Internal Person ID, and identity credentials.',
+      description: 'Account settings, JuriMbrella Internal Person ID, and identity credentials.',
       category: 'Account',
     },
     {
@@ -815,7 +815,7 @@ export const ROLE_NAVIGATION_MAP: Record<UserRole, NavItemConfig[]> = {
       id: 'org-data-retention',
       label: 'Data Retention',
       icon: Archive,
-      description: 'Configure tenant data retention policies subject to Dhenze ENF standards.',
+      description: 'Configure tenant data retention policies subject to JuriMbrella standards.',
       category: 'Administration',
     },
     {

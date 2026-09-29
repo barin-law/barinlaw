@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client Consultation & Videoconference Workspace
  * Encrypted Messages, Consultation Notes, and Comprehensive Video Call Simulator
  */

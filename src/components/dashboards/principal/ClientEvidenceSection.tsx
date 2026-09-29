@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client Documents, Evidence & AI Classification Module
  * Vault, Deduplication, Audio/Video Players, Testimonies, and 17 AI-Organized Folders
  */

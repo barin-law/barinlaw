@@ -39,7 +39,7 @@ import { ROLE_NAVIGATION_MAP } from './data/navigationConfig';
 import { ROLE_ROUTE_MAP, ROUTE_ROLE_MAP } from './data/routesConfig';
 
 // Public & Security Route Pages
-import { DhenzeLawFirmPublicPage } from './pages/DhenzeLawFirmPublicPage';
+import { JurimbrellaPortalPage } from './pages/JurimbrellaPortalPage';
 import { SignInPage } from './pages/SignInPage';
 import { PublicHomePage } from './pages/PublicHomePage';
 import { PublicVerifyPage } from './pages/PublicVerifyPage';
@@ -49,27 +49,8 @@ import { NotFound404 } from './components/common/NotFound404';
 
 /**
  * ============================================================
- * DHENZE ELECTRONIC NOTARIZATION FACILITY
- * GitHub Pages Routing Configuration
- * ============================================================
- *
- * Production:
- * https://barin-law.github.io/barinlaw/
- *
- * Vite base:
- * /barinlaw/
- *
- * The application uses its own lightweight routing system rather
- * than React Router.
- *
- * Browser URL:
- * /barinlaw/contact
- *
- * Internal application route:
- * /contact
- *
- * This prevents the GitHub Pages repository prefix from being
- * mistaken for an application route.
+ * JURIMBRELLA — PHILIPPINE eNOTARIZATION
+ * Application Routing Configuration
  * ============================================================
  */
 
@@ -452,7 +433,7 @@ const MainWorkspace: React.FC = () => {
  * Example:
  *
  * Browser:
- * /barinlaw/contact
+ * /contact
  *
  * Application:
  * /contact
@@ -481,36 +462,23 @@ const AppRouter: React.FC = () => {
         );
 
   /**
-   * Convert the actual browser pathname into an
-   * application-relative pathname.
-   *
-   * Examples:
-   *
-   * /barinlaw/            -> /
-   * /barinlaw/sign-in     -> /sign-in
-   * /barinlaw/contact     -> /contact
-   * /barinlaw/verify      -> /verify
+   * Convert the actual browser pathname into an application-relative pathname.
    */
   const getAppPath = (): string => {
-    const pathname =
-      window.location.pathname || '/';
+    let pathname = window.location.pathname || '/';
 
-    if (
-      basePath &&
-      pathname === basePath
-    ) {
+    if (pathname.startsWith('/barinlaw/')) {
+      pathname = pathname.replace(/^\/barinlaw/, '');
+    } else if (pathname === '/barinlaw') {
+      pathname = '/';
+    }
+
+    if (basePath && pathname === basePath) {
       return '/';
     }
 
-    if (
-      basePath &&
-      pathname.startsWith(
-        `${basePath}/`
-      )
-    ) {
-      const relativePath =
-        pathname.slice(basePath.length);
-
+    if (basePath && pathname.startsWith(`${basePath}/`)) {
+      const relativePath = pathname.slice(basePath.length);
       return relativePath || '/';
     }
 
@@ -542,14 +510,7 @@ const AppRouter: React.FC = () => {
   }, []);
 
   /**
-   * Navigate internally while preserving the
-   * GitHub Pages repository base path.
-   *
-   * navigate('/contact')
-   *
-   * becomes:
-   *
-   * /barinlaw/contact
+   * Navigate internally while preserving the application base path.
    */
   const navigate = (path: string) => {
     let normalizedPath =
@@ -559,33 +520,10 @@ const AppRouter: React.FC = () => {
           : `/${path}`
         : '/';
 
-    /**
-     * Remove accidental duplicate repository prefix.
-     *
-     * Example:
-     *
-     * /barinlaw/contact
-     *
-     * becomes:
-     *
-     * /contact
-     */
-    if (
-      basePath &&
-      normalizedPath.startsWith(
-        `${basePath}/`
-      )
-    ) {
-      normalizedPath =
-        normalizedPath.slice(
-          basePath.length
-        );
+    if (basePath && normalizedPath.startsWith(`${basePath}/`)) {
+      normalizedPath = normalizedPath.slice(basePath.length);
     }
-
-    if (
-      basePath &&
-      normalizedPath === basePath
-    ) {
+    if (basePath && normalizedPath === basePath) {
       normalizedPath = '/';
     }
 
@@ -621,19 +559,19 @@ const AppRouter: React.FC = () => {
    */
 
   /**
-   * 1. Dhenze Law Firm Public Page
+   * 1. JuriMbrella Legal Portal Public Page
    *
-   * Keep old /barin-law-firm route temporarily
-   * for backwards compatibility.
+   * Preserves backward compatibility routes:
+   * /jurimbrella-portal, /legal-information, /dhenze-law-firm, /barin-law-firm
    */
   if (
-    currentPath ===
-      '/dhenze-law-firm' ||
-    currentPath ===
-      '/barin-law-firm'
+    currentPath === '/jurimbrella-portal' ||
+    currentPath === '/legal-information' ||
+    currentPath === '/dhenze-law-firm' ||
+    currentPath === '/barin-law-firm'
   ) {
     return (
-      <DhenzeLawFirmPublicPage
+      <JurimbrellaPortalPage
         onNavigate={navigate}
       />
     );

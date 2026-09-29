@@ -29,7 +29,7 @@ export const SecurityProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const [notificationConfig, setNotificationConfig] = useState<SecurityNotificationConfig>({
     emailAlertsEnabled: true,
-    alertEmailRecipient: 'security-response@barin-enf.gov.ph',
+    alertEmailRecipient: 'security-response@jurimbrella.notary.ph',
     slackAlertsEnabled: true,
     slackWebhookConfigured: true,
     pushNotificationsEnabled: true,
@@ -107,7 +107,7 @@ export const SecurityProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     let severity: ThreatAlert['severity'] = 'HIGH';
     let ip = '185.220.101.44';
     let location = 'Tor Exit Relay / Autonomous System 60729';
-    let targetUser = 'Atty. Leandro V. Barin (ENP)';
+    let targetUser = 'Atty. Leandro V. Morales (ENP)';
 
     if (type === 'FAILED_MFA_BRUTE_FORCE') {
       title = `Repeated Failed MFA Verification (${notificationConfig.failedLoginThreshold + 1} attempts)`;
@@ -166,14 +166,14 @@ export const SecurityProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         uid: 'secops-engine',
         name: 'Automated Threat Detection Engine',
         role: 'SECOPS_ANALYST',
-        email: 'alerts@barin-enf.gov.ph',
+        email: 'alerts@jurimbrella.notary.ph',
       },
       action: `SECURITY_ALERT_${type}`,
       resource: 'SecurityKernel/IntrusionDetection',
       resourceId: id,
       severity,
       ipAddress: ip,
-      userAgent: 'BarinSecurityEngine/2.4',
+      userAgent: 'JuriMbrellaSecurityEngine/2.4',
       location,
       metadata: { threatId: id, dispatchedChannels },
     });
@@ -183,7 +183,7 @@ export const SecurityProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     if (format === 'JSON') {
       return JSON.stringify(
         {
-          facility: 'Barin Electronic Notarization Facility',
+          facility: 'JuriMbrella Philippine Electronic Notarization',
           accreditationCandidate: true,
           exportTimestamp: new Date().toISOString(),
           totalEvents: auditLogs.length,
@@ -199,7 +199,7 @@ export const SecurityProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       return auditLogs
         .map((log) => {
           const epoch = new Date(log.timestamp).getTime();
-          return `CEF:0|BarinENF|ElectronicNotarizationFacility|1.0|${log.action}|${log.action}|${
+          return `CEF:0|JuriMbrella|ElectronicNotarizationFacility|1.0|${log.action}|${log.action}|${
             log.severity === 'CRITICAL' ? 10 : log.severity === 'HIGH' ? 8 : log.severity === 'MEDIUM' ? 5 : 2
           }|rt=${epoch} src=${log.ipAddress} suser=${log.actor.email} msg=${log.action} on ${log.resource} cs1Label=Hash cs1=${log.hash} cs2Label=PrevHash cs2=${log.prevHash}`;
         })
@@ -210,7 +210,7 @@ export const SecurityProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return auditLogs
       .map((log) => {
         const pri = log.severity === 'CRITICAL' ? 11 : log.severity === 'HIGH' ? 12 : log.severity === 'MEDIUM' ? 14 : 16;
-        return `<${pri}>1 ${log.timestamp} barin-enf.gov.ph BarinENF - - [audit@48210 action="${log.action}" actor="${log.actor.email}" hash="${log.hash}"] ${log.action} executed on ${log.resource}`;
+        return `<${pri}>1 ${log.timestamp} jurimbrella.notary.ph JuriMbrella - - [audit@48210 action="${log.action}" actor="${log.actor.email}" hash="${log.hash}"] ${log.action} executed on ${log.resource}`;
       })
       .join('\n');
   };

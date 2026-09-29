@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client Participants & Witness Management Module
  * Authorization, Invitations, Role Conflict Checks, and Masked Internal Lookup
  */
@@ -108,7 +108,7 @@ export const ClientParticipantsSection: React.FC<ClientParticipantsSectionProps>
     if (
       val.toLowerCase().includes('maria') ||
       val.toLowerCase().includes('santos') ||
-      val.toLowerCase().includes('dhenze') ||
+      val.toLowerCase().includes('jurimbrella') ||
       val.toLowerCase().includes('enp') ||
       val.toLowerCase().includes('beneficiary')
     ) {

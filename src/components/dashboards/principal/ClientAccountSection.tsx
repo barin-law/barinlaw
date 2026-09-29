@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client Account, Security, Devices, Privacy & Payments Module
  * Official Statutory Settlements, Device Authorizations & Support
  */
@@ -287,7 +287,7 @@ export const ClientAccountSection: React.FC<ClientAccountSectionProps> = ({
             <div className="border border-black/10 p-4 bg-neutral-50 dark:border-white/10 dark:bg-neutral-900 space-y-2">
               <h4 className="font-bold text-xs">Helpdesk Contacts</h4>
               <p className="text-[11px] text-neutral-600 dark:text-neutral-400">
-                Email: support@dhenze-notary.ph
+                Email: support@jurimbrella.notary.ph
                 <br />
                 Direct Hotline: +63 (2) 8888-0814
                 <br />
@@ -311,7 +311,7 @@ export const ClientAccountSection: React.FC<ClientAccountSectionProps> = ({
             Terminate Client Session
           </h3>
           <p className="text-xs text-neutral-500">
-            Securely revoke local session keys and log out of the Dhenze Electronic Notarization Facility.
+            Securely revoke local session keys and log out of the JuriMbrella Philippine Electronic Notarization platform.
           </p>
           <button
             onClick={() => {

@@ -135,7 +135,7 @@ export const CollapsibleSidebar: React.FC<CollapsibleSidebarProps> = ({
             </div>
           </div>
         ) : (
-          <div className="flex items-center justify-center pt-1" title="DHENZE ENF">
+          <div className="flex items-center justify-center pt-1" title="JuriMbrella">
             <BrandLogo
               variant="emblem"
               height={32}

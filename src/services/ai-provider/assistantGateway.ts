@@ -1,10 +1,10 @@
 /**
- * Barin Assistant Provider Gateway
+ * JuriMbrella Assistant Provider Gateway
  * Provider-independent server-side AI gateway with client demonstration fallback,
  * prompt-injection protection, and legal safety validation.
  */
 
-import { AssistantMessage, LegalSourceCitation } from '../../types/barin-assistant';
+import { AssistantMessage, LegalSourceCitation } from '../../types/jurimbrella-assistant';
 import { PREAPPROVED_LEGAL_ANSWERS, VERIFIED_LEGAL_SOURCES } from '../legal-retrieval/legalKnowledgeBase';
 
 export interface AssistantResponse {
@@ -34,7 +34,7 @@ export class AssistantGatewayService {
 
     for (const trigger of urgentTriggers) {
       if (q.includes(trigger)) {
-        return 'URGENT NOTICE: For emergencies, active criminal detention, physical violence, or threats to personal safety, please contact the Philippine National Police (Emergency 911), the nearest Police Station, or the Public Attorney\'s Office (PAO) hotline immediately. Barin Assistant cannot provide real-time crisis or emergency assistance.';
+        return 'URGENT NOTICE: For emergencies, active criminal detention, physical violence, or threats to personal safety, please contact the Philippine National Police (Emergency 911), the nearest Police Station, or the Public Attorney\'s Office (PAO) hotline immediately. JuriMbrella Assistant cannot provide real-time crisis or emergency assistance.';
       }
     }
     return null;
@@ -62,7 +62,7 @@ export class AssistantGatewayService {
       if (q.includes(pattern)) {
         return {
           isSafe: false,
-          rejectionReason: 'This query contains instructions that conflict with Barin Assistant legal-safety policies. The assistant cannot provide guidance on wrongdoing, bypass statutory safeguards, or alter jurisdictional rules.',
+          rejectionReason: 'This query contains instructions that conflict with JuriMbrella Assistant legal-safety policies. The assistant cannot provide guidance on wrongdoing, bypass statutory safeguards, or alter jurisdictional rules.',
         };
       }
     }
@@ -91,15 +91,15 @@ export class AssistantGatewayService {
     const normalized = userPrompt.trim().toLowerCase();
     const exactMatch = PREAPPROVED_LEGAL_ANSWERS.find(
       (item) =>
-        normalized.includes(item.triggerPhrase) ||
-        item.triggerPhrase.includes(normalized) ||
+        (item.triggerPhrase && normalized.includes(item.triggerPhrase)) ||
+        (item.triggerPhrase && item.triggerPhrase.includes(normalized)) ||
         normalized === item.question.toLowerCase()
     );
 
     if (exactMatch) {
       return {
         text: exactMatch.answerText,
-        sources: exactMatch.sources,
+        sources: exactMatch.sources || exactMatch.citations || [],
         hasUncertaintyNotice: false,
         urgentNotice: urgentNotice || undefined,
       };

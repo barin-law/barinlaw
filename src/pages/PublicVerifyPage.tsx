@@ -20,23 +20,15 @@ export const PublicVerifyPage: React.FC<PublicVerifyPageProps> = ({ onNavigate }
           <div
             onClick={() => onNavigate('/')}
             className="flex items-center gap-3 cursor-pointer select-none"
-            title="Barin Electronic Notarization Facility"
+            title="JuriMbrella — Protection over every signature"
           >
             <BrandLogo
-              variant="emblem"
+              variant="compact"
               height={36}
               priority
-              alt="BARIN ENF Emblem"
+              alt="JuriMbrella Emblem"
               className="shrink-0"
             />
-            <div className="flex flex-col">
-              <span className="font-serif text-sm font-bold tracking-tight text-neutral-950">
-                BARIN ENF
-              </span>
-              <span className="text-[10px] text-neutral-500 font-mono">
-                Verification Gateway
-              </span>
-            </div>
           </div>
 
           <div className="flex items-center gap-3 sm:gap-4 text-xs">
@@ -49,10 +41,10 @@ export const PublicVerifyPage: React.FC<PublicVerifyPageProps> = ({ onNavigate }
             </button>
             <button
               type="button"
-              onClick={() => onNavigate('/barin-law-firm')}
+              onClick={() => onNavigate('/jurimbrella-portal')}
               className="text-neutral-600 hover:text-black font-medium"
             >
-              Barin Law Firm
+              Legal Information
             </button>
             <button
               type="button"

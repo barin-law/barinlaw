@@ -352,7 +352,7 @@ export const PrincipalDashboard: React.FC<PrincipalDashboardProps> = ({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-bold text-black dark:text-white tracking-tight">
-                  Dhenze ENF 24-Step Operational Workflow — Aligned with A.M. No. 24-10-14-SC
+                  JuriMbrella 24-Step Operational Workflow — Aligned with A.M. No. 24-10-14-SC
                 </span>
                 <span className="text-[10px] font-mono px-2 py-0.5 border border-black/20 dark:border-white/20 text-neutral-500">
                   24 Operational Milestones

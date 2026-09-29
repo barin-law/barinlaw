@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client Notarization Ceremony, Seals, Canonical SHA-256 & QR Code Verification
  * Supreme Court A.M. No. 24-10-14-SC Demonstration Mode
  */
@@ -184,7 +184,7 @@ export const ClientNotarizationSection: React.FC<ClientNotarizationSectionProps>
                     <QrCode className="h-28 w-28 text-black" />
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                       <span className="border border-black bg-white px-1 text-[8px] font-bold font-mono">
-                        DHENZE
+                        JURIMBRELLA
                       </span>
                     </div>
                   </div>

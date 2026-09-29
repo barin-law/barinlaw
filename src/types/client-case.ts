@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client & Principal Case Workflow Domain Types
  * Compliant with Supreme Court A.M. No. 24-10-14-SC, R.A. 8792, and R.A. 10173
  * Demonstration-Only Environment (APP_ENV=demo, DEMO_MODE=true)

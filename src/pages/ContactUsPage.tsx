@@ -33,19 +33,11 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
               className="flex items-center gap-2.5 text-neutral-900 dark:text-neutral-100 hover:opacity-80 transition-opacity cursor-pointer"
             >
               <BrandLogo
-                variant="emblem"
-                height={32}
+                variant="compact"
+                height={34}
                 decorative
                 className="shrink-0"
               />
-              <div className="text-left">
-                <span className="font-serif text-sm sm:text-base font-bold tracking-tight block leading-tight">
-                  BARIN ENF
-                </span>
-                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block">
-                  Candidate Facility
-                </span>
-              </div>
             </button>
           </div>
 
@@ -59,10 +51,10 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
             </button>
             <button
               type="button"
-              onClick={() => onNavigate('/barin-law-firm')}
+              onClick={() => onNavigate('/jurimbrella-portal')}
               className="text-xs text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hidden sm:inline-block cursor-pointer"
             >
-              Barin Law Firm
+              Legal Information
             </button>
             <button
               type="button"
@@ -96,10 +88,10 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({ onNavigate }) => {
             <span>Official Communications Desk</span>
           </div>
           <h1 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-neutral-950 dark:text-neutral-50">
-            Contact Barin Law Firm &amp; Administrator Support
+            Contact JuriMbrella Support &amp; Legal Desk
           </h1>
           <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 max-w-3xl leading-relaxed">
-            Reach Atty. Enrico Barin for inquiries concerning electronic notarization under Supreme Court A.M. No. 24-10-14-SC, consultation scheduling, or technical support assistance.
+            Reach our administrative and legal assistance desk for inquiries concerning electronic notarization under Supreme Court A.M. No. 24-10-14-SC, consultation scheduling, or technical support assistance.
           </p>
         </div>
 

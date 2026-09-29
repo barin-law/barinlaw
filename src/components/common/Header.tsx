@@ -32,21 +32,20 @@ export const Header: React.FC = () => {
         {/* Brand & Wordmark */}
         <div className="flex items-center gap-3">
           <BrandLogo
-            variant="emblem"
+            variant="compact"
             height={36}
             priority
-            alt="DHENZE ENF Emblem"
+            alt="JuriMbrella Philippine Electronic Notarization"
             className="shrink-0"
           />
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-base font-bold tracking-tight">DHENZE ENF</span>
-              <span className="border border-black/30 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider dark:border-white/30">
-                Candidate v1.0
+              <span className="border border-black/30 dark:border-white/30 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider">
+                A.M. No. 24-10-14-SC Aligned
               </span>
             </div>
             <p className="hidden text-[11px] text-neutral-600 sm:block dark:text-neutral-400">
-              Philippine Electronic Notarization Facility • Supreme Court A.M. No. 24-10-14-SC
+              Philippine Electronic Notarization • Protection over every signature
             </p>
           </div>
         </div>

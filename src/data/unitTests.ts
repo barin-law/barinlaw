@@ -58,7 +58,7 @@ export const COMPREHENSIVE_UNIT_TESTS: UnitTestCase[] = [
     description: 'Calculates standard SHA-256 digest using browser SubtleCrypto and compares against authoritative vector.',
     status: 'PENDING',
     run: async () => {
-      const testInput = 'Barin Electronic Notarization Facility - A.M. No. 24-10-14-SC';
+      const testInput = 'JuriMbrella Philippine Electronic Notarization - A.M. No. 24-10-14-SC';
       const digest = await sha256(testInput);
 
       if (!digest || digest.length !== 64) {

@@ -360,14 +360,13 @@ export const SignInPage: React.FC<SignInPageProps> = ({
           <div
             onClick={() => onNavigate('/')}
             className="flex items-center cursor-pointer select-none"
-            title="Barin Electronic Notarization Facility"
+            title="JuriMbrella — Protection over every signature"
           >
             <BrandLogo
-              variant="full"
-              height={40}
+              variant="compact"
+              height={38}
               priority
-              alt="BARIN ENF Electronic Notarization Facility"
-              className="max-h-[44px]"
+              alt="JuriMbrella Philippine Electronic Notarization"
             />
           </div>
 
@@ -395,11 +394,10 @@ export const SignInPage: React.FC<SignInPageProps> = ({
               <div className="flex justify-center pb-1">
                 <BrandLogo
                   variant="full"
-                  width={170}
-                  height="auto"
+                  height={80}
                   priority
-                  alt="BARIN ENF Electronic Notarization Facility"
-                  className="max-w-[180px]"
+                  alt="JuriMbrella Philippine Electronic Notarization"
+                  className="max-w-[320px]"
                 />
               </div>
               <h1 className="text-lg font-bold tracking-tight font-serif text-neutral-900">
@@ -799,10 +797,10 @@ export const SignInPage: React.FC<SignInPageProps> = ({
                     <div className="border border-neutral-200 p-3 bg-neutral-50 text-xs space-y-2">
                       <div className="flex items-center justify-between text-[11px]">
                         <span className="font-bold text-neutral-700">Simulated SMS Preview:</span>
-                        <span className="font-mono text-neutral-500">SENDER: DHENZE-ENF</span>
+                        <span className="font-mono text-neutral-500">SENDER: JURIMBRELLA</span>
                       </div>
                       <div className="font-mono bg-white p-2 border border-neutral-200 text-xs">
-                        [Dhenze ENF] Your one-time verification PIN is <strong>829104</strong>. Valid for 10 minutes. Do not share with anyone.
+                        [JuriMbrella] Your one-time verification PIN is <strong>829104</strong>. Valid for 10 minutes. Do not share with anyone.
                       </div>
                       <button
                         type="button"
@@ -1105,10 +1103,10 @@ export const SignInPage: React.FC<SignInPageProps> = ({
               <div className="pt-1">
                 <button
                   type="button"
-                  onClick={() => onNavigate('/barin-law-firm')}
+                  onClick={() => onNavigate('/jurimbrella-portal')}
                   className="text-xs text-neutral-500 hover:text-black"
                 >
-                  Return to Barin Law Firm Public Page
+                  Return to JuriMbrella Legal Information Page
                 </button>
               </div>
             </div>

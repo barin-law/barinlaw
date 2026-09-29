@@ -67,7 +67,7 @@ export const SecOpsDashboard: React.FC<SecOpsDashboardProps> = ({
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `dhenze-enf-siem-${selectedExportFormat.toLowerCase()}-${Date.now()}.txt`;
+    a.download = `jurimbrella-siem-${selectedExportFormat.toLowerCase()}-${Date.now()}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   };

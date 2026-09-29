@@ -57,8 +57,8 @@ export interface ContactInquiry {
   auditTrail: InquiryAuditEntry[];
 }
 
-const STORAGE_KEY = 'barin_enf_contact_inquiries_v1';
-const RATE_LIMIT_KEY = 'barin_enf_last_inquiry_submission_time';
+const STORAGE_KEY = 'jurimbrella_contact_inquiries_v1';
+const RATE_LIMIT_KEY = 'jurimbrella_last_inquiry_submission_time';
 
 // Initial demonstration inquiries for administration review
 const INITIAL_INQUIRIES: ContactInquiry[] = [
@@ -74,7 +74,7 @@ const INITIAL_INQUIRIES: ContactInquiry[] = [
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(),
     status: 'OPEN',
     priority: 'HIGH',
-    assignedAdmin: 'Atty. Enrico Barin',
+    assignedAdmin: 'Atty. Enrico Morales',
     attachmentStatus: 'NONE',
     internalNotes: [
       {
@@ -149,12 +149,12 @@ const INITIAL_INQUIRIES: ContactInquiry[] = [
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48).toISOString(),
     status: 'RESOLVED',
     priority: 'LOW',
-    assignedAdmin: 'Atty. Enrico Barin',
+    assignedAdmin: 'Atty. Enrico Morales',
     attachmentStatus: 'ATTACHED',
     internalNotes: [
       {
         id: 'note-3',
-        author: 'Atty. Enrico Barin',
+        author: 'Atty. Enrico Morales',
         text: 'Annex C conforms with the 2004 Rules and 2024 REN guidelines. Notice issued.',
         timestamp: new Date(Date.now() - 1000 * 60 * 60 * 30).toISOString(),
       },
@@ -162,7 +162,7 @@ const INITIAL_INQUIRIES: ContactInquiry[] = [
     replyHistory: [
       {
         id: 'rep-2',
-        author: 'Atty. Enrico Barin',
+        author: 'Atty. Enrico Morales',
         channel: 'EMAIL',
         text: 'Confirmed compliance with A.M. 24-10-14-SC. Draft certificate cleared.',
         timestamp: new Date(Date.now() - 1000 * 60 * 60 * 30).toISOString(),
@@ -176,7 +176,7 @@ const INITIAL_INQUIRIES: ContactInquiry[] = [
       },
       {
         timestamp: new Date(Date.now() - 1000 * 60 * 60 * 30).toISOString(),
-        actor: 'Atty. Enrico Barin',
+        actor: 'Atty. Enrico Morales',
         action: 'Status updated to RESOLVED',
       },
     ],
@@ -336,7 +336,7 @@ class InquiryService {
       createdAt: new Date().toISOString(),
       status: 'OPEN',
       priority: 'MEDIUM',
-      assignedAdmin: 'Atty. Enrico Barin',
+      assignedAdmin: 'Atty. Enrico Morales',
       attachmentStatus: 'NONE',
       internalNotes: [],
       replyHistory: [],

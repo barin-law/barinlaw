@@ -40,19 +40,11 @@ export const GlobalFooter: React.FC<GlobalFooterProps> = ({
             <div className="md:col-span-5 space-y-3.5">
               <div className="flex items-center gap-2.5">
                 <BrandLogo
-                  variant="emblem"
-                  height={28}
+                  variant="compact"
+                  height={32}
                   decorative
                   className="shrink-0"
                 />
-                <div>
-                  <span className="font-serif text-sm font-bold tracking-tight text-neutral-950 dark:text-neutral-50 block leading-tight">
-                    DHENZE ELECTRONIC NOTARIZATION FACILITY
-                  </span>
-                  <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block">
-                    Candidate Accreditation Architecture
-                  </span>
-                </div>
               </div>
 
               <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-md">
@@ -193,7 +185,7 @@ export const GlobalFooter: React.FC<GlobalFooterProps> = ({
           {/* Bottom Bar: Copyright & Candidate Disclaimer */}
           <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-neutral-500">
             <p>
-              &copy; {siteContact.copyrightYear} {siteContact.attorneyName} • Dhenze Electronic Notarization Facility. All rights reserved.
+              &copy; {siteContact.copyrightYear} {siteContact.attorneyName} • JuriMbrella Philippine Electronic Notarization. All rights reserved.
             </p>
             <p className="text-[11px] font-mono">
               Official Developer: Ophireum Multimedia Production

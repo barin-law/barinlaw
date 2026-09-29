@@ -30,7 +30,7 @@ export interface ContactInquiry {
   message: string;
   status: 'NEW' | 'IN_PROGRESS' | 'RESOLVED' | 'ARCHIVED';
   createdAt: string;
-  source: 'WEB_CONTACT_PAGE' | 'PUBLIC_MODAL' | 'DHENZE_LAW_FIRM' | 'SYSTEM_SUPPORT';
+  source: 'WEB_CONTACT_PAGE' | 'PUBLIC_MODAL' | 'JURIMBRELLA_PORTAL' | 'SYSTEM_SUPPORT';
 }
 
 const INITIAL_INQUIRIES: ContactInquiry[] = [
@@ -56,7 +56,7 @@ const INITIAL_INQUIRIES: ContactInquiry[] = [
     message: 'Seeking consultation with Supreme Court of the Philippines regarding bulk notarization agreements for logistics bills of lading under Supreme Court A.M. 24-10-14-SC.',
     status: 'NEW',
     createdAt: '2026-09-14T11:15:00Z',
-    source: 'DHENZE_LAW_FIRM',
+    source: 'JURIMBRELLA_PORTAL',
   },
   {
     id: 'INQ-2026-003',

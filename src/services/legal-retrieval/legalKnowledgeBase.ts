@@ -1,9 +1,9 @@
 /**
- * Barin Assistant Legal Knowledge Retrieval Base
+ * JuriMbrella Assistant Legal Knowledge Retrieval Base
  * Grounded in Supreme Court of the Philippines issuances, Official Gazette statutes, and NPC regulations.
  */
 
-import { LegalSourceCitation, PreapprovedLegalQnA } from '../../types/barin-assistant';
+import { LegalSourceCitation, PreapprovedLegalQnA } from '../../types/jurimbrella-assistant';
 
 export const VERIFIED_LEGAL_SOURCES: LegalSourceCitation[] = [
   {

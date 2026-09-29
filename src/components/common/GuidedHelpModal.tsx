@@ -27,7 +27,7 @@ export const GuidedHelpModal: React.FC<GuidedHelpModalProps> = ({
           <div className="flex items-center gap-2">
             <BookOpen className="h-5 w-5" />
             <h2 id="help-modal-title" className="text-base font-bold">
-              Dhenze ENF Operational Guide & Legal Disclosures
+              JuriMbrella Operational Guide & Legal Disclosures
             </h2>
           </div>
           <button
@@ -48,7 +48,7 @@ export const GuidedHelpModal: React.FC<GuidedHelpModalProps> = ({
               <span>Accreditation Candidate Environment</span>
             </div>
             <p className="mt-1.5 text-[11px] text-neutral-600 dark:text-neutral-400">
-              The Dhenze Electronic Notarization Facility (Dhenze ENF) is an accreditation candidate platform under the Supreme Court of the Philippines Rules on Electronic Notarization (A.M. No. 24-10-14-SC). No documents generated in this demonstration environment possess official legal validity.
+              JuriMbrella is an electronic notarization platform engineered in alignment with the Supreme Court of the Philippines Rules on Electronic Notarization (A.M. No. 24-10-14-SC). No documents generated in this demonstration environment possess official legal validity.
             </p>
           </div>
 
@@ -144,7 +144,7 @@ export const GuidedHelpModal: React.FC<GuidedHelpModalProps> = ({
         {/* Footer */}
         <div className="flex items-center justify-between border-t border-black/10 px-6 py-3 dark:border-white/10 text-xs">
           <span className="text-[11px] text-neutral-500 font-mono">
-            Dhenze Law &bull; Ophireum Multimedia Production
+            JuriMbrella &bull; Ophireum Multimedia Production
           </span>
           <button
             onClick={onClose}

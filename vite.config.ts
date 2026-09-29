@@ -9,9 +9,8 @@ export default defineConfig(({ mode }) => {
   const disableHmr = env.DISABLE_HMR === 'true';
 
   return {
-    // GitHub Pages project:
-    // https://barin-law.github.io/barinlaw/
-    base: '/barinlaw/',
+    // Official JuriMbrella Philippine eNotarization
+    base: process.env.VITE_BASE || '/',
 
     plugins: [
       react(),

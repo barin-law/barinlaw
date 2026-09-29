@@ -1,5 +1,5 @@
 /**
- * Dhenze Electronic Notarization Facility (Dhenze ENF)
+ * JuriMbrella — Philippine Electronic Notarization
  * Client Tasks & Action Items Module
  * Clean, accessible, and fully functional task list for non-technical users
  */
